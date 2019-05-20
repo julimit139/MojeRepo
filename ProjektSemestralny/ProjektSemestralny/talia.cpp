@@ -32,41 +32,38 @@ int Talia::tasujKarty()
 {
 	srand(time(NULL));
 	std::random_shuffle(talia.begin(), talia.end());
-	for (std::vector<Karta>::iterator it = talia.begin(); it != talia.end(); it++) //wypisanie potasowanej talii na ekran (roboczo)
-	{
-		std::cout << *it << std::endl;
-	}
 	return 0;
 }
 
-/*Karta Talia::zdejmij_karte()
+Karta Talia::zdejmijKarte()
 {
-	dlugosc -= 1;
-	return talia[dlugosc];
+	Karta kartaRobocza(talia.rbegin()->odczytaj_wartosc(), talia.rbegin()->odczytaj_kolor());
+	talia.pop_back();
+	return kartaRobocza;
 }
 
-Kolor Talia::odczytaj_kolor_atutowy()
+Kolor Talia::odczytajKolorAtutowy()
 {
-	Kolor kolor_atutowy = talia[0].odczytaj_kolor();
-	switch (kolor_atutowy)
+	Kolor kolorAtutowy = talia.begin()->odczytaj_kolor();
+	switch (kolorAtutowy)
 	{
 	case pik:
-		kolor_atutowy = pik;
+		kolorAtutowy = pik;
 		break;
 	case kier:
-		kolor_atutowy = kier;
+		kolorAtutowy = kier;
 		break;
 	case karo:
-		kolor_atutowy = karo;
+		kolorAtutowy = karo;
 		break;
 	case trefl:
-		kolor_atutowy = trefl;
+		kolorAtutowy = trefl;
 		break;
 	}
-	return kolor_atutowy;
+	return kolorAtutowy;
 }
 
-void Talia::wypisz_kolor_atutowy(Kolor kolor_atutowy)
+/*void Talia::wypisz_kolor_atutowy(Kolor kolor_atutowy)
 {
 	switch (kolor_atutowy)
 	{
@@ -98,12 +95,12 @@ int Talia::odczytajDlugoscTalii()
 /*void Talia::podmien_karte_w_talii(Karta karta_do_podmiany)
 {
 	talia[0] = Karta(karta_do_podmiany.odczytaj_wartosc(), odczytaj_kolor_atutowy());
-}
-
-void Talia::wyswietl_talie()
-{
-	for (int i = 0; i < rozmiar_talii; i++)
-	{
-		cout << talia[i] << endl;
-	}
 }*/
+
+void Talia::wyswietlTalie()
+{
+	for (std::vector<Karta>::iterator it = talia.begin(); it != talia.end(); it++)
+	{
+		std::cout << *it << std::endl;
+	}
+}
