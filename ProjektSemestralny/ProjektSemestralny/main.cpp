@@ -16,9 +16,9 @@ int main()
 	std::cout << std::endl << std::endl;
 	talia.wyswietlTalie();
 
-	talia.odczytajKolorAtutowy();
-
-
+	//talia.odczytajKolorAtutowy();
+	talia.wypiszKolorAtutowy(talia.odczytajKolorAtutowy());
+	talia.odczytajWartoscOdkrytejKartyAtutowej();
 
 	getchar();
 	return 0;
