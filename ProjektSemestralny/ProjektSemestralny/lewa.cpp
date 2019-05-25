@@ -14,10 +14,10 @@ Lewa::Lewa(Karta pierwsza, Karta druga)
 /*Karta & Lewa::operator[](int indeks)
 {
 	return this->lewa[indeks];
-}
+}*/
 
 std::ostream & operator << (std::ostream & wypisz, Lewa lewa)
 {
-	
+	wypisz << *(lewa.lewa.begin()) << *(lewa.lewa.rbegin()) << std::endl;
 	return wypisz;
-}*/
+}
