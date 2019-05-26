@@ -2,6 +2,7 @@
 #include "stale.h"
 #include "karta.h"
 #include "talia.h"
+#include "reka.h"
 
 int main()
 {
@@ -12,13 +13,11 @@ int main()
 
 	talia.wyswietlTalie();
 	std::cout << std::endl << std::endl;
-	std::cout << talia.zdejmijKarte() << std::endl;
-	std::cout << std::endl << std::endl;
-	talia.wyswietlTalie();
 
-	//talia.odczytajKolorAtutowy();
-	talia.wypiszKolorAtutowy(talia.odczytajKolorAtutowy());
-	talia.odczytajWartoscOdkrytejKartyAtutowej();
+	Reka mojaReka(talia);
+	mojaReka.wyswietlAktualnaReke();
+	std::cout << mojaReka.sprawdzWarunekPodmiany();
+	
 
 	getchar();
 	return 0;

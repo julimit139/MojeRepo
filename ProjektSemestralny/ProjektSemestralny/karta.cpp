@@ -12,19 +12,19 @@ Karta::Karta(Wartosc w, Kolor k)
 	this->kolor = k;
 }
 
-Wartosc & Karta::odczytaj_wartosc()
+Wartosc & Karta::odczytajWartosc()
 {
 	return this->wartosc;
 }
 
-Kolor & Karta::odczytaj_kolor()
+Kolor & Karta::odczytajKolor()
 {
 	return this->kolor;
 }
 
 std::ostream & operator << (std::ostream & wypisz, Karta karta)
 {
-	switch (karta.odczytaj_wartosc())
+	switch (karta.odczytajWartosc())
 	{
 	case dziewiatka:
 		wypisz << "9 ";
@@ -45,7 +45,7 @@ std::ostream & operator << (std::ostream & wypisz, Karta karta)
 		wypisz << "A ";
 		break;
 	}
-	switch (karta.odczytaj_kolor())
+	switch (karta.odczytajKolor())
 	{
 	case pik:
 		wypisz << "pik\n";

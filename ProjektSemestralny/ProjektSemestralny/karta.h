@@ -9,8 +9,8 @@ class Karta
 public:
 	Karta();			//konstruktor domyœlny obiektu klasy Karta
 	Karta(Wartosc w, Kolor k);				//konstruktor obiektu klasy Karta
-	Wartosc & odczytaj_wartosc();			//funkcja odczytuj¹ca wartoœæ karty
-	Kolor & odczytaj_kolor();			//funkcja odczytuj¹ca kolor karty
+	Wartosc & odczytajWartosc();			//funkcja odczytuj¹ca wartoœæ karty
+	Kolor & odczytajKolor();			//funkcja odczytuj¹ca kolor karty
 	friend std::ostream & operator << (std::ostream & wypisz, Karta karta);			//zaprzyjaŸniona funkcja wypisuj¹ca kartê na ekran
 };
 

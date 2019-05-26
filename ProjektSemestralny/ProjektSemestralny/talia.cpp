@@ -37,14 +37,14 @@ int Talia::tasujKarty()
 
 Karta Talia::zdejmijKarte()
 {
-	Karta kartaRobocza(talia.rbegin()->odczytaj_wartosc(), talia.rbegin()->odczytaj_kolor());
+	Karta kartaRobocza(talia.rbegin()->odczytajWartosc(), talia.rbegin()->odczytajKolor());
 	talia.pop_back();
 	return kartaRobocza;
 }
 
 Kolor Talia::odczytajKolorAtutowy()
 {
-	Kolor kolorAtutowy = talia.begin()->odczytaj_kolor();
+	Kolor kolorAtutowy = talia.begin()->odczytajKolor();
 	switch (kolorAtutowy)
 	{
 	case pik:
@@ -84,7 +84,7 @@ void Talia::wypiszKolorAtutowy(Kolor kolorAtutowy)
 
 Wartosc Talia::odczytajWartoscOdkrytejKartyAtutowej()
 {
-	return talia.begin()->odczytaj_wartosc();
+	return talia.begin()->odczytajWartosc();
 }
 
 int Talia::odczytajDlugoscTalii()
@@ -92,10 +92,10 @@ int Talia::odczytajDlugoscTalii()
 	return talia.size();
 }
 
-/*void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
+void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
 {
-	*(talia.begin()) = Karta(kartaDoPodmiany.odczytaj_wartosc(), odczytajKolorAtutowy());
-}*/
+	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy());
+}
 
 void Talia::wyswietlTalie()
 {

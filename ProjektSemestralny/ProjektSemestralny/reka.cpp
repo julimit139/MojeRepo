@@ -12,39 +12,39 @@ Reka::Reka(Talia & talia)
 /*Karta & Reka::operator[](int indeks)
 {
 	return this->reka[indeks];
-}
+}*/
 
-void Reka::pobierz_karte(Talia & talia, int indeks)
+void Reka::pobierzKarte(Talia & talia, int indeks)
 {
-	reka[indeks] = talia.zdejmij_karte();
+	reka[indeks] = talia.zdejmijKarte();
 }
 
-Karta & Reka::wez_karte_spod_indeksu_1(int indeks)
+Karta & Reka::wezKarteSpodIndeksu1(int indeks)
 {
 	return reka[indeks];
 }
 
-Karta & Reka::wez_karte_spod_indeksu_2(int indeks, int * tab)
+Karta & Reka::wezKarteSpodIndeksu2(int indeks, int * tab)
 {
 	tab[indeks] = 0;
 	return reka[indeks];
 }
 
-int Reka::znajdz_indeks(Karta karta)
+int Reka::znajdzIndeks(Karta karta)
 {
 	int indeks = 0;
-	for (int i = 0; i < rozmiar_reki; i++)
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		if ((reka[i].odczytaj_wartosc() == karta.odczytaj_wartosc()) && (reka[i].odczytaj_kolor() == karta.odczytaj_kolor()))
+		if (((*it).odczytajWartosc() == karta.odczytajWartosc()) && ((*it).odczytajKolor() == karta.odczytajKolor()))
 		{
-			indeks = i;
 			break;
 		}
+		indeks += 1;
 	}
 	return indeks;
 }
 
-Karta Reka::dobierz_karte_1(Karta karta_wylozona)
+/*Karta Reka::dobierz_karte_1(Karta karta_wylozona)
 {
 	Karta * karta_dobrana = NULL;
 	if (karta_wylozona.odczytaj_kolor() == kolor_atutowy)
@@ -297,18 +297,20 @@ Karta Reka::dobierz_karte_2(Karta karta_wylozona, int * tab)
 		}
 	}
 	return *karta_dobrana;
-}
+}*/
 
-void Reka::wyswietl_aktualna_reke()
+void Reka::wyswietlAktualnaReke()
 {
-	cout << "Twoja aktualna reka to:\n\n";
-	for (int i = 0; i < rozmiar_reki; i++)
+	int indeks = 0;
+	std::cout << "Twoja aktualna reka to:\n\n";
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		cout << i + 1 << ". " << reka[i] << endl;
+		std::cout << (indeks + 1) << ". " << (*it) << std::endl;
+		indeks += 1;
 	}
 }
 
-void Reka::wyswietl_aktualna_reke_pomniejszona(int * tab)
+/*void Reka::wyswietl_aktualna_reke_pomniejszona(int * tab)
 {
 	cout << "Twoja aktualna reka to:\n\n";
 	for (int i = 0; i < rozmiar_reki; i++)
@@ -322,30 +324,38 @@ void Reka::wyswietl_aktualna_reke_pomniejszona(int * tab)
 			cout << i + 1 << ". " << reka[i] << endl;
 		}
 	}
-}
+}*/
 
-int Reka::sprawdz_warunek_podmiany()
+int Reka::sprawdzWarunekPodmiany()
 {
-	int podmiana = 7;
-	for (int i = 0; i < rozmiar_reki; i++)
+	int podmianaBool = false;
+	int podmianaInt = 0;
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		if ((reka[i].odczytaj_wartosc() == dziewiatka) && (reka[i].odczytaj_kolor() == kolor_atutowy))
+		if (((*it).odczytajWartosc() == dziewiatka) && ((*it).odczytajKolor() == kolorAtutowy))
 		{
-			podmiana = i;
+			podmianaBool = true;
+			break;
 		}
+		podmianaInt += 1;
 	}
-	return podmiana;
+	if (podmianaBool == false)
+	{
+		podmianaInt = 7;
+	}
+	return podmianaInt;
+
 }
 
 void Reka::podmien(Talia & talia, int indeks)
 {
 	Karta tmp = reka[indeks];
-	Wartosc w = talia.odczytaj_wartosc_odkrytej_karty_atutowej();
-	reka[indeks] = Karta(w, kolor_atutowy);
-	talia.podmien_karte_w_talii(tmp);
+	Wartosc w = talia.odczytajWartoscOdkrytejKartyAtutowej();
+	reka[indeks] = Karta(w, kolorAtutowy);
+	talia.podmienKarteWTalii(tmp);
 }
 
-int Reka::sprawdz_meldunek()
+/*int Reka::sprawdzMeldunek()
 {
 	int indeks = 7;
 	for (int i = 0; i < rozmiar_reki; i++)
@@ -356,7 +366,7 @@ int Reka::sprawdz_meldunek()
 			{
 				if ((reka[j].odczytaj_wartosc() == dama) && (reka[j].odczytaj_kolor() == reka[i].odczytaj_kolor()))
 				{
-					if (reka[i].odczytaj_kolor() == kolor_atutowy)
+					if (reka[i].odczytaj_kolor() == kolorAtutowy)
 					{
 						indeks = i;
 						return indeks;
