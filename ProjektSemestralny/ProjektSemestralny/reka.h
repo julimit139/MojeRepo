@@ -14,10 +14,10 @@ public:
 	Karta & wezKarteSpodIndeksu1(int indeks);			//funkcja pobieraj¹ca kartê spod indeksu - wersja do pierwszej czêœci gry
 	Karta & wezKarteSpodIndeksu2(int indeks, int * tab);			//funkcja pobieraj¹ca kartê spod indeksu - wersja do drugiej czêœci gry
 	int znajdzIndeks(Karta karta);				//funkcja znajduj¹ca indeks podanej karty
-	//Karta dobierz_karte_1(Karta karta_wylozona);			//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w pierwszej czêœci gry 
-	//Karta dobierz_karte_2(Karta karta_wylozona, int * tab);				//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w drugiej czêœci gry
+	Karta dobierzKarte1(Karta kartaWylozona);			//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w pierwszej czêœci gry 
+	Karta dobierzKarte2(Karta kartaWylozona, int * tab);				//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w drugiej czêœci gry
 	void wyswietlAktualnaReke();			//funkcja wyœwietlaj¹ca aktualn¹ rêkê
-	//void wyswietl_aktualna_reke_pomniejszona(int * tab);			//funkcja wyœwietlaj¹ca aktualn¹ pomniejszon¹ rêkê
+	void wyswietlAktualnaRekePomniejszona(int * tab);			//funkcja wyœwietlaj¹ca aktualn¹ pomniejszon¹ rêkê
 	int sprawdzWarunekPodmiany();				//funkcja sprawdzaj¹ca warunek podmiany dziewi¹tki w kolorze atutowym na kartê ze spodu stosu
 	void podmien(Talia & talia, int indeks);			//funkcja podmieniaj¹ca dziewi¹tkê atutow¹ na kartê ze spodu stosu
 	int sprawdzMeldunek();				//funkcja sprawdzaj¹ca, czy jest meldunek

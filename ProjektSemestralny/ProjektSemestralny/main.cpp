@@ -18,6 +18,10 @@ int main()
 	mojaReka.wyswietlAktualnaReke();
 	std::cout << mojaReka.sprawdzWarunekPodmiany();
 	std::cout << mojaReka.sprawdzMeldunek();
+
+	int tab[6] = { 0, 0, 0, 1, 1, 1 };
+	mojaReka.wyswietlAktualnaReke();
+	mojaReka.wyswietlAktualnaRekePomniejszona(tab);
 	
 
 	getchar();

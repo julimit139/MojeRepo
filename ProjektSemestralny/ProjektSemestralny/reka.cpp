@@ -44,41 +44,41 @@ int Reka::znajdzIndeks(Karta karta)
 	return indeks;
 }
 
-/*Karta Reka::dobierz_karte_1(Karta karta_wylozona)
+Karta Reka::dobierzKarte1(Karta kartaWylozona)
 {
-	Karta * karta_dobrana = NULL;
-	if (karta_wylozona.odczytaj_kolor() == kolor_atutowy)
+	Karta * kartaDobrana = NULL;
+	if (kartaWylozona.odczytajKolor() == kolorAtutowy)
 	{
-		for (int i = 0; i < rozmiar_reki; i++)
+		for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 		{
-			if (reka[i].odczytaj_kolor() == kolor_atutowy)
+			if ((*it).odczytajKolor() == kolorAtutowy)
 			{
-				if (reka[i].odczytaj_wartosc() > karta_wylozona.odczytaj_wartosc())
+				if ((*it).odczytajWartosc() > kartaWylozona.odczytajWartosc())
 				{
-					if (karta_dobrana == NULL)
+					if (kartaDobrana == NULL)
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
-					if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+					if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
 				}
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (reka[i].odczytaj_kolor() != kolor_atutowy)
+				if ((*it).odczytajKolor() != kolorAtutowy)
 				{
-					if (karta_dobrana == NULL)
+					if (kartaDobrana == NULL)
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
-					if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+					if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
 				}
 			}
@@ -86,218 +86,226 @@ int Reka::znajdzIndeks(Karta karta)
 	}
 	else
 	{
-		for (int i = 0; i < rozmiar_reki; i++)
+		for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 		{
-			if (reka[i].odczytaj_kolor() == karta_wylozona.odczytaj_kolor())
+			if ((*it).odczytajKolor() == kartaWylozona.odczytajKolor())
 			{
-				if (reka[i].odczytaj_wartosc() > karta_wylozona.odczytaj_wartosc())
+				if ((*it).odczytajWartosc() > kartaWylozona.odczytajWartosc())
 				{
-					if (karta_dobrana == NULL)
+					if (kartaDobrana == NULL)
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
-					if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+					if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
 				}
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (reka[i].odczytaj_kolor() == kolor_atutowy)
+				if ((*it).odczytajKolor() == kolorAtutowy)
 				{
-					if (karta_dobrana == NULL)
+					if (kartaDobrana == NULL)
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
-					if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+					if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
 				}
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if ((reka[i].odczytaj_kolor() != karta_wylozona.odczytaj_kolor()) && (reka[i].odczytaj_kolor() != kolor_atutowy))
+				if (((*it).odczytajKolor() != kartaWylozona.odczytajKolor()) && ((*it).odczytajKolor() != kolorAtutowy))
 				{
-					if (karta_dobrana == NULL)
+					if (kartaDobrana == NULL)
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
-					if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+					if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 					{
-						karta_dobrana = &reka[i];
+						kartaDobrana = &(*it);
 					}
 				}
 			}
 		}
 	}
-	return *karta_dobrana;
+	return *kartaDobrana;
 }
 
-Karta Reka::dobierz_karte_2(Karta karta_wylozona, int * tab)
+Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 {
-	Karta * karta_dobrana = NULL;
-	if (karta_wylozona.odczytaj_kolor() == kolor_atutowy)
+	Karta * kartaDobrana = NULL;
+	int indeks = 0;
+	if (kartaWylozona.odczytajKolor() == kolorAtutowy)
 	{
-		for (int i = 0; i < rozmiar_reki; i++)
+		for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 		{
-			if (tab[i] != 0)
+			if (tab[indeks] != 0)
 			{
-				if (reka[i].odczytaj_kolor() == kolor_atutowy)
+				if ((*it).odczytajKolor() == kolorAtutowy)
 				{
-					if (reka[i].odczytaj_wartosc() > karta_wylozona.odczytaj_wartosc())
+					if ((*it).odczytajWartosc() > kartaWylozona.odczytajWartosc())
 					{
-						if (karta_dobrana == NULL)
+						if (kartaDobrana == NULL)
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
-						if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+						if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
 					}
 				}
 			}
+			indeks += 1;
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (tab[i] != 0)
+				if (tab[indeks] != 0)
 				{
-					if (reka[i].odczytaj_kolor() == kolor_atutowy)
+					if ((*it).odczytajKolor() == kolorAtutowy)
 					{
-						if (reka[i].odczytaj_wartosc() < karta_wylozona.odczytaj_wartosc())
+						if ((*it).odczytajWartosc() < kartaWylozona.odczytajWartosc())
 						{
-							if (karta_dobrana == NULL)
+							if (kartaDobrana == NULL)
 							{
-								karta_dobrana = &reka[i];
+								kartaDobrana = &(*it);
 							}
-							if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+							if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 							{
-								karta_dobrana = &reka[i];
+								kartaDobrana = &(*it);
 							}
 						}
 					}
 				}
+				indeks += 1;
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (tab[i] != 0)
+				if (tab[indeks] != 0)
 				{
-					if (reka[i].odczytaj_kolor() != kolor_atutowy)
+					if ((*it).odczytajKolor() != kolorAtutowy)
 					{
-						if (karta_dobrana == NULL)
+						if (kartaDobrana == NULL)
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
-						if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+						if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
 					}
 				}
+				indeks += 1;
 			}
 		}
 	}
 	else
 	{
-		for (int i = 0; i < rozmiar_reki; i++)
+		for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 		{
-			if (tab[i] != 0)
+			if (tab[indeks] != 0)
 			{
-				if (reka[i].odczytaj_kolor() == karta_wylozona.odczytaj_kolor())
+				if ((*it).odczytajKolor() == kartaWylozona.odczytajKolor())
 				{
-					if (reka[i].odczytaj_wartosc() > karta_wylozona.odczytaj_wartosc())
+					if ((*it).odczytajWartosc() > kartaWylozona.odczytajWartosc())
 					{
-						if (karta_dobrana == NULL)
+						if (kartaDobrana == NULL)
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
-						if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+						if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
 					}
 				}
 			}
+			indeks += 1;
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (tab[i] != 0)
+				if (tab[indeks] != 0)
 				{
-					if (reka[i].odczytaj_kolor() == karta_wylozona.odczytaj_kolor())
+					if ((*it).odczytajKolor() == kartaWylozona.odczytajKolor())
 					{
-						if (reka[i].odczytaj_wartosc() < karta_wylozona.odczytaj_wartosc())
+						if ((*it).odczytajWartosc() < kartaWylozona.odczytajWartosc())
 						{
-							if (karta_dobrana == NULL)
+							if (kartaDobrana == NULL)
 							{
-								karta_dobrana = &reka[i];
+								kartaDobrana = &(*it);
 							}
-							if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+							if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 							{
-								karta_dobrana = &reka[i];
+								kartaDobrana = &(*it);
 							}
 						}
 					}
 				}
+				indeks += 1;
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (tab[i] != 0)
+				if (tab[indeks] != 0)
 				{
-					if (reka[i].odczytaj_kolor() == kolor_atutowy)
+					if ((*it).odczytajKolor() == kolorAtutowy)
 					{
-						if (karta_dobrana == NULL)
+						if (kartaDobrana == NULL)
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
-						if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+						if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
 					}
 				}
+				indeks += 1;
 			}
 		}
-		if (karta_dobrana == NULL)
+		if (kartaDobrana == NULL)
 		{
-			for (int i = 0; i < rozmiar_reki; i++)
+			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
-				if (tab[i] != 0)
+				if (tab[indeks] != 0)
 				{
-					if ((reka[i].odczytaj_kolor() != karta_wylozona.odczytaj_kolor()) && (reka[i].odczytaj_kolor() != kolor_atutowy))
+					if (((*it).odczytajKolor() != kartaWylozona.odczytajKolor()) && ((*it).odczytajKolor() != kolorAtutowy))
 					{
-						if (karta_dobrana == NULL)
+						if (kartaDobrana == NULL)
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
-						if ((karta_dobrana != NULL) && (reka[i].odczytaj_wartosc() < karta_dobrana->odczytaj_wartosc()))
+						if ((kartaDobrana != NULL) && ((*it).odczytajWartosc() < kartaDobrana->odczytajWartosc()))
 						{
-							karta_dobrana = &reka[i];
+							kartaDobrana = &(*it);
 						}
 					}
 				}
+				indeks += 1;
 			}
 		}
 	}
-	return *karta_dobrana;
-}*/
+	return *kartaDobrana;
+}
 
 void Reka::wyswietlAktualnaReke()
 {
@@ -310,21 +318,23 @@ void Reka::wyswietlAktualnaReke()
 	}
 }
 
-/*void Reka::wyswietl_aktualna_reke_pomniejszona(int * tab)
+void Reka::wyswietlAktualnaRekePomniejszona(int * tab)
 {
-	cout << "Twoja aktualna reka to:\n\n";
-	for (int i = 0; i < rozmiar_reki; i++)
+	int indeks = 0;
+	std::cout << "Twoja aktualna reka to:\n\n";
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		if (tab[i] == 0)
+		if (tab[indeks] == 0)
 		{
-			cout << i + 1 << ". ---\n";
+			std::cout << (indeks + 1) << ". ---\n";
 		}
 		else
 		{
-			cout << i + 1 << ". " << reka[i] << endl;
+			std::cout << (indeks + 1) << ". " << (*it) << std::endl;
 		}
+		indeks += 1;
 	}
-}*/
+}
 
 int Reka::sprawdzWarunekPodmiany()
 {
