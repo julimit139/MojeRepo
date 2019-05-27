@@ -359,6 +359,7 @@ int Reka::sprawdzMeldunek()
 {
 	bool meldunekBool = false;
 	int meldunekInt = 0;
+	int indeks = 0;
 	for (std::vector<Karta>::iterator it1 = reka.begin(); it1 != reka.end(); it1++)
 	{
 		for (std::vector<Karta>::iterator it2 = reka.begin(); it2 != reka.end(); it2++)
@@ -369,19 +370,23 @@ int Reka::sprawdzMeldunek()
 				{
 					if ((*it1).odczytajKolor() == kolorAtutowy)
 					{
-						meldunekInt = ;
+						meldunekBool = true;
+						indeks = meldunekInt;
+						break;
 					}
 					else
 					{
-						indeks = i;
+						meldunekBool = true;
+						indeks = meldunekInt;
 					}
 				}
 			}
 		}
+		meldunekInt += 1;
 	}
 	if (meldunekBool == false)
 	{
-		meldunekInt = 7;
+		indeks = 7;
 	}
-	return meldunekInt;
+	return indeks;
 }

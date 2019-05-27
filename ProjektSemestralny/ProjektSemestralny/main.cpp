@@ -17,6 +17,7 @@ int main()
 	Reka mojaReka(talia);
 	mojaReka.wyswietlAktualnaReke();
 	std::cout << mojaReka.sprawdzWarunekPodmiany();
+	std::cout << mojaReka.sprawdzMeldunek();
 	
 
 	getchar();
