@@ -328,7 +328,7 @@ void Reka::wyswietlAktualnaReke()
 
 int Reka::sprawdzWarunekPodmiany()
 {
-	int podmianaBool = false;
+	bool podmianaBool = false;
 	int podmianaInt = 0;
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
@@ -355,21 +355,21 @@ void Reka::podmien(Talia & talia, int indeks)
 	talia.podmienKarteWTalii(tmp);
 }
 
-/*int Reka::sprawdzMeldunek()
+int Reka::sprawdzMeldunek()
 {
-	int indeks = 7;
-	for (int i = 0; i < rozmiar_reki; i++)
+	bool meldunekBool = false;
+	int meldunekInt = 0;
+	for (std::vector<Karta>::iterator it1 = reka.begin(); it1 != reka.end(); it1++)
 	{
-		for (int j = 0; j < rozmiar_reki; j++)
+		for (std::vector<Karta>::iterator it2 = reka.begin(); it2 != reka.end(); it2++)
 		{
-			if (reka[i].odczytaj_wartosc() == krol)
+			if ((*it1).odczytajWartosc() == krol)
 			{
-				if ((reka[j].odczytaj_wartosc() == dama) && (reka[j].odczytaj_kolor() == reka[i].odczytaj_kolor()))
+				if (((*it2).odczytajWartosc() == dama) && ((*it2).odczytajKolor() == (*it1).odczytajKolor()))
 				{
-					if (reka[i].odczytaj_kolor() == kolorAtutowy)
+					if ((*it1).odczytajKolor() == kolorAtutowy)
 					{
-						indeks = i;
-						return indeks;
+						meldunekInt = ;
 					}
 					else
 					{
@@ -379,5 +379,9 @@ void Reka::podmien(Talia & talia, int indeks)
 			}
 		}
 	}
-	return indeks;
-}*/
+	if (meldunekBool == false)
+	{
+		meldunekInt = 7;
+	}
+	return meldunekInt;
+}
