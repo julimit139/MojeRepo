@@ -2,30 +2,30 @@
 
 Talia::Talia()
 {
-	talia.push_back(Karta(dziewiatka, pik));
-	talia.push_back(Karta(walet, pik));
-	talia.push_back(Karta(dama, pik));
-	talia.push_back(Karta(krol, pik));
-	talia.push_back(Karta(dziesiatka, pik));
-	talia.push_back(Karta(as, pik));
-	talia.push_back(Karta(dziewiatka, kier));
-	talia.push_back(Karta(walet, kier));
-	talia.push_back(Karta(dama, kier));
-	talia.push_back(Karta(krol, kier));
-	talia.push_back(Karta(dziesiatka, kier));
-	talia.push_back(Karta(as, kier));
-	talia.push_back(Karta(dziewiatka, karo));
-	talia.push_back(Karta(walet, karo));
-	talia.push_back(Karta(dama, karo));
-	talia.push_back(Karta(krol, karo));
-	talia.push_back(Karta(dziesiatka, karo));
-	talia.push_back(Karta(as, karo));
-	talia.push_back(Karta(dziewiatka, trefl));
-	talia.push_back(Karta(walet, trefl));
-	talia.push_back(Karta(dama, trefl));
-	talia.push_back(Karta(krol, trefl));
-	talia.push_back(Karta(dziesiatka, trefl));
-	talia.push_back(Karta(as, trefl));
+	talia.push_back(Karta(dziewiatka, pik,"dziewiatka_pik.jpg"));
+	talia.push_back(Karta(walet, pik, "walet_pik.jpg"));
+	talia.push_back(Karta(dama, pik, "dama_pik.jpg"));
+	talia.push_back(Karta(krol, pik, "krol_pik.jpg"));
+	talia.push_back(Karta(dziesiatka, pik, "dziesiatka_pik.jpg"));
+	talia.push_back(Karta(as, pik, "as_pik.jpg"));
+	talia.push_back(Karta(dziewiatka, kier, "dziewiatka_kier.jpg"));
+	talia.push_back(Karta(walet, kier, "walet_kier.jpg"));
+	talia.push_back(Karta(dama, kier, "dama_kier.jpg"));
+	talia.push_back(Karta(krol, kier, "krol_kier.jpg"));
+	talia.push_back(Karta(dziesiatka, kier, "dziesiatka_kier.jpg"));
+	talia.push_back(Karta(as, kier, "as_kier.jpg"));
+	talia.push_back(Karta(dziewiatka, karo, "dziewiatka_karo.jpg"));
+	talia.push_back(Karta(walet, karo, "walet_karo.jpg"));
+	talia.push_back(Karta(dama, karo, "dama_karo.jpg"));
+	talia.push_back(Karta(krol, karo, "krol_karo.jpg"));
+	talia.push_back(Karta(dziesiatka, karo, "dziesiatka_karo.jpg"));
+	talia.push_back(Karta(as, karo, "as_karo.jpg"));
+	talia.push_back(Karta(dziewiatka, trefl, "dziewiatka_trefl.jpg"));
+	talia.push_back(Karta(walet, trefl, "walet_trefl.jpg"));
+	talia.push_back(Karta(dama, trefl, "dama_trefl.jpg"));
+	talia.push_back(Karta(krol, trefl, "krol_trefl.jpg"));
+	talia.push_back(Karta(dziesiatka, trefl, "dziesiatka_trefl.jpg"));
+	talia.push_back(Karta(as, trefl, "as_trefl.jpg"));
 }
 
 int Talia::tasujKarty()
@@ -37,7 +37,7 @@ int Talia::tasujKarty()
 
 Karta Talia::zdejmijKarte()
 {
-	Karta kartaRobocza(talia.rbegin()->odczytajWartosc(), talia.rbegin()->odczytajKolor());
+	Karta kartaRobocza(talia.rbegin()->odczytajWartosc(), talia.rbegin()->odczytajKolor(), talia.rbegin()->odczytajNazweObrazu());
 	talia.pop_back();
 	return kartaRobocza;
 }
@@ -94,7 +94,7 @@ int Talia::odczytajDlugoscTalii()
 
 void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
 {
-	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy());
+	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy(), kartaDoPodmiany.odczytajNazweObrazu());
 }
 
 void Talia::wyswietlTalie()

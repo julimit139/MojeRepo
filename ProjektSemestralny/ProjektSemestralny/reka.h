@@ -9,7 +9,6 @@ class Reka
 	Kolor kolorAtutowy;			//pole z kolorem atutowym 
 public:
 	Reka(Talia & talia);			//konstruktor obiektu klasy Reka
-	//Karta & operator[](int indeks);				//prze³adowany operator indeksowania, umo¿liwia dostanie siê do konkretnego elementu tablicy
 	void pobierzKarte(Talia & talia, int indeks);			//funkcja pobieraj¹ca kartê z talii/ze stosu
 	Karta & wezKarteSpodIndeksu1(int indeks);			//funkcja pobieraj¹ca kartê spod indeksu - wersja do pierwszej czêœci gry
 	Karta & wezKarteSpodIndeksu2(int indeks, int * tab);			//funkcja pobieraj¹ca kartê spod indeksu - wersja do drugiej czêœci gry

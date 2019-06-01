@@ -7,24 +7,22 @@
 
 int main()
 {
-	foo();
+	//foo();
 	Talia talia;
-	std::cout << talia.odczytajDlugoscTalii();
-
 	talia.tasujKarty();
-
-	talia.wyswietlTalie();
+	//talia.wyswietlTalie();
 	std::cout << std::endl << std::endl;
 
 	Reka mojaReka(talia);
 	mojaReka.wyswietlAktualnaReke();
-	std::cout << mojaReka.sprawdzWarunekPodmiany();
-	std::cout << mojaReka.sprawdzMeldunek();
+	//std::cout << mojaReka.sprawdzWarunekPodmiany();
+	//std::cout << mojaReka.sprawdzMeldunek();
 
-	int tab[6] = { 0, 0, 0, 1, 1, 1 };
-	mojaReka.wyswietlAktualnaReke();
-	mojaReka.wyswietlAktualnaRekePomniejszona(tab);
-	
+
+	sf::RenderWindow window(sf::VideoMode(1200, 650), "My window", sf::Style::Default);
+
+	Karta k(dama, pik, "dama_pik.jpg");
+	k.wyswietlKarte(window);
 
 	getchar();
 	return 0;

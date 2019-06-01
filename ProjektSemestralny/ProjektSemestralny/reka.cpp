@@ -9,11 +9,6 @@ Reka::Reka(Talia & talia)
 	kolorAtutowy = talia.odczytajKolorAtutowy();
 }
 
-/*Karta & Reka::operator[](int indeks)
-{
-	return this->reka[indeks];
-}*/
-
 void Reka::pobierzKarte(Talia & talia, int indeks)
 {
 	reka[indeks] = talia.zdejmijKarte();
@@ -361,7 +356,8 @@ void Reka::podmien(Talia & talia, int indeks)
 {
 	Karta tmp = reka[indeks];
 	Wartosc w = talia.odczytajWartoscOdkrytejKartyAtutowej();
-	reka[indeks] = Karta(w, kolorAtutowy);
+	//std::string s = talia.begin()->odczytajNazweObrazu();
+	//reka[indeks] = Karta(w, kolorAtutowy);
 	talia.podmienKarteWTalii(tmp);
 }
 
