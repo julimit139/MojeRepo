@@ -402,7 +402,7 @@ Karta & Reka::operator[](int indeks)
 	return this->reka[indeks];
 }
 
-sf::RenderWindow & Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
+void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 20;
@@ -419,10 +419,9 @@ sf::RenderWindow & Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
 		window.draw(sprite);
 		x += 150;
 	}
-	return window;
 }
 
-sf::RenderWindow & Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 470;
@@ -431,5 +430,4 @@ sf::RenderWindow & Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
 		(*it).wyswietlKarte(window, x, y);
 		x += 150;
 	}
-	return window;
 }

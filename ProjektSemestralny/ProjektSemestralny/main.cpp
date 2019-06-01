@@ -15,11 +15,41 @@ int main()
 	Reka rekaCzlowieka(talia);
 	Reka rekaKomputera(talia);
 
-	sf::RenderWindow window(sf::VideoMode(1200, 650), "My window", sf::Style::Default);
+	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
 
-	wyswietlStol(window, rekaCzlowieka, rekaKomputera);
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			wyswietlStol(window, rekaCzlowieka, rekaKomputera);
+
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+			{
+				window.close();
+				break;
+			}
+			case sf::Event::MouseButtonPressed:
+			{
+				std::cout << "Mouse button has been pressed" << std::endl;
+				break;
+			}
+
+
+			}
+			
+
+				
+		}
+	}
+
 	
+	
+	std::cout << "Ciastko!" << std::endl;
 
+	
 
 	return 0;
 	getchar();
@@ -49,17 +79,5 @@ void wyswietlStol(sf::RenderWindow & window, Reka rekaCzlowieka, Reka rekaKomput
 	wyswietlStos(window);
 	rekaCzlowieka.wyswietlRekeCzlowieka(window);
 	rekaKomputera.wyswietlRekeKomputera(window);
-	
 	window.display();
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-
-				window.close();
-		}
-	}
 }
