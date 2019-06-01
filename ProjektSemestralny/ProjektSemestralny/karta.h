@@ -16,7 +16,7 @@ public:
 	Wartosc & odczytajWartosc();			//funkcja odczytuj¹ca wartoœæ karty
 	Kolor & odczytajKolor();			//funkcja odczytuj¹ca kolor karty
 	std::string odczytajNazweObrazu();
-	void wyswietlKarte(sf::RenderWindow & window);
+	void wyswietlKarte(sf::RenderWindow & window, int x, int y);
 
 	friend std::ostream & operator << (std::ostream & wypisz, Karta karta);			//zaprzyjaŸniona funkcja wypisuj¹ca kartê na ekran
 };

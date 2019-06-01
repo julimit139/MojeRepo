@@ -396,3 +396,58 @@ int Reka::sprawdzMeldunek()
 	}
 	return indeks;
 }
+
+Karta & Reka::operator[](int indeks)
+{
+	return this->reka[indeks];
+}
+
+void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
+{
+	int x = 144;
+	int y = 20;
+	window.clear(sf::Color(30, 91, 6, 1));
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
+	{
+		(*it).wyswietlKarte(window, x, y);
+		x += 150;
+	}
+	window.display();
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+
+				window.close();
+		}
+	}
+	
+}
+
+void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+{
+	int x = 144;
+	int y = 470;
+	window.clear(sf::Color(30, 91, 6, 1));
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
+	{
+		(*it).wyswietlKarte(window, x, y);
+		x += 150;
+	}
+	window.display();
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+
+				window.close();
+		}
+	}
+
+}

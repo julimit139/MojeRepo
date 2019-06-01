@@ -33,7 +33,7 @@ std::string Karta::odczytajNazweObrazu()
 	return this->nazwaObrazu;
 }
 
-void Karta::wyswietlKarte(sf::RenderWindow & window)
+void Karta::wyswietlKarte(sf::RenderWindow & window, int x, int y)
 {
 	sf::Texture texture;
 	if (!texture.loadFromFile(this->odczytajNazweObrazu()))
@@ -42,12 +42,15 @@ void Karta::wyswietlKarte(sf::RenderWindow & window)
 	}
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
-	//sprite.setPosition(sf::Vector2f(144.f, 20.f));
-	window.clear(sf::Color(30, 91, 6, 1));
-	window.draw(sprite);
-	window.display();
+	sprite.setPosition(sf::Vector2f(x, y));
 
-	while (window.isOpen())
+	//window.clear(sf::Color(30, 91, 6, 1));
+
+	window.draw(sprite);
+	
+	//window.display();
+
+	/*while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -56,7 +59,7 @@ void Karta::wyswietlKarte(sf::RenderWindow & window)
 
 				window.close();
 		}
-	}
+	}*/
 }
 
 std::ostream & operator << (std::ostream & wypisz, Karta karta)

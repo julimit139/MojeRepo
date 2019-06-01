@@ -20,4 +20,7 @@ public:
 	int sprawdzWarunekPodmiany();				//funkcja sprawdzaj¹ca warunek podmiany dziewi¹tki w kolorze atutowym na kartê ze spodu stosu
 	void podmien(Talia & talia, int indeks);			//funkcja podmieniaj¹ca dziewi¹tkê atutow¹ na kartê ze spodu stosu
 	int sprawdzMeldunek();				//funkcja sprawdzaj¹ca, czy jest meldunek
+	Karta & operator[](int indeks); //prze³adowany operator indeksowania, umo¿liwia dostanie siê do konkretnego elementu tablicy
+	void wyswietlRekeKomputera(sf::RenderWindow & window);
+	void wyswietlRekeCzlowieka(sf::RenderWindow & window);
 };

@@ -3,14 +3,12 @@
 #include "karta.h"
 #include "talia.h"
 #include "reka.h"
-#include "Some.h"
 
 int main()
 {
 	//foo();
 	Talia talia;
 	talia.tasujKarty();
-	//talia.wyswietlTalie();
 	std::cout << std::endl << std::endl;
 
 	Reka mojaReka(talia);
@@ -21,9 +19,14 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(1200, 650), "My window", sf::Style::Default);
 
-	Karta k(dama, pik, "dama_pik.jpg");
-	k.wyswietlKarte(window);
+	//Karta k(dama, pik, "dama_pik.jpg");
+	//k.wyswietlKarte(window);
+	//mojaReka[0].wyswietlKarte(window);
+	
+	//mojaReka.wyswietlRekeKomputera(window);
+	mojaReka.wyswietlRekeCzlowieka(window);
 
-	getchar();
+
 	return 0;
+	getchar();
 }
