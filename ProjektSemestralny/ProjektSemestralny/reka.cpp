@@ -402,52 +402,34 @@ Karta & Reka::operator[](int indeks)
 	return this->reka[indeks];
 }
 
-void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
+sf::RenderWindow & Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 20;
-	window.clear(sf::Color(30, 91, 6, 1));
+	sf::Texture texture;
+	if (!texture.loadFromFile("tyl_karty.jpg"))
+	{
+		texture.loadFromFile("joker.jpg");
+	}
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		(*it).wyswietlKarte(window, x, y);
+		sprite.setPosition(sf::Vector2f(x, y));
+		window.draw(sprite);
 		x += 150;
 	}
-	window.display();
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-
-				window.close();
-		}
-	}
-	
+	return window;
 }
 
-void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+sf::RenderWindow & Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 470;
-	window.clear(sf::Color(30, 91, 6, 1));
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
 		(*it).wyswietlKarte(window, x, y);
 		x += 150;
 	}
-	window.display();
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-
-				window.close();
-		}
-	}
-
+	return window;
 }

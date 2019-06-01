@@ -43,23 +43,7 @@ void Karta::wyswietlKarte(sf::RenderWindow & window, int x, int y)
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(x, y));
-
-	//window.clear(sf::Color(30, 91, 6, 1));
-
 	window.draw(sprite);
-	
-	//window.display();
-
-	/*while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-
-				window.close();
-		}
-	}*/
 }
 
 std::ostream & operator << (std::ostream & wypisz, Karta karta)
