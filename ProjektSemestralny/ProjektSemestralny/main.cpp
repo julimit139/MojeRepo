@@ -3,9 +3,11 @@
 #include "karta.h"
 #include "talia.h"
 #include "reka.h"
+#include "Some.h"
 
 int main()
 {
+	foo();
 	Talia talia;
 	std::cout << talia.odczytajDlugoscTalii();
 
