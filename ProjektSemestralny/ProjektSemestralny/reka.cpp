@@ -302,7 +302,48 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 	return *kartaDobrana;
 }
 
-void Reka::wyswietlAktualnaReke()
+Karta & Reka::operator[](int indeks)
+{
+	return this->reka[indeks];
+}
+
+void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
+{
+	int x = 144;
+	int y = 20;
+	sf::Texture texture;
+	if (!texture.loadFromFile("tyl_karty.jpg"))
+	{
+		texture.loadFromFile("joker.jpg");
+	}
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
+	{
+		sprite.setPosition(sf::Vector2f(x, y));
+		window.draw(sprite);
+		x += 150;
+	}
+}
+
+void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+{
+	int x = 144;
+	int y = 470;
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
+	{
+		(*it).wyswietlKarte(window, x, y);
+		x += 150;
+	}
+}
+
+
+
+
+
+
+
+/*void Reka::wyswietlAktualnaReke()
 {
 	int indeks = 0;
 	std::cout << "Twoja aktualna reka to:\n\n";
@@ -395,39 +436,5 @@ int Reka::sprawdzMeldunek()
 		indeks = 7;
 	}
 	return indeks;
-}
+}*/
 
-Karta & Reka::operator[](int indeks)
-{
-	return this->reka[indeks];
-}
-
-void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
-{
-	int x = 144;
-	int y = 20;
-	sf::Texture texture;
-	if (!texture.loadFromFile("tyl_karty.jpg"))
-	{
-		texture.loadFromFile("joker.jpg");
-	}
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
-	{
-		sprite.setPosition(sf::Vector2f(x, y));
-		window.draw(sprite);
-		x += 150;
-	}
-}
-
-void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
-{
-	int x = 144;
-	int y = 470;
-	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
-	{
-		(*it).wyswietlKarte(window, x, y);
-		x += 150;
-	}
-}

@@ -92,7 +92,7 @@ int Talia::odczytajDlugoscTalii()
 	return talia.size();
 }
 
-void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
+/*void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
 {
 	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy(), kartaDoPodmiany.odczytajNazweObrazu());
 }
@@ -103,4 +103,4 @@ void Talia::wyswietlTalie()
 	{
 		std::cout << *it << std::endl;
 	}
-}
+}*/

@@ -19,6 +19,8 @@ public:
 	void wypiszKolorAtutowy(Kolor kolorAtutowy);				//funkcja wypisuj¹ca kolor atutowy
 	Wartosc odczytajWartoscOdkrytejKartyAtutowej();				//funkcja odczytuj¹ca wartoœæ karty okreœlaj¹cej kolor atutowy
 	int odczytajDlugoscTalii();			//funkcja odczytuj¹ca d³ugoœæ talii/stosu
-	void podmienKarteWTalii(Karta kartaDoPodmiany);			//funkcja podmieniaj¹ca kartê ze spodu stosu na dziewi¹tkê atutow¹
-	void wyswietlTalie();			//funkcja wyœwietlaj¹ca taliê
+	
+										
+	//void podmienKarteWTalii(Karta kartaDoPodmiany);			//funkcja podmieniaj¹ca kartê ze spodu stosu na dziewi¹tkê atutow¹
+	//void wyswietlTalie();			//funkcja wyœwietlaj¹ca taliê
 };

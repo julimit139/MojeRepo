@@ -33,6 +33,9 @@
     <ClCompile Include="Some.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gracz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="karta.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Some.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gracz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

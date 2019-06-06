@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gracz.cpp" />
     <ClCompile Include="karta.cpp" />
     <ClCompile Include="lewa.cpp" />
     <ClCompile Include="main.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="talia.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gracz.h" />
     <ClInclude Include="karta.h" />
     <ClInclude Include="lewa.h" />
     <ClInclude Include="reka.h" />
