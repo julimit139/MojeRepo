@@ -11,11 +11,6 @@ Karta::Karta(Wartosc w, Kolor k, std::string n)
 	wartosc = w;
 	kolor = k;
 	nazwaObrazu = n;
-	/*if (!tekstura.loadFromFile(nazwaObrazu))
-	{
-		tekstura.loadFromFile("joker.png");
-	}
-	obraz.setTexture(tekstura, true);*/
 }
 
 Wartosc & Karta::odczytajWartosc()
