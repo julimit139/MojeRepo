@@ -6,10 +6,10 @@ Gracz::Gracz(Talia & talia) : reka(talia)
 	licznikZebranychLew = 0;
 }
 
-void Gracz::pobierzKarte(Talia & talia, int indeks)
+/*void Gracz::pobierzKarte(Talia & talia, int indeks)
 {
 	reka.pobierzKarte(talia, indeks);
-}
+}*/
 
 Karta & Gracz::wezKarteSpodIndeksu1(int indeks)
 {
@@ -144,4 +144,49 @@ void Gracz::wyswietlRekeKomputera(sf::RenderWindow & window)
 	reka.wyswietlRekeKomputera(window);
 }
 
-void pobierzKarteZeStosu(sf::RenderWindow & window, int x, int y);
+/*void Gracz::pobierzKarte(sf::RenderWindow & window, int x, int y, Talia & talia, int indeks)
+{
+	if (x >= 79 && x <= 202 && y >= 245 && y <= 415)
+	{
+		reka.pobierzKarte(talia, indeks);
+	}
+}*/
+
+Karta & Gracz::wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks)
+{
+	reka[indeks].wyswietlKarte(window, 594, 245);
+	return reka[indeks];
+}
+
+Karta & Gracz::wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks)
+{
+	reka[indeks].wyswietlKarte(window, 444, 245);
+	return reka[indeks];
+}
+
+void Gracz::wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta)
+{
+	karta.wyswietlKarte(window, 1044, 470);
+}
+
+void Gracz::wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta)
+{
+	karta.wyswietlKarte(window, 1044, 20);
+}
+
+void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6])
+{
+	sf::RectangleShape maska(sf::Vector2f(123, 170));
+	maska.setFillColor(sf::Color(30, 91, 6, 1));
+	maska.setPosition(tabX[indeks], 740);
+	window.draw(maska);
+}
+
+void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6])
+{
+	sf::RectangleShape maska(sf::Vector2f(123, 170));
+	maska.setFillColor(sf::Color(30, 91, 6, 1));
+	maska.setPosition(tabX[indeks], 20);
+	window.draw(maska);
+}
+

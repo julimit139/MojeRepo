@@ -104,3 +104,9 @@ void Talia::wyswietlTalie()
 		std::cout << *it << std::endl;
 	}
 }*/
+
+
+Karta & Talia::pokazKarteAtutowa()
+{
+	return *(talia.begin());
+}

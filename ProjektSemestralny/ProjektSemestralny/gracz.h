@@ -15,7 +15,6 @@ class Gracz
 	int duzePunkty;			//pole z liczb¹ du¿ych punktów gracza
 public:
 	Gracz(Talia & talia); //konstruktor obiektu klasy Gracz
-	void pobierzKarte(Talia & talia, int indeks); //funkcja pobieraj¹ca kartê ze stosu
 	Karta & wezKarteSpodIndeksu1(int indeks); //funkcja pobieraj¹ca kartê spod indeksu - wersja do pierwszej czêœci gry
 	Karta & wezKarteSpodIndeksu2(int indeks, int * tab); //funkcja pobieraj¹ca kartê spod indeksu - wersja do drugiej czêœci gry
 	int znajdzIndeks(Karta karta); //funkcja znajduj¹ca indeks podanej karty
@@ -27,16 +26,28 @@ public:
 	Karta jakaKarta(int indeks); //funkcja sprawdzaj¹ca, jaka karta jest pod podanym indeksem
 	void dodajLewe(Karta karta1, Karta karta2); //funkcja dodaj¹ca lewê do zbioru lew
 	void wyswietlZbiorLew(); //funkcja wyœwietlaj¹ca zbiór lew
+	
+	
 	int wybierzKarte(sf::RenderWindow & window, int x, int y);
 
 	void wyswietlRekeCzlowieka(sf::RenderWindow & window);
 	void wyswietlRekeKomputera(sf::RenderWindow & window);
-	void pobierzKarteZeStosu(sf::RenderWindow & window, int x, int y);
+	
+	Karta & wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks);
+	Karta & wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks);
+	void wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta);
+	void wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta);
 
+	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6]);
+	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6]);
+
+
+	//void pobierzKarte(sf::RenderWindow & window, int x, int y, Talia & talia, int indeks);
 	//void wyswietl_reke(); //funkcja wyœwietlaj¹ca aktualn¹ rêkê
 	//void wyswietl_reke_pomniejszona(int * tab); //funkcja wyœwietlaj¹ca aktualn¹ pomniejszon¹ rêkê
 	//int sprawdz_warunek_podmiany(); //funkcja sprawdzaj¹ca warunek podmiany dziewi¹tki w kolorze atutowym na kartê ze spodu stosu
 	//void podmien(Talia & talia, int indeks); //funkcja podmieniaj¹ca dziewi¹tkê atutow¹ na kartê ze spodu stosu
 	//int sprawdz_meldunek(); //funkcja sprawdzaj¹ca, czy jest meldunek
+	//void pobierzKarte(Talia & talia, int indeks); //funkcja pobieraj¹ca kartê ze stosu
 
 };

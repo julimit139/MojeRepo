@@ -41,6 +41,13 @@ void Karta::wyswietlKarte(sf::RenderWindow & window, int x, int y)
 	window.draw(sprite);
 }
 
+void Karta::zmienWlascowsciKarty(Karta nowa)
+{
+	this->kolor = nowa.odczytajKolor();
+	this->wartosc = nowa.odczytajWartosc();
+	this->nazwaObrazu = nowa.odczytajNazweObrazu();
+}
+
 std::ostream & operator << (std::ostream & wypisz, Karta karta)
 {
 	switch (karta.odczytajWartosc())

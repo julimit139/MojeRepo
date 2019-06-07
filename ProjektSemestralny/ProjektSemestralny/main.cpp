@@ -5,50 +5,70 @@
 #include "reka.h"
 #include "gracz.h"
 
+void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia);
 void wyswietlStos(sf::RenderWindow & window);
 void wyswietlStol(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek);
 
 
 int main()
 {
+	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
+
 	Talia talia;
 	talia.tasujKarty();
 
 	Gracz komputer(talia);
 	Gracz czlowiek(talia);
-	
 
-	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
+
+	window.clear(sf::Color(30, 91, 6, 1));
+	wyswietlStos(window);
+	komputer.wyswietlRekeKomputera(window);
+	czlowiek.wyswietlRekeCzlowieka(window);
+	wyswietlKolorAtutowy(window, talia);
+	window.display();
+
+	
+	
+	std::string ktoWygral = "komputer";
+
 
 	while (window.isOpen())
 	{
+		//pierwszy ruch nale¿y do komputera
+		if (ktoWygral == "komputer")
+		{
+			komputer.wyswietlWylozonaKarteKomputera(window, 0);
+			window.display();
+			komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX);
+			window.display();
+
+
+
+		}
+		else if (ktoWygral == "czlowiek")
+		{
+
+
+
+
+		}
+		
+		
+		
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			wyswietlStol(window, komputer, czlowiek);
 
-			/*window.clear(sf::Color(30, 91, 6, 1));
-			Karta mojaKarta(dama, kier, "dama_kier.jpg");
-			sf::Texture texture;
-			if (!texture.loadFromFile("dama_kier.jpg"))
-			{
-				texture.loadFromFile("joker.jpg");
-			}
-			sf::Sprite sprite;
-			sprite.setTexture(texture);
-			sprite.setPosition(sf::Vector2f(200, 200));
-			window.draw(sprite);
-			window.display();*/
 
+
+
+
+
+		
 
 			switch (event.type)
 			{
-			case sf::Event::Closed:
-			{
-				window.close();
-				break;
-			}
-
 			case sf::Event::MouseButtonPressed:
 			{
 				std::cout << "Mouse button has been pressed" << std::endl;
@@ -60,16 +80,24 @@ int main()
 						int x = sf::Mouse::getPosition(window).x;
 						int y = sf::Mouse::getPosition(window).y;
 						
-						czlowiek.wybierzKarte(window, x, y);
+						int indeks = czlowiek.wybierzKarte(window, x, y);
+
+						//czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
+						
+
+						//czlowiek.pobierzKarte(window, x, y, talia, indeks);
+
+
+
 
 						break;
 					}
 				}
 				break;
 			}
-			case sf::Event::MouseButtonReleased:
+			case sf::Event::Closed:
 			{
-				std::cout << "Mouse button has been released" << std::endl;
+				window.close();
 				break;
 			}
 
@@ -93,7 +121,10 @@ int main()
 
 
 
-
+void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia)
+{
+	talia.pokazKarteAtutowa().wyswietlKarte(window, 519, 245);
+}
 
 void wyswietlStos(sf::RenderWindow & window)
 {

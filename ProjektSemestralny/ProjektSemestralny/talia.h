@@ -15,12 +15,13 @@ public:
 	Talia();			//konstruktor obiektu klasy Talia
 	int tasujKarty();			//funkcja tasuj¹ca taliê kart
 	Karta zdejmijKarte();			//funkcja zdejmuj¹ca kartê z talii/ze stosu
-	Kolor odczytajKolorAtutowy();				//funkcja odczytuj¹ca kolor atutowy
-	void wypiszKolorAtutowy(Kolor kolorAtutowy);				//funkcja wypisuj¹ca kolor atutowy
 	Wartosc odczytajWartoscOdkrytejKartyAtutowej();				//funkcja odczytuj¹ca wartoœæ karty okreœlaj¹cej kolor atutowy
 	int odczytajDlugoscTalii();			//funkcja odczytuj¹ca d³ugoœæ talii/stosu
-	
-										
+	Karta & pokazKarteAtutowa(); //DO KONTROLI
+
+
+	Kolor odczytajKolorAtutowy();				//funkcja odczytuj¹ca kolor atutowy
+	void wypiszKolorAtutowy(Kolor kolorAtutowy);				//funkcja wypisuj¹ca kolor atutowy									
 	//void podmienKarteWTalii(Karta kartaDoPodmiany);			//funkcja podmieniaj¹ca kartê ze spodu stosu na dziewi¹tkê atutow¹
 	//void wyswietlTalie();			//funkcja wyœwietlaj¹ca taliê
 };
