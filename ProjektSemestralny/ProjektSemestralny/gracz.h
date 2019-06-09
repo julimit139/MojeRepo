@@ -38,7 +38,7 @@ public:
 	void wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta);
 	void wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta);
 
-	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6]);
+	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska);
 	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska);
 
 

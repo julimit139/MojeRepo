@@ -174,10 +174,9 @@ void Gracz::wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta)
 	karta.wyswietlKarte(window, 1044, 20);
 }
 
-void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6])
+void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska)
 {
-	sf::RectangleShape maska(sf::Vector2f(123, 170));
-	maska.setFillColor(sf::Color(30, 91, 6, 1));
+	maska.setFillColor(sf::Color(30, 91, 6));
 	maska.setPosition(tabX[indeks], 740);
 	window.draw(maska);
 }

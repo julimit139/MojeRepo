@@ -23,7 +23,8 @@ void pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomputera, Kart
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
-	sf::RectangleShape maska(sf::Vector2f(123, 170));
+	sf::RectangleShape maskaKomputera(sf::Vector2f(123, 170));
+	sf::RectangleShape maskaCzlowieka(sf::Vector2f(123, 170));
 
 	Talia talia;
 	talia.tasujKarty();
@@ -43,7 +44,7 @@ int main()
 
 
 	wyswietlStol(window, komputer, czlowiek);
-	zakryjKolorAtutowy(window, maska);
+	zakryjKolorAtutowy(window, maskaKomputera);
 	window.display();
 	Sleep(2000);
 
@@ -61,20 +62,19 @@ int main()
 		{
 			wyswietlStol(window, komputer, czlowiek);
 			komputer.wyswietlWylozonaKarteKomputera(window, 0);
+			komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX, maskaKomputera);
 			window.display();
 			Sleep(2000);
 
-			wyswietlStol(window, komputer, czlowiek);
-			komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX, maska);
-			window.display();
-			Sleep(2000);
-
-
+		
 			
 			//Ruch gracza
-			bool exit = false;
+
+
+			int x, y, indeks;
+			bool wyjscie = false;
 			sf::Event event;
-			while (!exit)
+			while (!wyjscie)
 			{
 				if (window.pollEvent(event))
 				{
@@ -86,9 +86,10 @@ int main()
 						{
 						case sf::Mouse::Left:
 						{
-							int x = sf::Mouse::getPosition(window).x;
-							int y = sf::Mouse::getPosition(window).y;
-							int indeks = czlowiek.wybierzKarte(window, x, y);
+							x = sf::Mouse::getPosition(window).x;
+							y = sf::Mouse::getPosition(window).y;
+							indeks = czlowiek.wybierzKarte(window, x, y);
+							wyjscie = true;
 							break;
 						}
 						}
@@ -103,9 +104,13 @@ int main()
 
 					}
 				}
-
-				//...
 			}
+
+			wyswietlStol(window, komputer, czlowiek);
+			czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
+			czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
+			window.display();
+			Sleep(2000);
 
 		}
 		else if (ktoWygral == "czlowiek")
