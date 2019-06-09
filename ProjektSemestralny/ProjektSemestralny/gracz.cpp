@@ -6,10 +6,10 @@ Gracz::Gracz(Talia & talia) : reka(talia)
 	licznikZebranychLew = 0;
 }
 
-/*void Gracz::pobierzKarte(Talia & talia, int indeks)
+void Gracz::pobierzKarte(Talia & talia, int indeks)
 {
 	reka.pobierzKarte(talia, indeks);
-}*/
+}
 
 Karta & Gracz::wezKarteSpodIndeksu1(int indeks)
 {
@@ -182,11 +182,11 @@ void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int inde
 	window.draw(maska);
 }
 
-void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6])
+void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska)
 {
-	sf::RectangleShape maska(sf::Vector2f(123, 170));
-	maska.setFillColor(sf::Color(30, 91, 6, 1));
+	maska.setFillColor(sf::Color(30, 91, 6));
 	maska.setPosition(tabX[indeks], 20);
 	window.draw(maska);
+	//window.display();
 }
 

@@ -39,7 +39,7 @@ public:
 	void wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta);
 
 	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6]);
-	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6]);
+	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska);
 
 
 	//void pobierzKarte(sf::RenderWindow & window, int x, int y, Talia & talia, int indeks);
@@ -48,6 +48,7 @@ public:
 	//int sprawdz_warunek_podmiany(); //funkcja sprawdzaj¹ca warunek podmiany dziewi¹tki w kolorze atutowym na kartê ze spodu stosu
 	//void podmien(Talia & talia, int indeks); //funkcja podmieniaj¹ca dziewi¹tkê atutow¹ na kartê ze spodu stosu
 	//int sprawdz_meldunek(); //funkcja sprawdzaj¹ca, czy jest meldunek
-	//void pobierzKarte(Talia & talia, int indeks); //funkcja pobieraj¹ca kartê ze stosu
+	
+	void pobierzKarte(Talia & talia, int indeks); //funkcja pobieraj¹ca kartê ze stosu
 
 };
