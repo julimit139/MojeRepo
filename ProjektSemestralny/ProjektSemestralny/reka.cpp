@@ -438,4 +438,3 @@ int Reka::sprawdzMeldunek()
 	}
 	return indeks;
 }*/
-

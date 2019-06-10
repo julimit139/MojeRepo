@@ -203,5 +203,3 @@ void Gracz::zakryjWyswietlonaKarteKomputera(sf::RenderWindow & window, const int
 	maska.setPosition(tabX[0], wspolerzednaStosuY);
 	window.draw(maska);
 }
-
-

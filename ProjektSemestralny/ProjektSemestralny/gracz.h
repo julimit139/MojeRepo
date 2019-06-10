@@ -26,7 +26,7 @@ public:
 	Karta jakaKarta(int indeks); //funkcja sprawdzaj¹ca, jaka karta jest pod podanym indeksem
 	void dodajLewe(Karta karta1, Karta karta2); //funkcja dodaj¹ca lewê do zbioru lew
 	void wyswietlZbiorLew(); //funkcja wyœwietlaj¹ca zbiór lew
-	
+
 	
 	int wybierzKarte(sf::RenderWindow & window, int x, int y);
 

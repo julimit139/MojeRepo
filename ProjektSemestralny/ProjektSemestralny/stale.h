@@ -9,7 +9,7 @@ enum Kolor { pik, kier, karo, trefl }; //typ wyliczeniowy zawieraj¹cy kolory kar
 const int wspolrzedneRekiX[6] = { 144, 294, 444, 594, 744, 894 };
 const int wspolrzedneRekiY[2] = { 20, 470 };
 const int wspolrzednaStosuX = 79;
-const int wspolerzednaStosuY = 245;
+const int wspolrzednaStosuY = 245;
 const int wspolrzedneXWylozonychKart[2] = {444, 594};
 const int szerokoscKarty = 123;
 const int wysokoscKarty = 170;
