@@ -35,11 +35,15 @@ public:
 	
 	Karta & wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks);
 	Karta & wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks);
+	
+	void zakryjWyswietlonaKarteCzlowieka(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska);
+	void zakryjWyswietlonaKarteKomputera(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska);
+
 	void wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta);
 	void wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta);
 
-	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska);
-	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska);
+	void zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska);
+	void zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska);
 
 
 	//void pobierzKarte(sf::RenderWindow & window, int x, int y, Talia & talia, int indeks);

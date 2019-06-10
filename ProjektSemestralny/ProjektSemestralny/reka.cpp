@@ -11,7 +11,8 @@ Reka::Reka(Talia & talia)
 
 void Reka::pobierzKarte(Talia & talia, int indeks)
 {
-	reka[indeks].zmienWlascowsciKarty(talia.zdejmijKarte());
+	reka[indeks] = talia.zdejmijKarte();
+	//reka[indeks].zmienWlascowsciKarty(talia.zdejmijKarte());
 }
 
 Karta & Reka::wezKarteSpodIndeksu1(int indeks)

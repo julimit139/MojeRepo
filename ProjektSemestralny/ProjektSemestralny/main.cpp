@@ -23,8 +23,8 @@ void pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomputera, Kart
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
-	sf::RectangleShape maskaKomputera(sf::Vector2f(123, 170));
-	sf::RectangleShape maskaCzlowieka(sf::Vector2f(123, 170));
+	sf::RectangleShape maskaKomputera(sf::Vector2f(128, 175));
+	sf::RectangleShape maskaCzlowieka(sf::Vector2f(128, 175));
 
 	Talia talia;
 	talia.tasujKarty();
@@ -57,14 +57,20 @@ int main()
 
 	while (window.isOpen())
 	{
-		//Ruch komputera - pierwszy ruch nale¿y do komputera
+		wyswietlStol(window, komputer, czlowiek);
+
+
+
+		
 		if (ktoWygral == "komputer")
 		{
+			//Ruch komputera - pierwszy ruch nale¿y do komputera
+
 			wyswietlStol(window, komputer, czlowiek);
-			komputer.wyswietlWylozonaKarteKomputera(window, 0);
+			kartaKomputera = komputer.wyswietlWylozonaKarteKomputera(window, 0);
 			komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX, maskaKomputera);
 			window.display();
-			Sleep(2000);
+			
 
 		
 			
@@ -107,7 +113,7 @@ int main()
 			}
 
 			wyswietlStol(window, komputer, czlowiek);
-			czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
+			kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
 			czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
 			window.display();
 			Sleep(2000);
@@ -116,8 +122,60 @@ int main()
 		else if (ktoWygral == "czlowiek")
 		{
 			//Ruch gracza
+			int x, y, indeks;
+			bool wyjscie = false;
+			sf::Event event;
+			while (!wyjscie)
+			{
+				if (window.pollEvent(event))
+				{
+					switch (event.type)
+					{
+					case sf::Event::MouseButtonPressed:
+					{
+						switch (event.key.code)
+						{
+						case sf::Mouse::Left:
+						{
+							x = sf::Mouse::getPosition(window).x;
+							y = sf::Mouse::getPosition(window).y;
+							indeks = czlowiek.wybierzKarte(window, x, y);
+							wyjscie = true;
+							break;
+						}
+						}
+						break;
+					}
+					case sf::Event::Closed:
+					{
+						window.close();
+						break;
+					}
+
+
+					}
+				}
+			}
+
+			wyswietlStol(window, komputer, czlowiek);
+			kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
+			czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
+			window.display();
+			Sleep(2000);
+
 
 			//Ruch komputera
+			kartaKomputera = komputer.dobierzKarte1(kartaCzlowieka);
+
+			wyswietlStol(window, komputer, czlowiek);
+			komputer.wyswietlWylozonaKarteKomputera(window, komputer.znajdzIndeks(kartaKomputera));
+			komputer.zakryjPusteMiejsceWReceKomputera(window, komputer.znajdzIndeks(kartaKomputera), wspolrzedneRekiX, maskaKomputera);
+			window.display();
+			Sleep(2000);
+
+
+
+
 
 
 		}
@@ -132,11 +190,17 @@ int main()
 		{
 			ktoWygral = "czlowiek";
 		}
-		dodajMalePunkty(komputer, czlowiek, punkty);
-		pobierzKarty(komputer, czlowiek, kartaKomputera, kartaCzlowieka, talia, punkty);
+		dodajMalePunkty(komputer, czlowiek, punkty);		
 
+		Sleep(2000);
 
+		wyswietlStol(window, komputer, czlowiek);
+		komputer.zakryjWyswietlonaKarteKomputera(window, wspolerzednaStosuY, wspolrzedneXWylozonychKart, maskaKomputera);
+		czlowiek.zakryjWyswietlonaKarteCzlowieka(window, wspolerzednaStosuY, wspolrzedneXWylozonychKart, maskaCzlowieka);
+		window.display();
+		Sleep(2000);
 		
+		pobierzKarty(komputer, czlowiek, kartaKomputera, kartaCzlowieka, talia, punkty);
 		
 			
 			

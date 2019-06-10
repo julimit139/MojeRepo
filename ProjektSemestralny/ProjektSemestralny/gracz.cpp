@@ -174,18 +174,34 @@ void Gracz::wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta)
 	karta.wyswietlKarte(window, 1044, 20);
 }
 
-void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska)
+void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(tabX[indeks], 740);
+	maska.setPosition(tabX[indeks], 470);
 	window.draw(maska);
+	//window.display();
 }
 
-void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape maska)
+void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
 	maska.setPosition(tabX[indeks], 20);
 	window.draw(maska);
 	//window.display();
 }
+
+void Gracz::zakryjWyswietlonaKarteCzlowieka(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska)
+{
+	maska.setFillColor(sf::Color(30, 91, 6));
+	maska.setPosition(tabX[1], wspolerzednaStosuY);
+	window.draw(maska);
+}
+
+void Gracz::zakryjWyswietlonaKarteKomputera(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska)
+{
+	maska.setFillColor(sf::Color(30, 91, 6));
+	maska.setPosition(tabX[0], wspolerzednaStosuY);
+	window.draw(maska);
+}
+
 
