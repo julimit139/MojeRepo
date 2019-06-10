@@ -16,6 +16,8 @@ void wyswietlStol(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek);
 void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia);
 void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska);
 
+int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka);
+
 //void wyswietlTimer();
 
 
@@ -560,3 +562,20 @@ void pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomputera, Kart
 
 
 }*/
+
+int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka)
+{
+	if (malePunktyKomputera > malePunktyCzlowieka)
+		return malePunktyKomputera;
+	else
+		return malePunktyCzlowieka;
+}
+
+template <class T>
+T rozstrzygnijZwyciestwoT(T a, T b)
+{
+	if (a > b)
+		return a;
+	else
+		return b;
+}
