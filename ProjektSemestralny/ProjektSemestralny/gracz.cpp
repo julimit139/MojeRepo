@@ -134,14 +134,24 @@ int Gracz::wybierzKarte(sf::RenderWindow & window, int x, int y)
 	return indeks;
 }
 
-void Gracz::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+void Gracz::wyswietlRekeCzlowieka1(sf::RenderWindow & window)
 {
-	reka.wyswietlRekeCzlowieka(window);
+	reka.wyswietlRekeCzlowieka1(window);
 }
 
-void Gracz::wyswietlRekeKomputera(sf::RenderWindow & window)
+void Gracz::wyswietlRekeKomputera1(sf::RenderWindow & window)
 {
-	reka.wyswietlRekeKomputera(window);
+	reka.wyswietlRekeKomputera1(window);
+}
+
+void Gracz::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6])
+{
+	reka.wyswietlRekeCzlowieka2(window, tab);
+}
+
+void Gracz::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6])
+{
+	reka.wyswietlRekeKomputera2(window, tab);
 }
 
 /*void Gracz::pobierzKarte(sf::RenderWindow & window, int x, int y, Talia & talia, int indeks)

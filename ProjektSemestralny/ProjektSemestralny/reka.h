@@ -16,8 +16,11 @@ public:
 	Karta dobierzKarte1(Karta kartaWylozona);			//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w pierwszej czêœci gry 
 	Karta dobierzKarte2(Karta kartaWylozona, int * tab);				//funkcja dobieraj¹ca kartê do wy³o¿onej przez cz³owieka w drugiej czêœci gry
 	Karta & operator[](int indeks); //prze³adowany operator indeksowania, umo¿liwia dostanie siê do konkretnego elementu tablicy
-	void wyswietlRekeKomputera(sf::RenderWindow & window);
-	void wyswietlRekeCzlowieka(sf::RenderWindow & window);
+	void wyswietlRekeKomputera1(sf::RenderWindow & window);
+	void wyswietlRekeCzlowieka1(sf::RenderWindow & window);
+
+	void wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6]);
+	void wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6]);
 
 
 	//void wyswietlAktualnaReke();			//funkcja wyœwietlaj¹ca aktualn¹ rêkê

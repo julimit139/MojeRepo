@@ -9,23 +9,39 @@
 #include "reka.h"
 #include "gracz.h"
 
+void threadTick(int* timer, bool* end)
+{
+	while (!(*end))
+	{
+		Sleep(1000);
+		(*timer)++;
+		//std::cout << *timer << std::endl;
+	}
+};
 
-void wyswietlStos(sf::RenderWindow & window, const int wspolrzednaStosuX, const int wspolrzednaStosuY);
-void zakryjStos(sf::RenderWindow & window, sf::RectangleShape maska, const int wspolrzednaStosuX, const int wspolrzednaStosuY);
-void wyswietlStol(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek);
-void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia);
-void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska);
+void wyswietlStos(sf::RenderWindow & window, const int X, const int Y);
+void zakryjStos(sf::RenderWindow & window, sf::RectangleShape maska, const int X, const int Y);
+void wyswietlStol1(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const int X, const int Y);
+void wyswietlStol2(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, int tabKomputera[6], int tabCzlowieka[6]);
+void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia, const int X, const int Y);
+void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska, const int X, const int Y);
 
-int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka);
+void wyswietlPunktyKomputera(sf::RenderWindow & window, Gracz komputer);
+void wyswietlPunktyCzlowieka(sf::RenderWindow & window, Gracz czlowiek);
 
-//void wyswietlTimer();
+
+Karta & ruchKomputeraPierwszy(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wspolrzednaStosuY, const int wspolrzedneRekiX[6], sf::RectangleShape maskaKomputera);
+Karta & ruchKomputeraDrugi();
+Karta & ruchCzlowiekaPierwszy();
+Karta & ruchCzlowiekaDrugi();
 
 
 int porownajKarty(Karta kartaKomputera, Karta kartaCzlowieka, Kolor kolorAtutowy, std::string ktoWygral); //funkcja porównuj¹ca wy³o¿one karty
 int dodajMalePunkty(Gracz & komputer, Gracz & czlowiek, int punkty);
 void pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomputera, Karta kartaCzlowieka, Talia & talia, int punkty); //funkcja pobieraj¹ca karty ze stosu w odpowiedniej kolejnoœci
+int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka);
 
-
+//int robCos(sf::RenderWindow & window, Karta & kartaCzlowieka, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wpsolrzednaStosuY, int indeks, const int wspolrzednaRekiX[6], sf::RectangleShape maskaCzlowieka);
 
 int main()
 {
@@ -34,9 +50,12 @@ int main()
 	sf::RectangleShape maskaCzlowieka(sf::Vector2f(130, 177));
 	sf::RectangleShape maskaStosu(sf::Vector2f(130, 177));
 
-	sf::Clock clock;
+	int timer = 0;
+	bool endTimer = false;
+	std::thread Timer(threadTick, &timer, &endTimer);
+	
 
-	//std::thread timer(wyswietlTimer);
+	
 
 
 
@@ -48,19 +67,19 @@ int main()
 	Gracz komputer(talia);
 	Gracz czlowiek(talia);
 
-	wyswietlStol(window, komputer, czlowiek);
+	wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 	Sleep(1000);
 
 
-	wyswietlStol(window, komputer, czlowiek);
-	wyswietlKolorAtutowy(window, talia);
+	wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+	wyswietlKolorAtutowy(window, talia, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
 	window.display();
 	Sleep(1000);
 
 
 
-	wyswietlStol(window, komputer, czlowiek);
-	zakryjKolorAtutowy(window, maskaKomputera);
+	wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+	zakryjKolorAtutowy(window, maskaKomputera, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
 	window.display();
 	Sleep(1000);
 
@@ -73,16 +92,12 @@ int main()
 
 	while (window.isOpen())
 	{	
-		sf::Time elapsed = clock.getElapsedTime();
-		std::cout << elapsed.asSeconds() << std::endl;
-		clock.restart();
-
 
 		//pierwsza czêœæ gry - ze stosem kart
 		while (talia.odczytajDlugoscTalii() != 0)
 		{
-			//wyswietlStol(window, komputer, czlowiek);
-			//Sleep(1000);
+			wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+			Sleep(1000);
 
 
 
@@ -90,13 +105,12 @@ int main()
 			{
 				//Ruch komputera - pierwszy ruch nale¿y do komputera
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 				kartaKomputera = komputer.wyswietlWylozonaKarteKomputera(window, 0);
 				komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX, maskaKomputera);
 				window.display();
 
-
-
+				
 
 				//Ruch gracza
 
@@ -136,7 +150,8 @@ int main()
 					}
 				}
 
-				wyswietlStol(window, komputer, czlowiek);
+				
+				wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 				kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
 				czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
 				window.display();
@@ -181,8 +196,8 @@ int main()
 						}
 					}
 				}
-
-				wyswietlStol(window, komputer, czlowiek);
+				//thread
+				wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 				kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
 				czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
 				window.display();
@@ -192,7 +207,7 @@ int main()
 				//Ruch komputera
 				kartaKomputera = komputer.dobierzKarte1(kartaCzlowieka);
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 				komputer.wyswietlWylozonaKarteKomputera(window, komputer.znajdzIndeks(kartaKomputera));
 				komputer.zakryjPusteMiejsceWReceKomputera(window, komputer.znajdzIndeks(kartaKomputera), wspolrzedneRekiX, maskaKomputera);
 				window.display();
@@ -217,37 +232,46 @@ int main()
 			}
 			dodajMalePunkty(komputer, czlowiek, punkty);
 
+			
+			Sleep(1000);
+			wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+			//komputer.zakryjWyswietlonaKarteKomputera(window, wspolrzednaStosuY, wspolrzedneXWylozonychKart, maskaKomputera);
+			//czlowiek.zakryjWyswietlonaKarteCzlowieka(window, wspolrzednaStosuY, wspolrzedneXWylozonychKart, maskaCzlowieka);
+			window.display();
 			Sleep(1000);
 
-			wyswietlStol(window, komputer, czlowiek);
+			wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
 			komputer.zakryjWyswietlonaKarteKomputera(window, wspolrzednaStosuY, wspolrzedneXWylozonychKart, maskaKomputera);
 			czlowiek.zakryjWyswietlonaKarteCzlowieka(window, wspolrzednaStosuY, wspolrzedneXWylozonychKart, maskaCzlowieka);
 			window.display();
 			Sleep(1000);
 
+
 			pobierzKarty(komputer, czlowiek, kartaKomputera, kartaCzlowieka, talia, punkty);
 
-			wyswietlStol(window, komputer, czlowiek);
-			Sleep(1000);
+			//wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+			//Sleep(1000);
 		}
 
-
-
-
+	
 		//druga czêœæ gry - bez stosu kart
-		wyswietlStol(window, komputer, czlowiek);
-		zakryjStos(window, maskaStosu, wspolrzednaStosuX, wspolrzednaStosuY);
-		window.display();
-		Sleep(1000);
-		
-		
+
 		int tablicaKomputera[6] = { 1, 2, 3, 4, 5, 6 };
 		int tablicaCzlowieka[6] = { 1, 2, 3, 4, 5, 6 };
 
+
+		wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
+		//zakryjStos(window, maskaStosu, wspolrzednaStosuX, wspolrzednaStosuY);
+		//window.display();
+		Sleep(1000);
+		
+		
+		
+
 		for (int i = 0; i < rozmiar_reki; i++)
 		{
-			//wyswietlStol(window, komputer, czlowiek);
-			//Sleep(2000);
+			wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
+			Sleep(2000);
 
 			if (ktoWygral == "komputer")
 			{
@@ -262,8 +286,9 @@ int main()
 					}
 				}
 				kartaKomputera = komputer.wezKarteSpodIndeksu2(ind, tablicaKomputera);
+				tablicaKomputera[ind] = 0;
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
 				komputer.wyswietlWylozonaKarteKomputera(window, komputer.znajdzIndeks(kartaKomputera));
 				komputer.zakryjPusteMiejsceWReceKomputera(window, komputer.znajdzIndeks(kartaKomputera), wspolrzedneRekiX, maskaKomputera);
 				window.display();
@@ -306,7 +331,7 @@ int main()
 				}
 				tablicaCzlowieka[indeks] = 0;
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
 				kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
 				czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
 				window.display();
@@ -352,7 +377,7 @@ int main()
 				}
 				tablicaCzlowieka[indeks] = 0;
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
 				kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
 				czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
 				window.display();
@@ -362,7 +387,7 @@ int main()
 				kartaKomputera = komputer.dobierzKarte2(kartaCzlowieka, tablicaKomputera);
 				tablicaKomputera[komputer.znajdzIndeks(kartaKomputera)] = 0;
 
-				wyswietlStol(window, komputer, czlowiek);
+				wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
 				komputer.wyswietlWylozonaKarteKomputera(window, komputer.znajdzIndeks(kartaKomputera));
 				komputer.zakryjPusteMiejsceWReceKomputera(window, komputer.znajdzIndeks(kartaKomputera), wspolrzedneRekiX, maskaKomputera);
 				window.display();
@@ -381,12 +406,12 @@ int main()
 			}
 			dodajMalePunkty(komputer, czlowiek, punkty);
 
-			wyswietlStol(window, komputer, czlowiek);
-			Sleep(1000);
+			//wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
+			//Sleep(1000);
 
 		}
 
-		
+		Sleep(5000);
 
 
 
@@ -396,9 +421,9 @@ int main()
 	
 	
 
-
+	endTimer = true;
+	Timer.join();
 	
-
 	return 0;
 	getchar();
 }
@@ -419,7 +444,7 @@ int main()
 
 
 
-void wyswietlStos(sf::RenderWindow & window, const int wspolrzednaStosuX, const int wspolrzednaStosuY)
+void wyswietlStos(sf::RenderWindow & window, const int X, const int Y)
 {
 	sf::Texture texture;
 	if (!texture.loadFromFile("tyl_karty.jpg"))
@@ -428,36 +453,48 @@ void wyswietlStos(sf::RenderWindow & window, const int wspolrzednaStosuX, const 
 	}
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(wspolrzednaStosuX, wspolrzednaStosuY));
+	sprite.setPosition(sf::Vector2f(X, Y));
 	window.draw(sprite);
 }
 
-void zakryjStos(sf::RenderWindow & window, sf::RectangleShape maska, const int wspolrzednaStosuX, const int wspolrzednaStosuY)
+void zakryjStos(sf::RenderWindow & window, sf::RectangleShape maska, const int X, const int Y)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(wspolrzednaStosuX, wspolrzednaStosuY);
+	maska.setPosition(X, Y);
 	window.draw(maska);
 }
 
-void wyswietlStol(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek)
+void wyswietlStol1(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const int X, const int Y)
 {
 	window.clear(sf::Color(30, 91, 6, 1));
-	wyswietlStos(window, wspolrzednaStosuX, wspolrzednaStosuY);
-	komputer.wyswietlRekeKomputera(window);
-	czlowiek.wyswietlRekeCzlowieka(window);
+	wyswietlStos(window, X, Y);
+	komputer.wyswietlRekeKomputera1(window);
+	czlowiek.wyswietlRekeCzlowieka1(window);
+	wyswietlPunktyKomputera(window, komputer);
+	wyswietlPunktyCzlowieka(window, czlowiek);
 	window.display();
 }
 
-void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia)
+void wyswietlStol2(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, int tabKomputera[6], int tabCzlowieka[6])
 {
-	talia.pokazKarteAtutowa().wyswietlKarte(window, 519, 245);
+	window.clear(sf::Color(30, 91, 6, 1));
+	komputer.wyswietlRekeKomputera2(window, tabKomputera);
+	czlowiek.wyswietlRekeCzlowieka2(window, tabCzlowieka);
+	wyswietlPunktyKomputera(window, komputer);
+	wyswietlPunktyCzlowieka(window, czlowiek);
+	window.display();
+}
+
+void wyswietlKolorAtutowy(sf::RenderWindow & window, Talia talia, const int X, const int Y)
+{
+	talia.pokazKarteAtutowa().wyswietlKarte(window, X, Y);
 }
 
 
-void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska)
+void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska, const int X, const int Y)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(519, 245);
+	maska.setPosition(X, Y);
 	window.draw(maska);
 	//window.display();
 }
@@ -578,4 +615,91 @@ T rozstrzygnijZwyciestwoT(T a, T b)
 		return a;
 	else
 		return b;
+}
+
+Karta & ruchKomputeraPierwszy(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wspolrzednaStosuY, const int wspolrzedneRekiX[6], sf::RectangleShape maskaKomputera)
+{
+	Karta kartaKomputera;
+
+	wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+	kartaKomputera = komputer.wyswietlWylozonaKarteKomputera(window, 0);
+	komputer.zakryjPusteMiejsceWReceKomputera(window, 0, wspolrzedneRekiX, maskaKomputera);
+	window.display();
+	return kartaKomputera;
+}
+
+/*int robCos(sf::RenderWindow & window, Karta & kartaCzlowieka, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wpsolrzednaStosuY, int indeks, const int wspolrzednaRekiX[6], sf::RectangleShape maskaCzlowieka)
+{
+	wyswietlStol1(window, komputer, czlowiek, wspolrzednaStosuX, wspolrzednaStosuY);
+	kartaCzlowieka = czlowiek.wyswietlWylozonaKarteCzlowieka(window, indeks);
+	czlowiek.zakryjPusteMiejsceWReceCzlowieka(window, indeks, wspolrzedneRekiX, maskaCzlowieka);
+	window.display();
+	Sleep(1000);
+}*/
+
+/*void threadTick(int & timer)
+{
+	timer++;
+	Sleep(1000);
+}*/
+
+
+
+
+void wyswietlPunktyKomputera(sf::RenderWindow & window, Gracz komputer)
+{
+	std::string nazwa = "KOMPUTER";
+	std::string punkty = std::to_string(komputer.odczytajLiczbeMalychPunktow());
+	sf::Font font;
+	if (!font.loadFromFile("VCR_OSD_MONO_1.001.ttf"))
+	{
+		std::cout << "An error occured!" << std::endl;
+	}
+	sf::Text text1;
+	text1.setFont(font);
+	text1.setString(nazwa);
+	text1.setCharacterSize(25);
+	text1.setPosition(sf::Vector2f(1050, 245));
+	text1.setFillColor(sf::Color::White);
+	//text1.setStyle(sf::Text::Bold);
+
+	sf::Text text2;
+	text2.setFont(font);
+	text2.setString(punkty);
+	text2.setCharacterSize(25);
+	text2.setPosition(sf::Vector2f(1098, 280));
+	text2.setFillColor(sf::Color::White);
+	//text2.setStyle(sf::Text::Bold);
+	
+	window.draw(text1);
+	window.draw(text2);
+}
+
+void wyswietlPunktyCzlowieka(sf::RenderWindow & window, Gracz czlowiek)
+{
+	std::string nazwa = "TY";
+	std::string punkty = std::to_string(czlowiek.odczytajLiczbeMalychPunktow());
+	sf::Font font;
+	if (!font.loadFromFile("VCR_OSD_MONO_1.001.ttf"))
+	{
+		std::cout << "An error occured!" << std::endl;
+	}
+	sf::Text text1;
+	text1.setFont(font);
+	text1.setString(nazwa);
+	text1.setCharacterSize(25);
+	text1.setPosition(sf::Vector2f(1093, 350));
+	text1.setFillColor(sf::Color::White);
+	//text1.setStyle(sf::Text::Bold);
+
+	sf::Text text2;
+	text2.setFont(font);
+	text2.setString(punkty);
+	text2.setCharacterSize(25);
+	text2.setPosition(sf::Vector2f(1098, 385));
+	text2.setFillColor(sf::Color::White);
+	//text2.setStyle(sf::Text::Bold);
+
+	window.draw(text1);
+	window.draw(text2);
 }

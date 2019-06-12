@@ -11,7 +11,7 @@ class Gracz
 	Reka reka;			 //rêka gracza
 	Lewa * zbiorLew;			//zbiór lew zebranych przez gracza
 	int licznikZebranychLew;			//pole z liczb¹ zebranych przez gracza lew
-	int malePunkty;			//pole z liczb¹ ma³ych punktów gracza
+	int malePunkty = 0;			//pole z liczb¹ ma³ych punktów gracza
 	int duzePunkty;			//pole z liczb¹ du¿ych punktów gracza
 public:
 	Gracz(Talia & talia); //konstruktor obiektu klasy Gracz
@@ -30,8 +30,11 @@ public:
 	
 	int wybierzKarte(sf::RenderWindow & window, int x, int y);
 
-	void wyswietlRekeCzlowieka(sf::RenderWindow & window);
-	void wyswietlRekeKomputera(sf::RenderWindow & window);
+	void wyswietlRekeCzlowieka1(sf::RenderWindow & window);
+	void wyswietlRekeKomputera1(sf::RenderWindow & window);
+
+	void wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6]);
+	void wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6]);
 	
 	Karta & wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks);
 	Karta & wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks);

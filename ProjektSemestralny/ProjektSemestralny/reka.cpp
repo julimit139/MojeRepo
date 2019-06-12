@@ -12,7 +12,6 @@ Reka::Reka(Talia & talia)
 void Reka::pobierzKarte(Talia & talia, int indeks)
 {
 	reka[indeks] = talia.zdejmijKarte();
-	//reka[indeks].zmienWlascowsciKarty(talia.zdejmijKarte());
 }
 
 Karta & Reka::wezKarteSpodIndeksu1(int indeks)
@@ -22,7 +21,7 @@ Karta & Reka::wezKarteSpodIndeksu1(int indeks)
 
 Karta & Reka::wezKarteSpodIndeksu2(int indeks, int * tab)
 {
-	tab[indeks] = 0;
+	//tab[indeks] = 0;
 	return reka[indeks];
 }
 
@@ -308,7 +307,7 @@ Karta & Reka::operator[](int indeks)
 	return this->reka[indeks];
 }
 
-void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
+void Reka::wyswietlRekeKomputera1(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 20;
@@ -327,7 +326,7 @@ void Reka::wyswietlRekeKomputera(sf::RenderWindow & window)
 	}
 }
 
-void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
+void Reka::wyswietlRekeCzlowieka1(sf::RenderWindow & window)
 {
 	int x = 144;
 	int y = 470;
@@ -338,9 +337,43 @@ void Reka::wyswietlRekeCzlowieka(sf::RenderWindow & window)
 	}
 }
 
+void Reka::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6])
+{
+	int x = 144;
+	int y = 20;
+	sf::Texture texture;
+	if (!texture.loadFromFile("tyl_karty.jpg"))
+	{
+		texture.loadFromFile("joker.jpg");
+	}
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	for (int i = 0; i < rozmiar_reki; i++)
+	{
+		if (tab[i] != 0)
+		{
+			sprite.setPosition(sf::Vector2f(x, y));
+			window.draw(sprite);
+		}
+		x += 150;
+	}
+}
 
-
-
+void Reka::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6])
+{
+	int x = 144;
+	int y = 470;
+	int i = 0;
+	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
+	{
+		if (tab[i] != 0)
+		{
+			(*it).wyswietlKarte(window, x, y);
+		}
+		x += 150;
+		i++;
+	}
+}
 
 
 
