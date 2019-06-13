@@ -15,7 +15,7 @@ void threadTick(int* timer, bool* end)
 	{
 		Sleep(1000);
 		(*timer)++;
-		//std::cout << *timer << std::endl;
+		std::cout << *timer << std::endl;
 	}
 };
 
@@ -29,6 +29,9 @@ void zakryjKolorAtutowy(sf::RenderWindow & window, sf::RectangleShape maska, con
 void wyswietlPunktyKomputera(sf::RenderWindow & window, Gracz komputer);
 void wyswietlPunktyCzlowieka(sf::RenderWindow & window, Gracz czlowiek);
 
+void wyswietlInformacjeOZwyciestwie(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek);
+void wyswietlInformacjeOCzasieGry(sf::RenderWindow & window, int czas);
+
 
 Karta & ruchKomputeraPierwszy(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wspolrzednaStosuY, const int wspolrzedneRekiX[6], sf::RectangleShape maskaKomputera);
 Karta & ruchKomputeraDrugi();
@@ -41,7 +44,6 @@ int dodajMalePunkty(Gracz & komputer, Gracz & czlowiek, int punkty);
 void pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomputera, Karta kartaCzlowieka, Talia & talia, int punkty); //funkcja pobieraj¹ca karty ze stosu w odpowiedniej kolejnoœci
 int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka);
 
-//int robCos(sf::RenderWindow & window, Karta & kartaCzlowieka, Gracz komputer, Gracz czlowiek, const int wspolrzednaStosuX, const int wpsolrzednaStosuY, int indeks, const int wspolrzednaRekiX[6], sf::RectangleShape maskaCzlowieka);
 
 int main()
 {
@@ -133,7 +135,10 @@ int main()
 								x = sf::Mouse::getPosition(window).x;
 								y = sf::Mouse::getPosition(window).y;
 								indeks = czlowiek.wybierzKarte(window, x, y);
-								wyjscie = true;
+								if (indeks != 7)
+								{
+									wyjscie = true;
+								}
 								break;
 							}
 							}
@@ -180,7 +185,10 @@ int main()
 								x = sf::Mouse::getPosition(window).x;
 								y = sf::Mouse::getPosition(window).y;
 								indeks = czlowiek.wybierzKarte(window, x, y);
-								wyjscie = true;
+								if (indeks != 7)
+								{
+									wyjscie = true;
+								}
 								break;
 							}
 							}
@@ -286,7 +294,7 @@ int main()
 					}
 				}
 				kartaKomputera = komputer.wezKarteSpodIndeksu2(ind, tablicaKomputera);
-				tablicaKomputera[ind] = 0;
+				//tablicaKomputera[ind] = 0;
 
 				wyswietlStol2(window, komputer, czlowiek, tablicaKomputera, tablicaCzlowieka);
 				komputer.wyswietlWylozonaKarteKomputera(window, komputer.znajdzIndeks(kartaKomputera));
@@ -313,7 +321,10 @@ int main()
 								x = sf::Mouse::getPosition(window).x;
 								y = sf::Mouse::getPosition(window).y;
 								indeks = czlowiek.wybierzKarte(window, x, y);
-								wyjscie = true;
+								if (indeks != 7)
+								{
+									wyjscie = true;
+								}
 								break;
 							}
 							}
@@ -359,7 +370,10 @@ int main()
 								x = sf::Mouse::getPosition(window).x;
 								y = sf::Mouse::getPosition(window).y;
 								indeks = czlowiek.wybierzKarte(window, x, y);
-								wyjscie = true;
+								if (indeks != 7)
+								{
+									wyjscie = true;
+								}
 								break;
 							}
 							}
@@ -411,18 +425,27 @@ int main()
 
 		}
 
-		Sleep(5000);
+		
+		endTimer = true;
+		Sleep(2000);
 
+		//koniec
+		window.clear(sf::Color(30, 91, 6, 1));
+		wyswietlInformacjeOZwyciestwie(window, komputer, czlowiek);
+		wyswietlInformacjeOCzasieGry(window, timer);
+		window.display();
+		Sleep(4000);
 
+		endTimer = true;
+		Timer.join();
 
-
+		window.close();
 	}
 
 	
 	
 
-	endTimer = true;
-	Timer.join();
+	
 	
 	return 0;
 	getchar();
@@ -608,10 +631,18 @@ int rozstrzygnijZwyciestwo(int malePunktyKomputera, int malePunktyCzlowieka)
 		return malePunktyCzlowieka;
 }
 
+ /*Gracz rozstrzygnijZwyciestwo(Gracz komputer, Gracz czlowiek)
+{
+	if (komputer.odczytajLiczbeMalychPunktow() > czlowiek.odczytajLiczbeMalychPunktow())
+		return komputer;
+	else
+		return czlowiek;
+}*/
+
 template <class T>
 T rozstrzygnijZwyciestwoT(T a, T b)
 {
-	if (a > b)
+	if (a.fun() > b.fun())
 		return a;
 	else
 		return b;
@@ -699,6 +730,61 @@ void wyswietlPunktyCzlowieka(sf::RenderWindow & window, Gracz czlowiek)
 	text2.setPosition(sf::Vector2f(1098, 385));
 	text2.setFillColor(sf::Color::White);
 	//text2.setStyle(sf::Text::Bold);
+
+	window.draw(text1);
+	window.draw(text2);
+}
+
+void wyswietlInformacjeOZwyciestwie(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek)
+{
+	std::string tekst;
+	int wygrany = rozstrzygnijZwyciestwo(komputer.odczytajLiczbeMalychPunktow(), czlowiek.odczytajLiczbeMalychPunktow());
+	if (wygrany == komputer.odczytajLiczbeMalychPunktow())
+	{
+		tekst = "Ta rozgrywke wygral komputer!";
+	}
+	else 
+	{
+		tekst = "Ta rozgrywke wygrales Ty!";
+	}
+
+	sf::Font font;
+	if (!font.loadFromFile("VCR_OSD_MONO_1.001.ttf"))
+	{
+		std::cout << "An error occured!" << std::endl;
+	}
+	sf::Text text;
+	text.setFont(font);
+	text.setString(tekst);
+	text.setCharacterSize(45);
+	text.setPosition(sf::Vector2f(200, 300));
+	text.setFillColor(sf::Color::White);
+
+	window.draw(text);
+}
+
+void wyswietlInformacjeOCzasieGry(sf::RenderWindow & window, int czas)
+{
+	std::string tekst = "Czas trwania rozgrywki (sekundy): ";
+	std::string czasGry = std::to_string(czas);
+	sf::Font font;
+	if (!font.loadFromFile("VCR_OSD_MONO_1.001.ttf"))
+	{
+		std::cout << "An error occured!" << std::endl;
+	}
+	sf::Text text1;
+	text1.setFont(font);
+	text1.setString(tekst);
+	text1.setCharacterSize(45);
+	text1.setPosition(sf::Vector2f(100, 400));
+	text1.setFillColor(sf::Color::White);
+
+	sf::Text text2;
+	text2.setFont(font);
+	text2.setString(czasGry);
+	text2.setCharacterSize(45);
+	text2.setPosition(sf::Vector2f(900, 400));
+	text2.setFillColor(sf::Color::White);
 
 	window.draw(text1);
 	window.draw(text2);

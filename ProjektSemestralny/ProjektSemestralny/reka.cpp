@@ -21,7 +21,7 @@ Karta & Reka::wezKarteSpodIndeksu1(int indeks)
 
 Karta & Reka::wezKarteSpodIndeksu2(int indeks, int * tab)
 {
-	//tab[indeks] = 0;
+	tab[indeks] = 0;
 	return reka[indeks];
 }
 
@@ -165,6 +165,7 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 		}
 		if (kartaDobrana == NULL)
 		{
+			indeks = 0;
 			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
 				if (tab[indeks] != 0)
@@ -189,6 +190,7 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 		}
 		if (kartaDobrana == NULL)
 		{
+			indeks = 0;
 			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
 				if (tab[indeks] != 0)
@@ -234,6 +236,7 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 		}
 		if (kartaDobrana == NULL)
 		{
+			indeks = 0;
 			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
 				if (tab[indeks] != 0)
@@ -258,6 +261,7 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 		}
 		if (kartaDobrana == NULL)
 		{
+			indeks = 0;
 			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
 				if (tab[indeks] != 0)
@@ -279,6 +283,7 @@ Karta Reka::dobierzKarte2(Karta kartaWylozona, int * tab)
 		}
 		if (kartaDobrana == NULL)
 		{
+			indeks = 0;
 			for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 			{
 				if (tab[indeks] != 0)
