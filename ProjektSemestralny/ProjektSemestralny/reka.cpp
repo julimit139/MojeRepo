@@ -380,38 +380,7 @@ void Reka::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6])
 	}
 }
 
-
-
-/*void Reka::wyswietlAktualnaReke()
-{
-	int indeks = 0;
-	std::cout << "Twoja aktualna reka to:\n\n";
-	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
-	{
-		std::cout << (indeks + 1) << ". " << (*it) << std::endl;
-		indeks += 1;
-	}
-}
-
-void Reka::wyswietlAktualnaRekePomniejszona(int * tab)
-{
-	int indeks = 0;
-	std::cout << "Twoja aktualna reka to:\n\n";
-	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
-	{
-		if (tab[indeks] == 0)
-		{
-			std::cout << (indeks + 1) << ". ---\n";
-		}
-		else
-		{
-			std::cout << (indeks + 1) << ". " << (*it) << std::endl;
-		}
-		indeks += 1;
-	}
-}
-
-int Reka::sprawdzWarunekPodmiany()
+/*int Reka::sprawdzWarunekPodmiany()
 {
 	bool podmianaBool = false;
 	int podmianaInt = 0;
