@@ -2,7 +2,7 @@
 
 Reka::Reka(Talia & talia)
 {
-	for (int i = 0; i < rozmiar_reki; i++)
+	for (int i = 0; i < rozmiarReki; i++)
 	{
 		reka.push_back(talia.zdejmijKarte());
 	}
@@ -312,10 +312,8 @@ Karta & Reka::operator[](int indeks)
 	return this->reka[indeks];
 }
 
-void Reka::wyswietlRekeKomputera1(sf::RenderWindow & window)
+void Reka::wyswietlRekeKomputera1(sf::RenderWindow & window, const float x[6], const float y[2])
 {
-	int x = 144;
-	int y = 20;
 	sf::Texture texture;
 	if (!texture.loadFromFile("tyl_karty.jpg"))
 	{
@@ -323,29 +321,27 @@ void Reka::wyswietlRekeKomputera1(sf::RenderWindow & window)
 	}
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
+	int indeks = 0;
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		sprite.setPosition(sf::Vector2f(x, y));
+		sprite.setPosition(sf::Vector2f(x[indeks], y[0]));
 		window.draw(sprite);
-		x += 150;
+		indeks++;
 	}
 }
 
-void Reka::wyswietlRekeCzlowieka1(sf::RenderWindow & window)
+void Reka::wyswietlRekeCzlowieka1(sf::RenderWindow & window, const float x[6], const float y[2])
 {
-	int x = 144;
-	int y = 470;
+	int indeks = 0;
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
-		(*it).wyswietlKarte(window, x, y);
-		x += 150;
+		(*it).wyswietlKarte(window, x[indeks], y[1]);
+		indeks++;
 	}
 }
 
-void Reka::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6])
+void Reka::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6], const float x[6], const float y[2])
 {
-	int x = 144;
-	int y = 20;
 	sf::Texture texture;
 	if (!texture.loadFromFile("tyl_karty.jpg"))
 	{
@@ -353,95 +349,25 @@ void Reka::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6])
 	}
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
-	for (int i = 0; i < rozmiar_reki; i++)
+	for (int i = 0; i < rozmiarReki; i++)
 	{
 		if (tab[i] != 0)
 		{
-			sprite.setPosition(sf::Vector2f(x, y));
+			sprite.setPosition(sf::Vector2f(x[i], y[0]));
 			window.draw(sprite);
 		}
-		x += 150;
 	}
 }
 
-void Reka::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6])
+void Reka::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6], const float x[6], const float y[2])
 {
-	int x = 144;
-	int y = 470;
 	int i = 0;
 	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
 	{
 		if (tab[i] != 0)
 		{
-			(*it).wyswietlKarte(window, x, y);
+			(*it).wyswietlKarte(window, x[i], y[1]);
 		}
-		x += 150;
 		i++;
 	}
 }
-
-/*int Reka::sprawdzWarunekPodmiany()
-{
-	bool podmianaBool = false;
-	int podmianaInt = 0;
-	for (std::vector<Karta>::iterator it = reka.begin(); it != reka.end(); it++)
-	{
-		if (((*it).odczytajWartosc() == dziewiatka) && ((*it).odczytajKolor() == kolorAtutowy))
-		{
-			podmianaBool = true;
-			break;
-		}
-		podmianaInt += 1;
-	}
-	if (podmianaBool == false)
-	{
-		podmianaInt = 7;
-	}
-	return podmianaInt;
-
-}
-
-void Reka::podmien(Talia & talia, int indeks)
-{
-	Karta tmp = reka[indeks];
-	Wartosc w = talia.odczytajWartoscOdkrytejKartyAtutowej();
-	//std::string s = talia.begin()->odczytajNazweObrazu();
-	//reka[indeks] = Karta(w, kolorAtutowy);
-	talia.podmienKarteWTalii(tmp);
-}
-
-int Reka::sprawdzMeldunek()
-{
-	bool meldunekBool = false;
-	int meldunekInt = 0;
-	int indeks = 0;
-	for (std::vector<Karta>::iterator it1 = reka.begin(); it1 != reka.end(); it1++)
-	{
-		for (std::vector<Karta>::iterator it2 = reka.begin(); it2 != reka.end(); it2++)
-		{
-			if ((*it1).odczytajWartosc() == krol)
-			{
-				if (((*it2).odczytajWartosc() == dama) && ((*it2).odczytajKolor() == (*it1).odczytajKolor()))
-				{
-					if ((*it1).odczytajKolor() == kolorAtutowy)
-					{
-						meldunekBool = true;
-						indeks = meldunekInt;
-						break;
-					}
-					else
-					{
-						meldunekBool = true;
-						indeks = meldunekInt;
-					}
-				}
-			}
-		}
-		meldunekInt += 1;
-	}
-	if (meldunekBool == false)
-	{
-		indeks = 7;
-	}
-	return indeks;
-}*/

@@ -128,7 +128,6 @@
     <ClCompile Include="lewa.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reka.cpp" />
-    <ClCompile Include="Some.cpp" />
     <ClCompile Include="talia.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +135,6 @@
     <ClInclude Include="karta.h" />
     <ClInclude Include="lewa.h" />
     <ClInclude Include="reka.h" />
-    <ClInclude Include="Some.h" />
     <ClInclude Include="stale.h" />
     <ClInclude Include="talia.h" />
   </ItemGroup>

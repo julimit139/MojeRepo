@@ -35,7 +35,7 @@ void Karta::zmienWlascowsciKarty(Karta nowa)
 	this->nazwaObrazu = nowa.odczytajNazweObrazu();
 }
 
-void Karta::wyswietlKarte(sf::RenderWindow & window, int x, int y)
+void Karta::wyswietlKarte(sf::RenderWindow & window, float x, float y)
 {
 	sf::Texture texture;
 	if (!texture.loadFromFile(this->odczytajNazweObrazu()))

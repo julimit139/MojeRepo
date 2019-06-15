@@ -30,9 +30,6 @@
     <ClCompile Include="talia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Some.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gracz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="talia.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Some.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gracz.h">

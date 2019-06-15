@@ -3,7 +3,6 @@
 Gracz::Gracz(Talia & talia) : reka(talia)
 {
 	zbiorLew = new Lewa[12];
-	licznikZebranychLew = 0;
 }
 
 void Gracz::pobierzKarte(Talia & talia, int indeks)
@@ -36,138 +35,125 @@ Karta Gracz::dobierzKarte2(Karta kartaWylozona, int * tab)
 	return reka.dobierzKarte2(kartaWylozona, tab);
 }
 
-int Gracz::dodajMalePunkty(int punkty)
+int Gracz::dodajPunkty(int punkty)
 {
-	malePunkty += punkty;
-	return malePunkty;
+	liczbaPunktow += punkty;
+	return liczbaPunktow;
 }
 
-int Gracz::odczytajLiczbeMalychPunktow()
+int Gracz::odczytajLiczbePunktow()
 {
-	return malePunkty;
+	return liczbaPunktow;
 }
 
-void Gracz::dodajLewe(Karta karta1, Karta karta2)
+void Gracz::dodajLewe(Karta kartaKomputera, Karta kartaCzlowieka)
 {
-	zbiorLew[licznikZebranychLew] = Lewa(karta1, karta2);
-	licznikZebranychLew++;
+	zbiorLew[licznikZebranychLew] = Lewa(kartaKomputera, kartaCzlowieka);
+	licznikZebranychLew += 1;
 }
 
-int Gracz::wybierzKarte(sf::RenderWindow & window, int x, int y)
+int Gracz::wybierzKarte(sf::RenderWindow & window, int x, int y, const float X[6], const float Y[2], const float w, const float s)
 {
 	int indeks = 7;
-	if (y >= 470 && y <= 640)
+	if (y >= Y[1] && y <= (Y[1] + w))
 	{
-		if (x >= 144 && x <= 267)
+		if (x >= X[0] && x <= (X[0] + s))
 		{
 			indeks = 0;
 		}
-		else if (x >= 294 && x <= 417)
+		else if (x >= X[1] && x <= (X[1] + s))
 		{
 			indeks = 1;
 		}
-		else if (x >= 444 && x <= 567)
+		else if (x >= X[2] && x <= (X[2] + s))
 		{
 			indeks = 2;
 		}
-		else if (x >= 594 && x <= 717)
+		else if (x >= X[3] && x <= (X[3] + s))
 		{
 			indeks = 3;
 		}
-		else if (x >= 744 && x <= 867)
+		else if (x >= X[4] && x <= (X[4] + s))
 		{
 			indeks = 4;
 		}
-		else if (x >= 894 && x <= 1017)
+		else if (x >= X[5] && x <= (X[5] + s))
 		{
 			indeks = 5;
 		}
 	}
-	std::cout << indeks << std::endl;
 	return indeks;
 }
 
-void Gracz::wyswietlRekeKomputera1(sf::RenderWindow & window)
+void Gracz::wyswietlRekeKomputera1(sf::RenderWindow & window, const float x[6], const float y[2])
 {
-	reka.wyswietlRekeKomputera1(window);
+	reka.wyswietlRekeKomputera1(window, x, y);
 }
 
-void Gracz::wyswietlRekeCzlowieka1(sf::RenderWindow & window)
+void Gracz::wyswietlRekeCzlowieka1(sf::RenderWindow & window, const float x[6], const float y[2])
 {
-	reka.wyswietlRekeCzlowieka1(window);
+	reka.wyswietlRekeCzlowieka1(window, x, y);
 }
 
-void Gracz::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6])
+void Gracz::wyswietlRekeKomputera2(sf::RenderWindow & window, int tab[6], const float x[6], const float y[2])
 {
-	reka.wyswietlRekeKomputera2(window, tab);
+	reka.wyswietlRekeKomputera2(window, tab, x, y);
 }
 
-void Gracz::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6])
+void Gracz::wyswietlRekeCzlowieka2(sf::RenderWindow & window, int tab[6], const float x[6], const float y[2])
 {
-	reka.wyswietlRekeCzlowieka2(window, tab);
+	reka.wyswietlRekeCzlowieka2(window, tab, x, y);
 }
 
-Karta & Gracz::wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks)
+Karta & Gracz::wyswietlWylozonaKarteKomputera(sf::RenderWindow & window, int indeks, const float x, const float y)
 {
-	reka[indeks].wyswietlKarte(window, 444, 245);
+	reka[indeks].wyswietlKarte(window, x, y);
 	return reka[indeks];
 }
 
-Karta & Gracz::wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks)
+Karta & Gracz::wyswietlWylozonaKarteCzlowieka(sf::RenderWindow & window, int indeks, const float x, const float y)
 {
-	reka[indeks].wyswietlKarte(window, 594, 245);
+	reka[indeks].wyswietlKarte(window, x, y);
 	return reka[indeks];
 }
 
-void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska)
+void Gracz::zakryjPusteMiejsceWReceKomputera(sf::RenderWindow & window, int indeks, const float x[6], const float y[2], sf::RectangleShape & maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(tabX[indeks], 20);
+	maska.setPosition(x[indeks], y[0]);
 	window.draw(maska);
 }
 
-void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const int tabX[6], sf::RectangleShape & maska)
+void Gracz::zakryjPusteMiejsceWReceCzlowieka(sf::RenderWindow & window, int indeks, const float x[6], const float y[2], sf::RectangleShape & maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(tabX[indeks], 470);
+	maska.setPosition(x[indeks], y[1]);
 	window.draw(maska);
 }
 
-void Gracz::zakryjWyswietlonaKarteKomputera(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska)
+void Gracz::zakryjWyswietlonaKarteKomputera(sf::RenderWindow & window, const float x[2], const float y, sf::RectangleShape maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(tabX[0], wspolerzednaStosuY);
+	maska.setPosition(x[0], y);
 	window.draw(maska);
 }
 
-void Gracz::zakryjWyswietlonaKarteCzlowieka(sf::RenderWindow & window, const int wspolerzednaStosuY, const int tabX[2], sf::RectangleShape maska)
+void Gracz::zakryjWyswietlonaKarteCzlowieka(sf::RenderWindow & window, const float x[2], const float y, sf::RectangleShape maska)
 {
 	maska.setFillColor(sf::Color(30, 91, 6));
-	maska.setPosition(tabX[1], wspolerzednaStosuY);
+	maska.setPosition(x[1], y);
 	window.draw(maska);
 }
 
-void Gracz::wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta karta)
+void Gracz::wyswietlWygranaLeweKomputera(sf::RenderWindow & window, Karta kartaKomputera, const float x, const float y[2])
 {
-	karta.wyswietlKarte(window, 1044, 20);
+	kartaKomputera.wyswietlKarte(window, x, y[0]);
 }
 
-void Gracz::wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta)
+void Gracz::wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta kartaCzlowieka, const float x, const float y[2])
 {
-	karta.wyswietlKarte(window, 1044, 470);
+	kartaCzlowieka.wyswietlKarte(window, x, y[1]);
 }
-
-
-/*Karta Gracz::jakaKarta(int indeks)
-{
-	return reka[indeks];
-}*/
-
-/*int Gracz::dodajDuzePunkty(int punkty)
-{
-	duzePunkty += punkty;
-	return duzePunkty;
-}*/
 
 /*void Gracz::wyswietlZbiorLew()
 {
@@ -176,19 +162,4 @@ void Gracz::wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta karta)
 		std::cout << "Lewa " << i + 1 << ":\n" << zbiorLew[i] << std::endl;
 
 	}
-}*/
-
-/*int Gracz::sprawdz_warunek_podmiany()
-{
-	return reka.sprawdz_warunek_podmiany();
-}*/
-
-/*void Gracz::podmien(Talia & talia, int indeks)
-{
-	reka.podmien(talia, indeks);
-}*/
-
-/*int Gracz::sprawdz_meldunek()
-{
-	return reka.sprawdz_meldunek();
 }*/

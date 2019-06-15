@@ -17,5 +17,5 @@ public:
 	Kolor & odczytajKolor();										//funkcja odczytuj¹ca kolor karty
 	std::string odczytajNazweObrazu();								//funkcja odczytuj¹ca nazwê obrazu odpowiadaj¹cego karcie
 	void zmienWlascowsciKarty(Karta nowa);							//funkcja zmieniaj¹ca istniej¹ce wartoœci pól karty na nowe
-	void wyswietlKarte(sf::RenderWindow & window, int x, int y);	//funkcja wyœwietlaj¹ce kartê w oknie
+	void wyswietlKarte(sf::RenderWindow & window, float x, float y);	//funkcja wyœwietlaj¹ce kartê w oknie
 };
