@@ -127,6 +127,7 @@
     <ClCompile Include="karta.cpp" />
     <ClCompile Include="lewa.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rozgrywka.cpp" />
     <ClCompile Include="reka.cpp" />
     <ClCompile Include="talia.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="gracz.h" />
     <ClInclude Include="karta.h" />
     <ClInclude Include="lewa.h" />
+    <ClInclude Include="rozgrywka.h" />
     <ClInclude Include="reka.h" />
     <ClInclude Include="stale.h" />
     <ClInclude Include="talia.h" />
