@@ -154,12 +154,3 @@ void Gracz::wyswietlWygranaLeweCzlowieka(sf::RenderWindow & window, Karta kartaC
 {
 	kartaCzlowieka.wyswietlKarte(window, x, y[1]);
 }
-
-/*void Gracz::wyswietlZbiorLew()
-{
-	for (int i = 0; i < licznikZebranychLew; i++)
-	{
-		std::cout << "Lewa " << i + 1 << ":\n" << zbiorLew[i] << std::endl;
-
-	}
-}*/

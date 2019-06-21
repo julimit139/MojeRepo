@@ -1,6 +1,5 @@
 #include "rozgrywka.h"
 
-//Deklaracje funkcji zdefiniownych poni¿ej funkcji main
 void threadTick(int* timer, bool* end)
 {
 	while (!(*end))
@@ -18,17 +17,15 @@ int main()
 	Rozgrywka rozgrywka;
 
 	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
-	
 	sf::RectangleShape maskaKomputera(sf::Vector2f(szerokoscMaski, wysokoscMaski));
 	sf::RectangleShape maskaCzlowieka(sf::Vector2f(szerokoscMaski, wysokoscMaski));
 	sf::RectangleShape maskaStosu(sf::Vector2f(szerokoscMaski, wysokoscMaski));
 	
 	bool wyjscie = false;
-	int timer = 0;
 	bool endTimer = false;
+	int timer = 0;
 	std::thread Timer(threadTick, &timer, &endTimer);
 	
-
 	Talia talia;
 	talia.tasujKarty();
 
@@ -37,23 +34,27 @@ int main()
 	Gracz komputer(talia);
 	Gracz czlowiek(talia);
 
+	int punkty = 0;
+	std::string ktoWygral = "komputer";
+	Karta kartaKomputera;
+	Karta kartaCzlowieka;
+
+	rozgrywka.wyswietlTekstPowitalny(window, wspolrzednaTekstuPowitalnegoX, wspolrzednaTekstuPowitalnegoY);
+	Sleep(4000);
+
 	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 	Sleep(1000);
 
 	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 	rozgrywka.wyswietlKolorAtutowy(window, talia, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
 	window.display();
-	Sleep(1500);
+	Sleep(2000);
 
 	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 	rozgrywka.zakryjKolorAtutowy(window, maskaKomputera, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
 	window.display();
 	Sleep(1000);
 
-
-	std::string ktoWygral = "komputer";
-	Karta kartaKomputera;
-	Karta kartaCzlowieka;
 
 	while (window.isOpen())
 	{	
@@ -76,9 +77,9 @@ int main()
 				rozgrywka.ruchKomputeraDrugi1(window, komputer, czlowiek, kartaKomputera, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzedneWylozonychKartX[0], wspolrzednaWylozonychKartY, maskaKomputera, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 			}
 
-			int punkty = rozgrywka.porownajKarty(kartaKomputera, kartaCzlowieka, kolorAtutowy, ktoWygral);
+			punkty = rozgrywka.porownajKarty(kartaKomputera, kartaCzlowieka, kolorAtutowy, ktoWygral);
 			ktoWygral = rozgrywka.powiedzKtoWygral(punkty);
-			//dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
+			rozgrywka.dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
 			rozgrywka.dodajPunkty(komputer, czlowiek, punkty);
 
 			Sleep(1000);
@@ -105,7 +106,6 @@ int main()
 		int tablicaKomputera[6] = { 1, 2, 3, 4, 5, 6 };
 		int tablicaCzlowieka[6] = { 1, 2, 3, 4, 5, 6 };
 
-
 		rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 		Sleep(1000);
 		
@@ -131,7 +131,7 @@ int main()
 
 			int punkty = rozgrywka.porownajKarty(kartaKomputera, kartaCzlowieka, kolorAtutowy, ktoWygral);
 			ktoWygral = rozgrywka.powiedzKtoWygral(punkty);
-			//dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
+			rozgrywka.dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
 			rozgrywka.dodajPunkty(komputer, czlowiek, punkty);
 
 			Sleep(1000);
@@ -162,7 +162,7 @@ int main()
 		rozgrywka.wyswietlInformacjeKoncowe(window, komputer, czlowiek, timer, wspolrzednaTekstuOWygranejX, wspolrzednaTekstuOWygranejY, wspolrzednaTekstuOCzasieX, wspolrzednaTekstuOCzasieY, wspolrzednaCzasuX, wspolrzednaCzasuY);
 		Sleep(4000);
 
-		endTimer = true;
+
 		Timer.join();
 
 		window.close();

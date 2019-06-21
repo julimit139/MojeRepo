@@ -28,7 +28,7 @@ std::string Karta::odczytajNazweObrazu()
 	return this->nazwaObrazu;
 }
 
-void Karta::zmienWlascowsciKarty(Karta nowa)
+void Karta::zmienWlasciwosciKarty(Karta nowa)
 {
 	this->kolor = nowa.odczytajKolor();
 	this->wartosc = nowa.odczytajWartosc();

@@ -19,6 +19,4 @@ public:
 	Kolor odczytajKolorAtutowy();						//funkcja odczytuj¹ca kolor atutowy
 	Wartosc odczytajWartoscOdkrytejKartyAtutowej();		//funkcja odczytuj¹ca wartoœæ karty okreœlaj¹cej kolor atutowy
 	Karta & pokazKarteAtutowa();						//funkcja zwracaj¹ca kartê wyznaczaj¹c¹ kolor atutowy
-
-	//void podmienKarteWTalii(Karta kartaDoPodmiany);			//funkcja podmieniaj¹ca kartê ze spodu stosu na dziewi¹tkê atutow¹
 };

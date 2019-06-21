@@ -84,31 +84,14 @@ void Rozgrywka::pobierzKarty(Gracz & komputer, Gracz & czlowiek, Karta kartaKomp
 	if (punkty < 0)
 	{
 
-		komputer.pobierzKarte(talia, komputer.znajdzIndeks(kartaKomputera)); //lew¹ wzi¹³ komputer, wiêc najpierw pobiera siê karta dla niego, potem dla cz³owieka
+		komputer.pobierzKarte(talia, komputer.znajdzIndeks(kartaKomputera)); //lewe wzi¹³ komputer, wiêc najpierw pobiera siê karta dla niego, potem dla cz³owieka
 		czlowiek.pobierzKarte(talia, czlowiek.znajdzIndeks(kartaCzlowieka));
 	}
 	else
 	{
-		czlowiek.pobierzKarte(talia, czlowiek.znajdzIndeks(kartaCzlowieka)); //lew¹ wzi¹³ cz³owiek, wiêc najpierw pobiera siê karta dla niego, potem dla komputera
+		czlowiek.pobierzKarte(talia, czlowiek.znajdzIndeks(kartaCzlowieka)); //lewe wzi¹³ cz³owiek, wiêc najpierw pobiera siê karta dla niego, potem dla komputera
 		komputer.pobierzKarte(talia, komputer.znajdzIndeks(kartaKomputera));
 	}
-}
-
-int Rozgrywka::rozstrzygnijZwyciestwo(int punktyKomputera, int punktyCzlowieka)
-{
-	if (punktyKomputera > punktyCzlowieka)
-		return punktyKomputera;
-	else
-		return punktyCzlowieka;
-}
-
-template <class T>
-T rozstrzygnijZwyciestwoT(T a, T b)
-{
-	if (a.fun() > b.fun())
-		return a;
-	else
-		return b;
 }
 
 std::string Rozgrywka::powiedzKtoWygral(int punkty)
@@ -400,10 +383,30 @@ void Rozgrywka::wyswietlPunktyCzlowieka(sf::RenderWindow & window, Gracz czlowie
 	window.draw(text2);
 }
 
+void Rozgrywka::wyswietlTekstPowitalny(sf::RenderWindow & window, const float xt, const float yt)
+{
+	std::string tekst = "Witaj w grze 66!";
+	sf::Font font;
+	if (!font.loadFromFile("VCR_OSD_MONO_1.001.ttf"))
+	{
+		font.loadFromFile("HeadlinerNo45.ttf");
+	}
+	sf::Text text;
+	text.setFont(font);
+	text.setString(tekst);
+	text.setCharacterSize(45);
+	text.setPosition(sf::Vector2f(xt, yt));
+	text.setFillColor(sf::Color::White);
+
+	window.clear(sf::Color(30, 91, 6, 1));
+	window.draw(text);
+	window.display();
+}
+
 void Rozgrywka::wyswietlInformacjeOZwyciestwie(sf::RenderWindow & window, Gracz komputer, Gracz czlowiek, const float xz, const float yz)
 {
 	std::string tekst;
-	int wygrany = rozstrzygnijZwyciestwo(komputer.odczytajLiczbePunktow(), czlowiek.odczytajLiczbePunktow());
+	int wygrany = rozstrzygnijZwyciestwoT(komputer.odczytajLiczbePunktow(), czlowiek.odczytajLiczbePunktow());
 	if (wygrany == komputer.odczytajLiczbePunktow())
 	{
 		tekst = "Ta rozgrywke wygral komputer!";

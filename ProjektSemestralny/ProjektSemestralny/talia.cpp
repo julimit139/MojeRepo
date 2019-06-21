@@ -77,8 +77,3 @@ Karta & Talia::pokazKarteAtutowa()
 {
 	return *(talia.begin());
 }
-
-/*void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
-{
-	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy(), kartaDoPodmiany.odczytajNazweObrazu());
-}*/

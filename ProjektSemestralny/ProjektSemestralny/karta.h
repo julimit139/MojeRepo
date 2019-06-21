@@ -11,11 +11,11 @@ class Karta
 	std::string nazwaObrazu;		//pole z nazw¹ obrazu odpowiadaj¹cego karcie
 
 public:
-	Karta();														//konstruktor domyœlny obiektu klasy Karta
-	Karta(Wartosc w, Kolor k, std::string n);						//konstruktor obiektu klasy Karta
-	Wartosc & odczytajWartosc();									//funkcja odczytuj¹ca wartoœæ karty
-	Kolor & odczytajKolor();										//funkcja odczytuj¹ca kolor karty
-	std::string odczytajNazweObrazu();								//funkcja odczytuj¹ca nazwê obrazu odpowiadaj¹cego karcie
-	void zmienWlascowsciKarty(Karta nowa);							//funkcja zmieniaj¹ca istniej¹ce wartoœci pól karty na nowe
+	Karta();															//konstruktor domyœlny obiektu klasy Karta
+	Karta(Wartosc w, Kolor k, std::string n);							//konstruktor obiektu klasy Karta
+	Wartosc & odczytajWartosc();										//funkcja odczytuj¹ca wartoœæ karty
+	Kolor & odczytajKolor();											//funkcja odczytuj¹ca kolor karty
+	std::string odczytajNazweObrazu();									//funkcja odczytuj¹ca nazwê obrazu odpowiadaj¹cego karcie
+	void zmienWlasciwosciKarty(Karta nowa);								//funkcja zmieniaj¹ca istniej¹ce wartoœci pól karty na nowe
 	void wyswietlKarte(sf::RenderWindow & window, float x, float y);	//funkcja wyœwietlaj¹ce kartê w oknie
 };
