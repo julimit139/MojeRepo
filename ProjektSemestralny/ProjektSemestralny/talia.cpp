@@ -42,6 +42,11 @@ Karta Talia::zdejmijKarte()
 	return kartaRobocza;
 }
 
+int Talia::odczytajDlugoscTalii()
+{
+	return talia.size();
+}
+
 Kolor Talia::odczytajKolorAtutowy()
 {
 	Kolor kolorAtutowy = talia.begin()->odczytajKolor();
@@ -63,44 +68,12 @@ Kolor Talia::odczytajKolorAtutowy()
 	return kolorAtutowy;
 }
 
-void Talia::wypiszKolorAtutowy(Kolor kolorAtutowy)
-{
-	switch (kolorAtutowy)
-	{
-	case pik:
-		std::cout << "Kolor atutowy w tej grze to pik.\n";
-		break;
-	case kier:
-		std::cout << "Kolor atutowy w tej grze to kier.\n";
-		break;
-	case karo:
-		std::cout << "Kolor atutowy w tej grze to karo.\n";
-		break;
-	case trefl:
-		std::cout << "Kolor atutowy w tej grze to trefl.\n";
-		break;
-	}
-}
-
 Wartosc Talia::odczytajWartoscOdkrytejKartyAtutowej()
 {
 	return talia.begin()->odczytajWartosc();
 }
 
-int Talia::odczytajDlugoscTalii()
+Karta & Talia::pokazKarteAtutowa()
 {
-	return talia.size();
-}
-
-void Talia::podmienKarteWTalii(Karta kartaDoPodmiany)
-{
-	*(talia.begin()) = Karta(kartaDoPodmiany.odczytajWartosc(), odczytajKolorAtutowy(), kartaDoPodmiany.odczytajNazweObrazu());
-}
-
-void Talia::wyswietlTalie()
-{
-	for (std::vector<Karta>::iterator it = talia.begin(); it != talia.end(); it++)
-	{
-		std::cout << *it << std::endl;
-	}
+	return *(talia.begin());
 }

@@ -18,45 +18,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="karta.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lewa.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reka.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="talia.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gracz.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rozgrywka.cpp">
+    <ClCompile Include="polybiusSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="karta.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lewa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reka.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stale.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="talia.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gracz.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rozgrywka.h">
+    <ClInclude Include="polybiusSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

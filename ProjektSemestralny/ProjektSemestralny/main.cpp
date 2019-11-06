@@ -1,55 +1,172 @@
-#include <iostream>
-#include "stale.h"
-#include "karta.h"
-#include "talia.h"
-#include "reka.h"
+#include "rozgrywka.h"
 
-sf::RenderWindow & wyswietlStos(sf::RenderWindow & window);
-void wyswietlStol(sf::RenderWindow & window, Reka rekaCzlowieka, Reka rekaKomputera);
+void threadTick(int* timer, bool* end)
+{
+	while (!(*end))
+	{
+		Sleep(1000);
+		(*timer)++;
+		std::cout << *timer << std::endl;
+	}
+};
+
+
 
 int main()
 {
+	Rozgrywka rozgrywka;
+
+	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
+	sf::RectangleShape maskaKomputera(sf::Vector2f(szerokoscMaski, wysokoscMaski));
+	sf::RectangleShape maskaCzlowieka(sf::Vector2f(szerokoscMaski, wysokoscMaski));
+	sf::RectangleShape maskaStosu(sf::Vector2f(szerokoscMaski, wysokoscMaski));
+	
+	bool wyjscie = false;
+	bool endTimer = false;
+	int timer = 0;
+	std::thread Timer(threadTick, &timer, &endTimer);
+	
 	Talia talia;
 	talia.tasujKarty();
 
-	Reka rekaCzlowieka(talia);
-	Reka rekaKomputera(talia);
+	Kolor kolorAtutowy = talia.odczytajKolorAtutowy();
 
-	sf::RenderWindow window(sf::VideoMode(1200, 650), "Gra 66", sf::Style::Titlebar | sf::Style::Close);
+	Gracz komputer(talia);
+	Gracz czlowiek(talia);
+
+	int punkty = 0;
+	std::string ktoWygral = "komputer";
+	Karta kartaKomputera;
+	Karta kartaCzlowieka;
+
+	rozgrywka.wyswietlTekstPowitalny(window, wspolrzednaTekstuPowitalnegoX, wspolrzednaTekstuPowitalnegoY);
+	Sleep(4000);
+
+	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+	Sleep(1000);
+
+	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+	rozgrywka.wyswietlKolorAtutowy(window, talia, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
+	window.display();
+	Sleep(2000);
+
+	rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+	rozgrywka.zakryjKolorAtutowy(window, maskaKomputera, wspolrzednaKoloruAtutowegoX, wspolrzednaKoloruAtutowegoY);
+	window.display();
+	Sleep(1000);
+
 
 	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
+	{	
+		//pierwsza czêœæ gry - ze stosem kart
+		while (talia.odczytajDlugoscTalii() != 0)
 		{
-			wyswietlStol(window, rekaCzlowieka, rekaKomputera);
+			rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			Sleep(1000);
 
-			switch (event.type)
+			if (ktoWygral == "komputer")
 			{
-			case sf::Event::Closed:
+				rozgrywka.ruchKomputeraPierwszy1(window, komputer, czlowiek, kartaKomputera, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzedneWylozonychKartX[0], wspolrzednaWylozonychKartY, maskaKomputera, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+				rozgrywka.ruchCzlowieka1(window, komputer, czlowiek, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzedneWylozonychKartX[1], wspolrzednaWylozonychKartY, wysokoscKarty, szerokoscKarty, maskaCzlowieka, wyjscie, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			}
+			else if (ktoWygral == "czlowiek")
 			{
-				window.close();
-				break;
-			}
-			case sf::Event::MouseButtonPressed:
-			{
-				std::cout << "Mouse button has been pressed" << std::endl;
-				break;
+				rozgrywka.ruchCzlowieka1(window, komputer, czlowiek, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzedneWylozonychKartX[1], wspolrzednaWylozonychKartY, wysokoscKarty, szerokoscKarty, maskaCzlowieka, wyjscie, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+				rozgrywka.ruchKomputeraDrugi1(window, komputer, czlowiek, kartaKomputera, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzedneWylozonychKartX[0], wspolrzednaWylozonychKartY, maskaKomputera, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
 			}
 
+			punkty = rozgrywka.porownajKarty(kartaKomputera, kartaCzlowieka, kolorAtutowy, ktoWygral);
+			ktoWygral = rozgrywka.powiedzKtoWygral(punkty);
+			rozgrywka.dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
+			rozgrywka.dodajPunkty(komputer, czlowiek, punkty);
 
-			}
-			
+			Sleep(1000);
+			rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			window.display();
+			Sleep(1000);
 
-				
+			rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			komputer.zakryjWyswietlonaKarteKomputera(window, wspolrzedneWylozonychKartX, wspolrzednaWylozonychKartY, maskaKomputera);
+			czlowiek.zakryjWyswietlonaKarteCzlowieka(window, wspolrzedneWylozonychKartX, wspolrzednaWylozonychKartY, maskaCzlowieka);
+			window.display();
+			Sleep(500);
+
+			rozgrywka.wyswietlStol1(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzednaStosuX, wspolrzednaStosuY, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			rozgrywka.wyswietlWygranaLewe(window, komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral, wspolrzednaLewX, wspolrzedneLewY);
+			window.display();
+			Sleep(1500);
+
+			rozgrywka.pobierzKarty(komputer, czlowiek, kartaKomputera, kartaCzlowieka, talia, punkty);
 		}
+
+	
+		//druga czêœæ gry - bez stosu kart
+		int tablicaKomputera[6] = { 1, 2, 3, 4, 5, 6 };
+		int tablicaCzlowieka[6] = { 1, 2, 3, 4, 5, 6 };
+
+		rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+		Sleep(1000);
+		
+		for (int i = 0; i < rozmiarReki; i++)
+		{
+			rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			Sleep(2000);
+
+			if (ktoWygral == "komputer")
+			{
+				rozgrywka.ruchKomputeraPierwszy2(window, komputer, czlowiek, kartaKomputera, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzedneWylozonychKartX[0], wspolrzednaWylozonychKartY, tablicaKomputera, tablicaCzlowieka, maskaKomputera, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+				rozgrywka.ruchCzlowieka2(window, komputer, czlowiek, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzedneWylozonychKartX[1], wspolrzednaWylozonychKartY, wysokoscKarty, szerokoscKarty, tablicaKomputera, tablicaCzlowieka, maskaCzlowieka, wyjscie, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+			}
+			else if (ktoWygral == "czlowiek")
+			{
+				rozgrywka.ruchCzlowieka2(window, komputer, czlowiek, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzedneWylozonychKartX[1], wspolrzednaWylozonychKartY, wysokoscKarty, szerokoscKarty, tablicaKomputera, tablicaCzlowieka, maskaCzlowieka, wyjscie, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+				rozgrywka.ruchKomputeraDrugi2(window, komputer, czlowiek, kartaKomputera, kartaCzlowieka, wspolrzedneRekiX, wspolrzedneRekiY, wspolrzedneWylozonychKartX[0], wspolrzednaWylozonychKartY, tablicaKomputera, tablicaCzlowieka, maskaKomputera, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+
+			}
+
+			int punkty = rozgrywka.porownajKarty(kartaKomputera, kartaCzlowieka, kolorAtutowy, ktoWygral);
+			ktoWygral = rozgrywka.powiedzKtoWygral(punkty);
+			rozgrywka.dodajLewe(komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral);
+			rozgrywka.dodajPunkty(komputer, czlowiek, punkty);
+
+			Sleep(1000);
+			rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			window.display();
+			Sleep(1000);
+
+			rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			komputer.zakryjWyswietlonaKarteKomputera(window, wspolrzedneWylozonychKartX, wspolrzednaWylozonychKartY, maskaKomputera);
+			czlowiek.zakryjWyswietlonaKarteCzlowieka(window, wspolrzedneWylozonychKartX, wspolrzednaWylozonychKartY, maskaCzlowieka);
+			window.display();
+			Sleep(500);
+
+			rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+			rozgrywka.wyswietlWygranaLewe(window, komputer, czlowiek, kartaKomputera, kartaCzlowieka, ktoWygral, wspolrzednaLewX, wspolrzedneLewY);
+			window.display();
+			Sleep(1500);
+
+		}
+
+		rozgrywka.wyswietlStol2(window, komputer, czlowiek, wspolrzedneRekiX, wspolrzedneRekiY, tablicaKomputera, tablicaCzlowieka, wspolrzednaTekstuKomputeraX, wspolrzednaTekstuKomputeraY, wspolrzednaPunktowKomputeraX, wspolrzednaPunktowKomputeraY, wspolrzednaTekstuCzlowiekaX, wspolrzednaTekstuCzlowiekaY, wspolrzednaPunktowCzlowiekaX, wspolrzednaPunktowCzlowiekaY);
+		Sleep(1500);
+		
+		endTimer = true;
+		Sleep(2000);
+
+		//zakoñczenie gry
+		rozgrywka.wyswietlInformacjeKoncowe(window, komputer, czlowiek, timer, wspolrzednaTekstuOWygranejX, wspolrzednaTekstuOWygranejY, wspolrzednaTekstuOCzasieX, wspolrzednaTekstuOCzasieY, wspolrzednaCzasuX, wspolrzednaCzasuY);
+		Sleep(4000);
+
+
+		Timer.join();
+
+		window.close();
 	}
-
-	
-	
-	std::cout << "Ciastko!" << std::endl;
-
-	
 
 	return 0;
 	getchar();
@@ -59,25 +176,5 @@ int main()
 
 
 
-sf::RenderWindow & wyswietlStos(sf::RenderWindow & window)
-{
-	sf::Texture texture;
-	if (!texture.loadFromFile("tyl_karty.jpg"))
-	{
-		texture.loadFromFile("joker.jpg");
-	}
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(79, 245));
-	window.draw(sprite);
-	return window;
-}
+//Definicje funkcji zadeklarowanych powy¿ej funkcji main
 
-void wyswietlStol(sf::RenderWindow & window, Reka rekaCzlowieka, Reka rekaKomputera)
-{
-	window.clear(sf::Color(30, 91, 6, 1));
-	wyswietlStos(window);
-	rekaCzlowieka.wyswietlRekeCzlowieka(window);
-	rekaKomputera.wyswietlRekeKomputera(window);
-	window.display();
-}

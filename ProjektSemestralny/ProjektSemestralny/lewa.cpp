@@ -5,19 +5,8 @@ Lewa::Lewa()
 
 }
 
-Lewa::Lewa(Karta pierwsza, Karta druga)
+Lewa::Lewa(Karta kartaKomputera, Karta kartaCzlowieka)
 {
-	lewa.push_back(pierwsza);
-	lewa.push_back(druga);
-}
-
-/*Karta & Lewa::operator[](int indeks)
-{
-	return this->lewa[indeks];
-}*/
-
-std::ostream & operator << (std::ostream & wypisz, Lewa lewa)
-{
-	wypisz << *(lewa.lewa.begin()) << *(lewa.lewa.rbegin()) << std::endl;
-	return wypisz;
+	lewa.push_back(kartaKomputera);
+	lewa.push_back(kartaCzlowieka);
 }
