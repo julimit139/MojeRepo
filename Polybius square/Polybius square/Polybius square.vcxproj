@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="constants.h" />
     <ClInclude Include="polybiusSquare.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,33 +1,48 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include "constants.h"
 
 class PolybiusSquare
 {
 private:
-	std::string keyWord;
-	char** polybiusSquare;
-	char* givenText;
-	char* encryptedText;
+	std::string keyword;
+	//char** polybiusSquare;
+	
+	char polybiusSquare [WIDTH][HEIGHT];
+
+	//char* givenText;
+	//char* encryptedText;
 
 
 public:
-	std::string getKeyWord();
+	std::string getKeyword();
 
-	bool checkValidityOfKeyWord(std::string keyWord);
+	bool checkCharactersInKeyword(std::string keyword);
 
-	void setKeyWord();
+	bool checkDuplicatesInKeyword(std::string keyword);
 
-	int createPolybiusSquare(std::string keyWord);
+
+
+	bool checkValidityOfKeyword(std::string keyword);
+
+	void setKeyword(std::string keyword);
+
+	int createPolybiusSquare();
 
 	std::string getText();
 
 	bool checkValidityOfText(std::string text);
 
-	int encryptText(std::string text);
+	std::string encryptText(std::string text);
 
-	void showEncryptedText(int encryptedText[]);
+	void showEncryptedText(std::string encryptedText);
 
+
+
+	//robocze
+	void showPolybiusSquare(char** polybiusSquare);
 
 
 };
