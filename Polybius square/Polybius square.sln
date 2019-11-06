@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polybius square", "Polybius square\Polybius square.vcxproj", "{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polybius Square", "Polybius Square\Polybius Square.vcxproj", "{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Debug|x64.ActiveCfg = Debug|x64
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Debug|x64.Build.0 = Debug|x64
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Debug|x86.ActiveCfg = Debug|Win32
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Debug|x86.Build.0 = Debug|Win32
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Release|x64.ActiveCfg = Release|x64
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Release|x64.Build.0 = Release|x64
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Release|x86.ActiveCfg = Release|Win32
-		{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}.Release|x86.Build.0 = Release|Win32
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Debug|x64.ActiveCfg = Debug|x64
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Debug|x64.Build.0 = Debug|x64
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Debug|x86.Build.0 = Debug|Win32
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Release|x64.ActiveCfg = Release|x64
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Release|x64.Build.0 = Release|x64
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Release|x86.ActiveCfg = Release|Win32
+		{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E22BD381-0276-48C7-9CB6-F0EC20B6F795}
+		SolutionGuid = {50DAE650-C300-4AF9-83DF-586C1C30C7B3}
 	EndGlobalSection
 EndGlobal

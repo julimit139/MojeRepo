@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7A7C0AD2-044F-4A48-8C1A-ABAF7F0EC835}</ProjectGuid>
-    <RootNamespace>Polybiussquare</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{FC946CC7-CF74-428F-B95E-DCA67D2EE0EE}</ProjectGuid>
+    <RootNamespace>PolybiusSquare</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -115,11 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="polybiusSquare.cpp" />
+    <ClInclude Include="polybiusSquare.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="polybiusSquare.h" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="polybiusSquare.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
