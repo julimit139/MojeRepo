@@ -8,32 +8,54 @@ class PolybiusSquare
 {
 private:
 	std::string keyword;
-	//char** polybiusSquare;
+	char** polybiusSquare;
 	
-	char polybiusSquare [WIDTH][HEIGHT];
+	//char polybiusSquare [WIDTH][HEIGHT];
 
 	//char* givenText;
 	//char* encryptedText;
 
 
 public:
-	std::string getKeyword();
 
+	//done
+	std::string getKeyword(); 
+
+	//done
+	bool checkLengthOfkeyword(std::string keyword);
+
+	//done
 	bool checkCharactersInKeyword(std::string keyword);
 
-	bool checkDuplicatesInKeyword(std::string keyword);
+
+	//bool checkDuplicatesInKeyword(std::string keyword);
+
+
+	//std::string removeDuplicate(std::string keyword);
+	
 
 
 
 	bool checkValidityOfKeyword(std::string keyword);
 
+	//done
 	void setKeyword(std::string keyword);
 
-	int createPolybiusSquare();
+	//done
+	char** createPolybiusSquare();
 
+	//done
+	void setPolybiusSquare(char** polybiusSquare);
+
+	//done
 	std::string getText();
 
+
 	bool checkValidityOfText(std::string text);
+
+
+	std::string findLetter(char letter);
+
 
 	std::string encryptText(std::string text);
 
@@ -42,7 +64,8 @@ public:
 
 
 	//robocze
-	void showPolybiusSquare(char** polybiusSquare);
+	//done
+	void showPolybiusSquare();
 
 
 };

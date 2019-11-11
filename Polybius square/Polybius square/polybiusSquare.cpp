@@ -9,6 +9,17 @@ std::string PolybiusSquare::getKeyword()
 }
 
 
+bool PolybiusSquare::checkLengthOfkeyword(std::string keyword)
+{
+	bool valid = false;
+	if (keyword.length() > 2 && keyword.length() < 8)
+	{
+		valid = true;
+	}
+	return valid;
+}
+
+
 
 bool PolybiusSquare::checkCharactersInKeyword(std::string keyword)
 {
@@ -46,18 +57,50 @@ bool PolybiusSquare::checkCharactersInKeyword(std::string keyword)
 
 
 
-bool PolybiusSquare::checkValidityOfKeyword(std::string keyword)
+/*std::string PolybiusSquare::removeDuplicate(std::string keyword)
+{
+	int index = 0;
+	for (int i = 0; i < keyword.length(); i++) 
+	{
+		char currentLetter = keyword.at(i);
+		for (int j = i + 1; j < keyword.length(); j++)
+		{
+			{
+			if (currentLetter == keyword.at(j))
+				keyword.erase(std::remove(keyword.begin() + j, keyword.end(), keyword.at(j), keyword.end());
+			}
+			if (keyword.at(i) == keyword.at(j))
+			{
+				break;
+			}
+				
+		}	
+		if (j == i)
+		{
+			keyword.at(index++) = keyword.at(i);
+		}			
+	}
+	return keyword;
+}*/
+
+/*bool PolybiusSquare::checkValidityOfKeyword(std::string keyword)
 {
 	bool valid = false;
-	if (keyword.length() >= 3 && keyword.length() <= 7)
+	if (checkLengthOfkeyword(keyword))
 	{
-
+		if (checkCharactersInKeyword(keyword))
+		{
+			if (checkDuplicatesInKeyword(keyword))
+			{
+				valid = true;
+			}
+		}
 	}
 
 
 
 	return valid;
-}
+}*/
 
 void PolybiusSquare::setKeyword(std::string keyword)
 {
@@ -75,40 +118,13 @@ std::string PolybiusSquare::getText()
 	return text;
 }
 
-void PolybiusSquare::showPolybiusSquare(char** polybiusSquare)
+char** PolybiusSquare::createPolybiusSquare()
 {
-	for (int i = 0; i < HEIGHT; i++)
+	char** square = new char*[HEIGHT];
+	for (int i = 0; i < HEIGHT; ++i)
 	{
-		for (int j = 0; j < WIDTH; j++)
-		{
-			std::cout << polybiusSquare[i][j] << " ";
-		}
-		std::cout << "\n";
+		square[i] = new char[WIDTH];
 	}
-}
-
-
-
-
-int PolybiusSquare::createPolybiusSquare()
-{
-	/*char * newAlphabet = new char[ALPHABET - keyword.length()];
-	int counter = 0;
-	for (int i = 0; i < (ALPHABET - keyword.length()); i++)
-	{
-		for (int j = 0; j < keyword.length(); j++)
-		{
-			if (alphabet[i] != keyword.at(j))
-			{
-				newAlphabet[counter] = alphabet[i];
-				counter++;
-				break;
-			}
-
-		}
-
-	}*/
-
 
 	std::string newAlphabet = alphabet;
 	for (int i = 0; i < keyword.length(); i++)
@@ -119,33 +135,37 @@ int PolybiusSquare::createPolybiusSquare()
 
 	newAlphabet = newAlphabet + specialSigns;
 
+	//std::cout << newAlphabet << std::endl;
+	//std::cout << newAlphabet.length() << std::endl;
 
-	std::cout << newAlphabet << std::endl;
-	std::cout << newAlphabet.length() << std::endl;
 
-
-	polybiusSquare[0][0] = polybiusSquare[1][0] = '*';
+	//writing spaces, numerals, letters and special signs to the table - in accordance with ASCII code
+	square[0][0] = square[1][0] = 32; //writing spaces to the table
 
 	
 	for (int j = 1; j < (WIDTH - 1); j++)
 	{
-		polybiusSquare[0][j] << char(j);
+		square[0][j] = j + 48; //writing numerals to the table
 	}
-	polybiusSquare[0][10] = '0';
+	square[0][10] = 48;
 
 	for (int i = 2; i < HEIGHT; i++)
 	{
-		polybiusSquare[i][0] = keyword.length() - 1 + i;
+		square[i][0] = keyword.length() - 1 + i + 48; //writing numerals to the table
+		if ((keyword.length() == 7) && (i == 4))
+		{
+			square[i][0] = keyword.length() - 1 + i - 10 + 48;
+		}
 	}
 
 	for (int j = 1; j < (keyword.length() + 1); j++)
 	{
-		polybiusSquare[1][j] << keyword.at(j-1);
+		square[1][j] = keyword.at(j-1); //writing keyword to the table
 	}
 
 	for (int j = (keyword.length() + 1); j < WIDTH; j++)
 	{
-		polybiusSquare[1][j] = '*';
+		square[1][j] = 32; //writing spaces to the table
 	}
 	
 	
@@ -156,7 +176,7 @@ int PolybiusSquare::createPolybiusSquare()
 		{
 			for (int j = 1; j < WIDTH; j++)
 			{
-				polybiusSquare[i][j] = newAlphabet.at(iterator);
+				square[i][j] = newAlphabet.at(iterator); //writing alphabet to the table
 				iterator++;
 			}
 		}
@@ -164,13 +184,30 @@ int PolybiusSquare::createPolybiusSquare()
 		{
 			for (int j = 1; j < (WIDTH - keyword.length() + 1); j++)
 			{
-				polybiusSquare[i][j] = newAlphabet.at(iterator);
+				square[i][j] = newAlphabet.at(iterator); //writing alphabet to the table
 				iterator++;
 			}
+			for (int j = (WIDTH - keyword.length() + 1); j < WIDTH; j++)
+			{
+				square[i][j] = 32; //writing spaces to the table
+			}
 		}
-		
 	}
 
+	return square;
+}
+
+
+
+void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
+{
+	this->polybiusSquare = polybiusSquare;
+}
+
+
+
+void PolybiusSquare::showPolybiusSquare()
+{
 	for (int i = 0; i < HEIGHT; i++)
 	{
 		for (int j = 0; j < WIDTH; j++)
@@ -179,6 +216,57 @@ int PolybiusSquare::createPolybiusSquare()
 		}
 		std::cout << "\n";
 	}
-
-	return 0;
 }
+
+
+
+
+std::string PolybiusSquare::findLetter(char letter)
+{
+	std::string found;
+	for (int i = 0; i < HEIGHT; i++)
+	{
+		for (int j = 0; j < WIDTH; j++)
+		{
+			if (polybiusSquare[i][j] == letter)
+			{
+				if (i != 1)
+				{
+					found += std::to_string(polybiusSquare[i][0] - 48);
+				}
+				found += std::to_string(polybiusSquare[0][j] - 48);
+				break;
+			}
+		}
+	}
+
+	std::cout << found << std::endl;
+
+	return found;
+}
+
+
+
+
+
+/*std::string PolybiusSquare::encryptText(std::string text)
+{
+	std::string encrypted;
+	char letter;
+	for (int i = 0; i < text.length(); i++)
+	{
+		letter = text.at(i);
+		
+
+
+
+
+	}
+
+
+
+
+
+
+	return encrypted;
+}*/
