@@ -2,14 +2,28 @@
 
 std::string PolybiusSquare::getKeyword()
 {
+	bool valid = false;
 	std::string keyword;
 	std::cout << "Enter the keyword on which your Polybius square will be based:\n";
-	std::cin >> keyword;
+	std::cout << "(The keyword should contain from 3 to 7 different letters belonging to english alphabet.)\n";
+	while (!valid)
+	{
+		std::cin >> keyword;
+		keyword = checkValidityOfKeyword(keyword);
+		if (keyword == "INVALID")
+		{
+			std::cout << "You entered invalid keyword. Please enter it one more time:\n";
+		}
+		else
+		{
+			valid = true;
+		}
+	}
 	return keyword;
 }
 
 
-bool PolybiusSquare::checkLengthOfkeyword(std::string keyword)
+bool PolybiusSquare::checkLengthOfKeyword(std::string keyword)
 {
 	bool valid = false;
 	if ((keyword.length() > 2) && (keyword.length() < 8))
@@ -68,8 +82,7 @@ bool PolybiusSquare::checkDuplicatesInKeyword(std::string keyword)
 }
 
 
-
-std::string PolybiusSquare::removeDuplicate(std::string keyword)
+std::string PolybiusSquare::removeDuplicates(std::string keyword)
 {
 	std::string key = keyword;
 	for (int i = 0; i < key.length(); i++)
@@ -79,57 +92,43 @@ std::string PolybiusSquare::removeDuplicate(std::string keyword)
 			if (key.at(i) == key.at(j))
 			{
 				key.erase(key.begin() + j);
+				j--;
 			}
 		}
 	}
-
-
-
-	/*int index = 0;
-	for (int i = 0; i < keyword.length(); i++) 
-	{
-		char currentLetter = keyword.at(i);
-		for (int j = i + 1; j < keyword.length(); j++)
-		{
-			{
-			if (currentLetter == keyword.at(j))
-				keyword.erase(std::remove(keyword.begin() + j, keyword.end(), keyword.at(j), keyword.end());
-			}
-			if (keyword.at(i) == keyword.at(j))
-			{
-				break;
-			}
-				
-		}	
-		if (j == i)
-		{
-			keyword.at(index++) = keyword.at(i);
-		}			
-	}*/
-
 	return key;
 }
 
-/*bool PolybiusSquare::checkValidityOfKeyword(std::string keyword)
+
+std::string PolybiusSquare::checkValidityOfKeyword(std::string keyword)
 {
-	bool valid = false;
-	if (checkLengthOfkeyword(keyword))
+	std::string key;
+
+	if (checkCharactersInKeyword(keyword))
 	{
-		if (checkCharactersInKeyword(keyword))
+		if (checkDuplicatesInKeyword(keyword))
 		{
-			if (checkDuplicatesInKeyword(keyword))
+			key = keyword;
+		}
+		else
+		{
+			key = removeDuplicates(keyword);
+			if (checkLengthOfKeyword(key))
 			{
-				valid = true;
+				key = key;
+			}
+			else
+			{
+				key = "INVALID";
 			}
 		}
 	}
-
-
-
-	return valid;
-}*/
-
-
+	else
+	{
+		key = "INVALID";
+	}
+	return key;
+}
 
 
 void PolybiusSquare::setKeyword(std::string keyword)
@@ -212,7 +211,6 @@ char** PolybiusSquare::createPolybiusSquare()
 }
 
 
-
 void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
 {
 	this->polybiusSquare = polybiusSquare;
@@ -221,12 +219,80 @@ void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
 
 std::string PolybiusSquare::getText()
 {
+	bool valid = false;
 	std::string text;
 	std::cout << "Enter the text you would like it to be encrypted:\n";
-	std::getline(std::cin >> std::ws, text);
+	std::cout << "(The text should contain from up to 100 letters belonging to english alphabet and special signs among the following: << ,.?!>>.)\n";
+	while (!valid)
+	{
+		std::getline(std::cin >> std::ws, text);
+		text = checkValidityOfText(text);
+		if (text == "INVALID")
+		{
+			std::cout << "You entered invalid text. Please enter it one more time:\n";
+		}
+		else
+		{
+			valid = true;
+		}
+	}
 	return text;
 }
 
+
+bool PolybiusSquare::checkLengthOfText(std::string text)
+{
+	bool valid = false;
+	if ((text.length() > 0) && (text.length() < 100))
+	{
+		valid = true;
+	}
+	return valid;
+}
+
+
+bool PolybiusSquare::checkCharactersInText(std::string text)
+{
+	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
+	bool valid = false;
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (improvedAlphabet.find(text.at(i)) != std::string::npos)
+		{
+			valid = true;
+		}
+		else
+		{
+			valid = false;
+			break;
+		}
+	}
+	return valid;
+}
+
+
+std::string PolybiusSquare::checkValidityOfText(std::string text)
+{
+	std::string tex;
+
+	if (checkLengthOfText(text))
+	{
+		if (checkCharactersInText(text))
+		{
+			tex = text;
+		}
+		else
+		{
+			tex = "INVALID";
+		}
+	}
+	else
+	{
+		tex = "INVALID";
+	}
+
+	return tex;
+}
 
 
 std::string PolybiusSquare::findLetter(char letter)
@@ -253,6 +319,7 @@ std::string PolybiusSquare::findLetter(char letter)
 
 std::string PolybiusSquare::encryptText(std::string text)
 {
+	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
 	std::string encrypted, found;
 	char letter;
 	for (int i = 0; i < text.length(); i++)
@@ -269,8 +336,6 @@ void PolybiusSquare::showEncryptedText(std::string encryptedText)
 {
 	std::cout << encryptedText << std::endl;
 }
-
-
 
 
 void PolybiusSquare::showPolybiusSquare()

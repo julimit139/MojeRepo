@@ -7,22 +7,15 @@ int main()
 	PolybiusSquare mySquare;
 
 	std::string key = mySquare.getKeyword();
-	
-	mySquare.checkLengthOfkeyword(key);
-	mySquare.checkCharactersInKeyword(key);
-	mySquare.checkDuplicatesInKeyword(key);
-	mySquare.removeDuplicate(key);
-
-	
 	mySquare.setKeyword(key);
 	
 	mySquare.createPolybiusSquare();
 	mySquare.setPolybiusSquare(mySquare.createPolybiusSquare());
 	mySquare.showPolybiusSquare();
 
-	//std::string text = mySquare.getText();
-	//std::string encryptedText= mySquare.encryptText(text);
-	//mySquare.showEncryptedText(encryptedText);
+	std::string text = mySquare.getText();
+	std::string encryptedText= mySquare.encryptText(text);
+	mySquare.showEncryptedText(encryptedText);
 
 
 	

@@ -6,3 +6,4 @@
 
 const std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const std::string specialSigns = " .,?!";
+const std::string improvedAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,?!";
