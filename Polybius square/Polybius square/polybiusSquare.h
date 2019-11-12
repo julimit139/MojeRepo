@@ -7,65 +7,62 @@
 class PolybiusSquare
 {
 private:
-	std::string keyword;
-	char** polybiusSquare;
+	std::string keyword; //field containing keyword given by user
+	char** polybiusSquare; //two-dimensional array containing Polybius square
 	
-	//char polybiusSquare [WIDTH][HEIGHT];
-
-	//char* givenText;
-	//char* encryptedText;
 
 
 public:
 
-	//done
-	std::string getKeyword(); 
+	std::string getKeyword(); //gets keyword from user
 
-	//done
-	bool checkLengthOfkeyword(std::string keyword);
+	bool checkLengthOfkeyword(std::string keyword); //checks whether the length of given keyword is in specific range
 
-	//done
-	bool checkCharactersInKeyword(std::string keyword);
+	
+	bool checkCharactersInKeyword(std::string keyword); //checks whether letters forming given keyword belong to english alphabet
 
 
-	//bool checkDuplicatesInKeyword(std::string keyword);
+	bool checkDuplicatesInKeyword(std::string keyword); //checks whether given keyword contains duplicated letters
 
-
-	//std::string removeDuplicate(std::string keyword);
+	//to improve, something connected with indexes doesn't work
+	std::string removeDuplicate(std::string keyword); //removes duplicated letters from given keyword
 	
 
 
-
-	bool checkValidityOfKeyword(std::string keyword);
-
-	//done
-	void setKeyword(std::string keyword);
-
-	//done
-	char** createPolybiusSquare();
-
-	//done
-	void setPolybiusSquare(char** polybiusSquare);
-
-	//done
-	std::string getText();
+	//bool checkValidityOfKeyword(std::string keyword); //checks validity of given keyword
 
 
-	bool checkValidityOfText(std::string text);
 
 
-	std::string findLetter(char letter);
+	void setKeyword(std::string keyword); //sets keyword
+
+	
+	char** createPolybiusSquare(); //creates Polybius square based on keyword
 
 
-	std::string encryptText(std::string text);
+	void setPolybiusSquare(char** polybiusSquare); //sets Polybius square
 
-	void showEncryptedText(std::string encryptedText);
+	
+	std::string getText(); //gets text from user
+
+
+	bool checkValidityOfText(std::string text); //checks validity of given text
+
+	
+
+	std::string findLetter(char letter); //finds letter in Polybius square
+
+	
+	std::string encryptText(std::string text); //encrypts given text
+
+
+	void showEncryptedText(std::string encryptedText); //shows encrypted text
 
 
 
 	//robocze
 	//done
-	void showPolybiusSquare();
+	void showPolybiusSquare(); //shows Polybius square
 
 
 };

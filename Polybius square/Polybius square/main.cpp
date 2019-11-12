@@ -8,14 +8,24 @@ int main()
 
 	std::string key = mySquare.getKeyword();
 	
-	//mySquare.removeDuplicate(key);
+	mySquare.checkLengthOfkeyword(key);
+	mySquare.checkCharactersInKeyword(key);
+	mySquare.checkDuplicatesInKeyword(key);
+	mySquare.removeDuplicate(key);
+
 	
 	mySquare.setKeyword(key);
+	
 	mySquare.createPolybiusSquare();
 	mySquare.setPolybiusSquare(mySquare.createPolybiusSquare());
 	mySquare.showPolybiusSquare();
 
-	mySquare.findLetter('A');
+	//std::string text = mySquare.getText();
+	//std::string encryptedText= mySquare.encryptText(text);
+	//mySquare.showEncryptedText(encryptedText);
+
+
+	
 	
 
 	system("pause");
