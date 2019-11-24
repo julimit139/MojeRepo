@@ -39,6 +39,9 @@ public:
 
 	void setPolybiusSquare(char** polybiusSquare); //sets Polybius square
 
+
+	char** getPolybiusSquare(); //gets Polybius square
+
 	
 	std::string getText(); //gets text from user
 
@@ -62,4 +65,8 @@ public:
 
 	//robocze
 	void showPolybiusSquare(); //shows Polybius square
+
+	
+	//do przysz³ej biblioteki
+	std::string encryptTextDLLVersion(std::string text, char** polybiusSquare);
 };

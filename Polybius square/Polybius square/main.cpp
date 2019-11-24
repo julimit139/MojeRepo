@@ -14,7 +14,8 @@ int main()
 	mySquare.showPolybiusSquare();
 
 	std::string text = mySquare.getText();
-	std::string encryptedText= mySquare.encryptText(text);
+	//std::string encryptedText= mySquare.encryptText(text);
+	std::string encryptedText = mySquare.encryptTextDLLVersion(text, mySquare.getPolybiusSquare());
 	mySquare.showEncryptedText(encryptedText);
 
 

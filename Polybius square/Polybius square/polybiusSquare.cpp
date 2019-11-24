@@ -217,6 +217,12 @@ void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
 }
 
 
+char ** PolybiusSquare::getPolybiusSquare()
+{
+	return polybiusSquare;
+}
+
+
 std::string PolybiusSquare::getText()
 {
 	bool valid = false;
@@ -348,4 +354,33 @@ void PolybiusSquare::showPolybiusSquare()
 		}
 		std::cout << "\n";
 	}
+}
+
+
+std::string PolybiusSquare::encryptTextDLLVersion(std::string text, char** polybiusSquare)
+{
+	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
+	std::string encrypted, found;
+	char letter;
+	for (int i = 0; i < text.length(); i++)
+	{
+		letter = text.at(i);
+		for (int i = 0; i < HEIGHT; i++)
+		{
+			for (int j = 0; j < WIDTH; j++)
+			{
+				if (polybiusSquare[i][j] == letter)
+				{
+					if (i != 1)
+					{
+						found += std::to_string(polybiusSquare[i][0] - 48);
+					}
+					found += std::to_string(polybiusSquare[0][j] - 48);
+					break;
+				}
+			}
+		}
+		encrypted = found;
+	}
+	return encrypted;
 }
