@@ -63,10 +63,14 @@ public:
 
 	void showEncryptedText(std::string encryptedText); //shows encrypted text
 
+
+	std::string enlargeLetters(std::string text); //enlarges letters forming text
+
+
 	//robocze
 	void showPolybiusSquare(); //shows Polybius square
 
 	
 	//do przysz³ej biblioteki
-	std::string encryptTextDLLVersion(std::string text, char** polybiusSquare);
+	//std::string encryptTextDLLVersion(std::string text, char** polybiusSquare, const int width, const int height);
 };

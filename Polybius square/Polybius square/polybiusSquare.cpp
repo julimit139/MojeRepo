@@ -228,7 +228,7 @@ std::string PolybiusSquare::getText()
 	bool valid = false;
 	std::string text;
 	std::cout << "Enter the text you would like it to be encrypted:\n";
-	std::cout << "(The text should contain from up to 100 letters belonging to english alphabet and special signs among the following: << ,.?!>>.)\n";
+	std::cout << "(The text should contain from 1 up to 100 letters belonging to english alphabet and special signs among the following: .,?!)\n";
 	while (!valid)
 	{
 		std::getline(std::cin >> std::ws, text);
@@ -343,6 +343,12 @@ void PolybiusSquare::showEncryptedText(std::string encryptedText)
 	std::cout << encryptedText << std::endl;
 }
 
+std::string PolybiusSquare::enlargeLetters(std::string text)
+{
+	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
+	return text;
+}
+
 
 void PolybiusSquare::showPolybiusSquare()
 {
@@ -357,9 +363,8 @@ void PolybiusSquare::showPolybiusSquare()
 }
 
 
-std::string PolybiusSquare::encryptTextDLLVersion(std::string text, char** polybiusSquare)
+/*std::string PolybiusSquare::encryptTextDLLVersion(std::string text, char** polybiusSquare, const int width, const int height)
 {
-	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
 	std::string encrypted, found;
 	char letter;
 	for (int i = 0; i < text.length(); i++)
@@ -383,4 +388,4 @@ std::string PolybiusSquare::encryptTextDLLVersion(std::string text, char** polyb
 		encrypted = found;
 	}
 	return encrypted;
-}
+}*/
