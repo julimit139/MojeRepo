@@ -6,7 +6,7 @@
 
 const int width = 11;
 const int height = 5;
-const int alphabet = 26;
+const int alphabetLength = 26;
 
 const std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const std::string specialSigns = " .,?!";

@@ -1,6 +1,7 @@
 #include "polybiusSquare.h"
 
-std::string PolybiusSquare::getKeyword()
+
+/*std::string PolybiusSquare::getKeyword()
 {
 	bool valid = false;
 	std::string keyword;
@@ -20,9 +21,9 @@ std::string PolybiusSquare::getKeyword()
 		}
 	}
 	return keyword;
-}
+}*/
 
-
+//copied
 bool PolybiusSquare::checkLengthOfKeyword(std::string keyword)
 {
 	bool valid = false;
@@ -33,7 +34,7 @@ bool PolybiusSquare::checkLengthOfKeyword(std::string keyword)
 	return valid;
 }
 
-
+//copied
 bool PolybiusSquare::checkCharactersInKeyword(std::string keyword)
 {
 	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
@@ -53,6 +54,7 @@ bool PolybiusSquare::checkCharactersInKeyword(std::string keyword)
 	return valid;
 }
 
+//copied
 bool PolybiusSquare::checkDuplicatesInKeyword(std::string keyword)
 {
 	bool valid = false;
@@ -81,7 +83,7 @@ bool PolybiusSquare::checkDuplicatesInKeyword(std::string keyword)
 	return valid;
 }
 
-
+//copied
 std::string PolybiusSquare::removeDuplicates(std::string keyword)
 {
 	std::string key = keyword;
@@ -99,11 +101,10 @@ std::string PolybiusSquare::removeDuplicates(std::string keyword)
 	return key;
 }
 
-
+//copied
 std::string PolybiusSquare::checkValidityOfKeyword(std::string keyword)
 {
 	std::string key;
-
 	if (checkCharactersInKeyword(keyword))
 	{
 		if (checkDuplicatesInKeyword(keyword))
@@ -131,13 +132,13 @@ std::string PolybiusSquare::checkValidityOfKeyword(std::string keyword)
 }
 
 
-void PolybiusSquare::setKeyword(std::string keyword)
+/*void PolybiusSquare::setKeyword(std::string keyword)
 {
 	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper); //transformation of keyword's letters to upper case
 	this->keyword = keyword;
-}
+}*/
 
-
+//copied
 char** PolybiusSquare::createPolybiusSquare()
 {
 	char** square = new char*[HEIGHT]; //declaration of two-dimensional array 
@@ -211,19 +212,19 @@ char** PolybiusSquare::createPolybiusSquare()
 }
 
 
-void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
+/*void PolybiusSquare::setPolybiusSquare(char** polybiusSquare)
 {
 	this->polybiusSquare = polybiusSquare;
-}
+}*/
 
 
-char ** PolybiusSquare::getPolybiusSquare()
+/*char ** PolybiusSquare::getPolybiusSquare()
 {
 	return polybiusSquare;
-}
+}*/
 
 
-std::string PolybiusSquare::getText()
+/*std::string PolybiusSquare::getText()
 {
 	bool valid = false;
 	std::string text;
@@ -243,10 +244,10 @@ std::string PolybiusSquare::getText()
 		}
 	}
 	return text;
-}
+}*/
 
 
-bool PolybiusSquare::checkLengthOfText(std::string text)
+/*bool PolybiusSquare::checkLengthOfText(std::string text)
 {
 	bool valid = false;
 	if ((text.length() > 0) && (text.length() < 100))
@@ -254,9 +255,9 @@ bool PolybiusSquare::checkLengthOfText(std::string text)
 		valid = true;
 	}
 	return valid;
-}
+}*/
 
-
+//copied
 bool PolybiusSquare::checkCharactersInText(std::string text)
 {
 	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
@@ -301,7 +302,7 @@ std::string PolybiusSquare::checkValidityOfText(std::string text)
 }
 
 
-std::string PolybiusSquare::findLetter(char letter)
+/*std::string PolybiusSquare::findLetter(char letter)
 {
 	std::string found;
 	for (int i = 0; i < HEIGHT; i++)
@@ -320,10 +321,10 @@ std::string PolybiusSquare::findLetter(char letter)
 		}
 	}
 	return found;
-}
+}*/
 
 
-std::string PolybiusSquare::encryptText(std::string text)
+/*std::string PolybiusSquare::encryptText(std::string text)
 {
 	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
 	std::string encrypted, found;
@@ -335,22 +336,22 @@ std::string PolybiusSquare::encryptText(std::string text)
 		encrypted += found;
 	}
 	return encrypted;
-}
+}*/
 
 
-void PolybiusSquare::showEncryptedText(std::string encryptedText)
+/*void PolybiusSquare::showEncryptedText(std::string encryptedText)
 {
 	std::cout << encryptedText << std::endl;
-}
+}*/
 
-std::string PolybiusSquare::enlargeLetters(std::string text)
+/*std::string PolybiusSquare::enlargeLetters(std::string text)
 {
 	std::transform(text.begin(), text.end(), text.begin(), ::toupper);
 	return text;
-}
+}*/
 
 
-void PolybiusSquare::showPolybiusSquare()
+/*void PolybiusSquare::showPolybiusSquare()
 {
 	for (int i = 0; i < HEIGHT; i++)
 	{
@@ -360,10 +361,10 @@ void PolybiusSquare::showPolybiusSquare()
 		}
 		std::cout << "\n";
 	}
-}
+}*/
 
 
-/*std::string PolybiusSquare::encryptTextDLLVersion(std::string text, char** polybiusSquare, const int width, const int height)
+std::string PolybiusSquare::encryptText(std::string text, char** polybiusSquare, const int width, const int height)
 {
 	std::string encrypted, found;
 	char letter;
@@ -388,4 +389,4 @@ void PolybiusSquare::showPolybiusSquare()
 		encrypted = found;
 	}
 	return encrypted;
-}*/
+}
