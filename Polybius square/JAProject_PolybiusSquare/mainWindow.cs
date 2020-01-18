@@ -25,41 +25,22 @@ namespace JAProject_PolybiusSquare
             InitializeComponent();
         }
 
-        /*private void setLabel(string s)
-        {
-            textLabel.Text = s;
-        }*/
 
-        /*private void okButton_Click(object sender, EventArgs e)
-        {
-            setLabel(mySquare.checkLengthOfText(textBox.Text).ToString());
-        }
 
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-            keywordTextBox.Text = textBox.Text;
-        }*/
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void threadsLabel_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void encryptButton_Click(object sender, EventArgs e)
         {
-            encryptedTextAnswerRichTextBox.Text = "123456789012345678901234567890123456789012345678901234567890123456789012345678912346718723198hkbajhsdksdaksdakjsdaksjdkbajsbdakjsbdakjsbdakjsbdakjsbdaksjbdakjsdbaksjdaksjbdakjsbdakjsbdakjsbdkajsbkjabdkjasbdkjabskjdabskjdabskdabskjdbajsdbajsbdkjabskjabdskjabskjdbaskjdbakjsbdaksjbdaksbdkajbdskj";
+            //encryptedTextAnswerRichTextBox.Text = "123456789012345678901234567890123456789012345678901234567890123456789012345678912346718723198hkbajhsdksdaksdakjsdaksjdkbajsbdakjsbdakjsbdakjsbdakjsbdaksjbdakjsdbaksjdaksjbdakjsbdakjsbdakjsbdkajsbkjabdkjasbdkjabskjdabskjdabskdabskjdbajsdbajsbdkjabskjabdskjabskjdbaskjdbakjsbdaksjbdaksbdkajbdskj";
             //int testInt = 4;
             //encryptedTextAnswerRichTextBox.Text = Program.testProc(testInt).ToString();
 
-            String keyword = "abcd";
-            byte[] keywordArray = Encoding.ASCII.GetBytes(keyword);
+            /*String keyword = "abcd";
+            byte[] keywordArray = Encoding.ASCII.GetBytes(keyword);*/
 
-            IntPtr initArray = Marshal.AllocHGlobal(8 * 5); //Alokacja pamięci na 5 wskaźników
+            /*IntPtr initArray = Marshal.AllocHGlobal(8 * 5); //Alokacja pamięci na 5 wskaźników
             IntPtr[] arrayArray = new IntPtr[5];
             for (int i = 0; i < 5; i++)
             {
@@ -75,10 +56,31 @@ namespace JAProject_PolybiusSquare
                 Marshal.Copy(arrayArray[i], square[i], 0, 11);
                 Marshal.FreeHGlobal(arrayArray[i]);
             }
-            Marshal.FreeHGlobal(initArray);
+            Marshal.FreeHGlobal(initArray);*/
+
+
+
+            String keyword = keywordTextBox.Text;
+            byte[] keywordArray = Encoding.ASCII.GetBytes(keyword);
+
+            encryptedTextAnswerRichTextBox.Text = Program.checkValidityOfKeyword(keywordArray).ToString();
+
+            //String text = textRichTextBox.Text;
+            //byte[] textArray = Encoding.ASCII.GetBytes(text);
 
             
-            //encryptedTextAnswerRichTextBox.Text = Program.checkCharactersInKeyword(array).ToString();
+
+
+
+            //encryptedTextAnswerRichTextBox.Text = Program.checkDuplicatesInKeyword(keywordArray).ToString();
+            //encryptedTextAnswerRichTextBox.Text = Program.removeDuplicates(keywordArray);
+
+
+
+
+
+
+
         }
     }
 }

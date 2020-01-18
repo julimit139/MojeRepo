@@ -3,7 +3,7 @@
 
 #include "PolybiusSquareCpp.h"
 
-
+//correct
 extern "C" EXPORT bool checkLengthOfKeyword(char* key)
 {
 	std::string keyword(key);
@@ -15,7 +15,7 @@ extern "C" EXPORT bool checkLengthOfKeyword(char* key)
 	return valid;
 }
 
-
+//correct
 extern "C" EXPORT bool checkCharactersInKeyword(char* key)
 {
 	std::string keyword(key);
@@ -36,10 +36,11 @@ extern "C" EXPORT bool checkCharactersInKeyword(char* key)
 	return valid;
 }
 
-
+//correct
 extern "C" EXPORT bool checkDuplicatesInKeyword(char* key)
 {
 	std::string keyword(key);
+	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
 	bool valid = false;
 	int p = -1, i, j;
 	for (i = 0; i < keyword.length(); i++)
@@ -66,10 +67,11 @@ extern "C" EXPORT bool checkDuplicatesInKeyword(char* key)
 	return valid;
 }
 
-
+//incorrect
 extern "C" EXPORT std::string removeDuplicates(char* key)
 {
 	std::string keyword(key);
+	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
 	for (int i = 0; i < keyword.length(); i++)
 	{
 		for (int j = i + 1; j < keyword.length(); j++)
@@ -84,8 +86,8 @@ extern "C" EXPORT std::string removeDuplicates(char* key)
 	return keyword;
 }
 
-
-extern "C" EXPORT std::string checkValidityOfKeyword(char* key)
+//incorrect
+/*extern "C" EXPORT std::string checkValidityOfKeyword(char* key)
 {
 	char* keyword = key;
 	if (checkCharactersInKeyword(key))
@@ -112,8 +114,32 @@ extern "C" EXPORT std::string checkValidityOfKeyword(char* key)
 		std::string(keyword) = "INVALID";
 	}
 	return std::string(keyword);
-}
+}*/
 
+//correct
+extern "C" EXPORT bool checkValidityOfKeyword(char* key)
+{
+	bool valid = false;
+	if (checkCharactersInKeyword(key))
+	{
+		if (checkDuplicatesInKeyword(key))
+		{
+			if (checkLengthOfKeyword(key))
+			{
+				valid = true;
+			}
+		}
+		else
+		{
+			std::string(keyword) = removeDuplicates(key);
+			if (checkLengthOfKeyword(&keyword[0]))
+			{
+				valid = true;
+			}
+		}
+	}
+	return valid;
+}
 
 extern "C" EXPORT void createPolybiusSquare(char** square, char* key)
 {
@@ -187,7 +213,7 @@ extern "C" EXPORT void createPolybiusSquare(char** square, char* key)
 	}
 }
 
-
+//correct
 extern "C" EXPORT bool checkCharactersInText(char* text)
 {
 	std::string textword(text);
@@ -206,21 +232,6 @@ extern "C" EXPORT bool checkCharactersInText(char* text)
 		}
 	}
 	return valid;
-}
-
-
-extern "C" EXPORT std::string checkValidityOfText(char* text)
-{
-	std::string textword(text);
-	if (checkCharactersInText(text))
-	{
-		textword = text;
-	}
-	else
-	{
-		textword = "INVALID";
-	}
-	return textword;
 }
 
 

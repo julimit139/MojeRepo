@@ -30,17 +30,18 @@ namespace JAProject_PolybiusSquare
         [DllImport(cpp_dll_name)]
         public static extern string removeDuplicates(byte[] keyword);
 
+        /*[DllImport(cpp_dll_name)]
+        public static extern string checkValidityOfKeyword(byte[] keyword);*/
+
         [DllImport(cpp_dll_name)]
-        public static extern string checkValidityOfKeyword(byte[] keyword);
+        public static extern bool checkValidityOfKeyword(byte[] keyword);
+
 
         [DllImport(cpp_dll_name)]
         public static extern void createPolybiusSquare(IntPtr square, byte[] keyword);
 
         [DllImport(cpp_dll_name)]
         public static extern bool checkCharactersInText(byte[] text);
-
-        [DllImport(cpp_dll_name)]
-        public static extern string checkValidityOfText(byte[] text);
 
         [DllImport(cpp_dll_name)]
         public static extern string encryptText(IntPtr square, byte[] text, int width, int height);

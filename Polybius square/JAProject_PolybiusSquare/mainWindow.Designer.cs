@@ -103,7 +103,7 @@
             this.keywordLabel.Size = new System.Drawing.Size(51, 13);
             this.keywordLabel.TabIndex = 9;
             this.keywordLabel.Text = "Keyword:";
-            this.keywordLabel.Click += new System.EventHandler(this.label1_Click);
+            //this.keywordLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // textRichTextBox
             // 
@@ -152,7 +152,7 @@
             this.threadsLabel.Size = new System.Drawing.Size(97, 13);
             this.threadsLabel.TabIndex = 13;
             this.threadsLabel.Text = "Number of threads:";
-            this.threadsLabel.Click += new System.EventHandler(this.threadsLabel_Click);
+            //this.threadsLabel.Click += new System.EventHandler(this.threadsLabel_Click);
             // 
             // encryptedTextLabel
             // 
