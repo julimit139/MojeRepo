@@ -1,4 +1,4 @@
 LIBRARY PolybiusSquareASM
 
 EXPORTS
-testProc
+encryptTextAsm

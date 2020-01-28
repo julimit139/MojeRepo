@@ -69,6 +69,7 @@
             // cppRadioButton
             // 
             this.cppRadioButton.AutoSize = true;
+            this.cppRadioButton.Checked = true;
             this.cppRadioButton.Location = new System.Drawing.Point(15, 275);
             this.cppRadioButton.Name = "cppRadioButton";
             this.cppRadioButton.Size = new System.Drawing.Size(44, 17);
@@ -84,7 +85,6 @@
             this.asmRadioButton.Name = "asmRadioButton";
             this.asmRadioButton.Size = new System.Drawing.Size(48, 17);
             this.asmRadioButton.TabIndex = 5;
-            this.asmRadioButton.TabStop = true;
             this.asmRadioButton.Text = "ASM";
             this.asmRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -103,7 +103,6 @@
             this.keywordLabel.Size = new System.Drawing.Size(51, 13);
             this.keywordLabel.TabIndex = 9;
             this.keywordLabel.Text = "Keyword:";
-            //this.keywordLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // textRichTextBox
             // 
@@ -152,12 +151,11 @@
             this.threadsLabel.Size = new System.Drawing.Size(97, 13);
             this.threadsLabel.TabIndex = 13;
             this.threadsLabel.Text = "Number of threads:";
-            //this.threadsLabel.Click += new System.EventHandler(this.threadsLabel_Click);
             // 
             // encryptedTextLabel
             // 
             this.encryptedTextLabel.AutoSize = true;
-            this.encryptedTextLabel.Location = new System.Drawing.Point(399, 67);
+            this.encryptedTextLabel.Location = new System.Drawing.Point(388, 64);
             this.encryptedTextLabel.Name = "encryptedTextLabel";
             this.encryptedTextLabel.Size = new System.Drawing.Size(78, 13);
             this.encryptedTextLabel.TabIndex = 14;
@@ -166,11 +164,11 @@
             // conversionTimeLabel
             // 
             this.conversionTimeLabel.AutoSize = true;
-            this.conversionTimeLabel.Location = new System.Drawing.Point(399, 250);
+            this.conversionTimeLabel.Location = new System.Drawing.Point(388, 250);
             this.conversionTimeLabel.Name = "conversionTimeLabel";
-            this.conversionTimeLabel.Size = new System.Drawing.Size(85, 13);
+            this.conversionTimeLabel.Size = new System.Drawing.Size(107, 13);
             this.conversionTimeLabel.TabIndex = 16;
-            this.conversionTimeLabel.Text = "Conversion time:";
+            this.conversionTimeLabel.Text = "Conversion time [ms]:";
             // 
             // encryptedTextAnswerRichTextBox
             // 

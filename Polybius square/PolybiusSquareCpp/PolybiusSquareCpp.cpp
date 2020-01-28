@@ -1,73 +1,79 @@
 // PolybiusSquareCpp.cpp : Defines the exported functions for the DLL application.
-//
 
+
+//do³¹czenie pliku nag³ówkowego zawieraj¹cego deklaracje funkcji zdefiniowanych poni¿ej
 #include "PolybiusSquareCpp.h"
 
-//correct
-extern "C" EXPORT bool checkLengthOfKeyword(char* key)
+
+//funkcja sprawdzaj¹ca, czy d³ugoœæ podanego s³owa kluczowego nale¿y do zakresu od 3 do 7 liter
+extern "C" EXPORT bool checkLengthOfKeyword(char* key)		//parametrem funkcji jest podane s³owo kluczowe typu char*
 {
-	std::string keyword(key);
-	bool valid = false;
-	if ((keyword.length() > 2) && (keyword.length() < 8))
+	std::string keyword(key);								//przekszta³cenie zmiennej typu char* na typ string
+	bool valid = false;										//inicjalizacja zmiennej valid warunkuj¹cej poprawnoœæ s³owa kluczowego
+	if ((keyword.length() > 2) && (keyword.length() < 8))	//sprawdzenie d³ugoœci s³owa kluczowego
 	{
-		valid = true;
+		valid = true;										//zmiana wartoœci zmiennej valid na, gdy d³ugoœæ zmiennej keyword zawiera siê w zakresie od 3 do 7 liter
 	}
-	return valid;
+	return valid;											//zwrócenie wartoœci zmiennej valid
 }
 
-//correct
-extern "C" EXPORT bool checkCharactersInKeyword(char* key)
+
+
+//funkcja sprawdzaj¹ca, czy litery tworz¹ce podane s³owo kluczowe nale¿¹ do angielskiego alfabetu
+extern "C" EXPORT bool checkCharactersInKeyword(char* key)							//parametrem funkcji jest podane s³owo kluczowe typu char*
 {
-	std::string keyword(key);
-	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
-	bool valid = false;
-	for (int i = 0; i < keyword.length(); i++)
+	std::string keyword(key);														//przekszta³cenie zmiennej typu char* na typ string
+	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);		//przekszta³cenie wszystkich liter nale¿¹cych do podanego s³owa kluczowego na wielkie litery
+	bool valid = false;																//inicjalizacja zmiennej valid warunkuj¹cej poprawnoœæ s³owa kluczowego
+	for (int i = 0; i < keyword.length(); i++)										//pêtla, w której sprawdzane s¹ litery
 	{
-		if (alphabet.find(keyword.at(i)) != std::string::npos)
+		if (alphabet.find(keyword.at(i)) != std::string::npos)						//sprawdzenie, czy litera nale¿y do alfabetu angielskiego
 		{
-			valid = true;
+			valid = true;															//zmiana wartoœci zmiennej valid
 		}
 		else
 		{
-			valid = false;
-			break;
+			valid = false;															//zmiana wartoœci zmiennej valid
+			break;																	//przerwanie pêtli for
 		}
 	}
-	return valid;
+	return valid;																	//zwrócenie wartoœci zmiennej valid
 }
 
-//correct
-extern "C" EXPORT bool checkDuplicatesInKeyword(char* key)
+
+
+//funkcja sprawdzaj¹ca, czy podane s³owo kluczowe zawiera powtarzaj¹ce siê litery
+extern "C" EXPORT bool checkDuplicatesInKeyword(char* key)							//parametrem funkcji jest podane s³owo kluczowe typu char*
 {
-	std::string keyword(key);
-	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
-	bool valid = false;
-	int p = -1, i, j;
-	for (i = 0; i < keyword.length(); i++)
+	std::string keyword(key);														//przekszta³cenie zmiennej typu char* na typ string
+	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);		//przekszta³cenie wszystkich liter na wielkie litery
+	bool valid = false;																//inicjalizacja zmiennej valid warunkuj¹cej poprawnoœæ s³owa kluczowego
+	int p = -1, i, j;																//inicjalizacja zmiennej p przechowuj¹cej indeks zduplikowanej litery i deklaracja zmiennych i i j s³u¿¹cych do realizacji dwóch pêtli for
+	for (i = 0; i < keyword.length(); i++)											//pêtle, w których sprawdzane jest, czy litery siê powtarzaj¹
 	{
 		for (j = i + 1; j < keyword.length(); j++)
 		{
-			if (keyword.at(i) == keyword.at(j))
+			if (keyword.at(i) == keyword.at(j))										//sprawdzenie, czy litera na pozycji i-tej jest taka sama jak litera na pozycji j-tej
 			{
-				p = i;
-				break;
+				p = i;																//zmiana wartoœci zmiennej p na indeks sprawdzanej litery
+				break;																//przerwanie pêtli for 
 			}
 		}
-		if (p != -1)
+		if (p != -1)																//sprawdzenie, czy litera na pozycji i-tej powtarza siê
 		{
-			break;
+			break;																	//przerwanie pêtli for
 		}
 	}
 
-	if (p == -1)
+	if (p == -1)																	//sprawdzenie, czy którakolwiek z liter siê powtarza
 	{
-		valid = true;
+		valid = true;																//zmiana wartoœci zmiennej valid
 	}
 
-	return valid;
+	return valid;																	//zwrócenie wartoœci zmiennej valid
 }
 
-//incorrect
+//funkcja usuwaj¹ca powtarzaj¹ce siê litery z podanego s³owa kluczowego
 extern "C" EXPORT std::string removeDuplicates(char* key)
 {
 	std::string keyword(key);
@@ -86,37 +92,8 @@ extern "C" EXPORT std::string removeDuplicates(char* key)
 	return keyword;
 }
 
-//incorrect
-/*extern "C" EXPORT std::string checkValidityOfKeyword(char* key)
-{
-	char* keyword = key;
-	if (checkCharactersInKeyword(key))
-	{
-		if (checkDuplicatesInKeyword(key))
-		{
-			keyword = key;
-		}
-		else
-		{
-			std::string(keyword) = removeDuplicates(key);
-			if (checkLengthOfKeyword(&keyword[0]))
-			{
-				keyword = keyword;
-			}
-			else
-			{
-				keyword = "INVALID";
-			}
-		}
-	}
-	else
-	{
-		std::string(keyword) = "INVALID";
-	}
-	return std::string(keyword);
-}*/
 
-//correct
+//funkcja sprawdzaj¹ca poprawnoœæ podanego s³owa kluczowego
 extern "C" EXPORT bool checkValidityOfKeyword(char* key)
 {
 	bool valid = false;
@@ -141,6 +118,7 @@ extern "C" EXPORT bool checkValidityOfKeyword(char* key)
 	return valid;
 }
 
+//funkcja tworz¹ca szachownicê Polibiusza na podstawie podanego s³owa kluczowego 
 extern "C" EXPORT void createPolybiusSquare(char** square, char* key)
 {
 	/*char** square = new char*[HEIGHT];  
@@ -148,6 +126,7 @@ extern "C" EXPORT void createPolybiusSquare(char** square, char* key)
 	{
 		square[i] = new char[WIDTH];
 	}*/
+
 	std::string keyword(key);
 	std::transform(keyword.begin(), keyword.end(), keyword.begin(), ::toupper);
 	std::string newAlphabet = alphabet; //creating new alphabet
@@ -213,7 +192,7 @@ extern "C" EXPORT void createPolybiusSquare(char** square, char* key)
 	}
 }
 
-//correct
+//funkcja sprawdzaj¹ca, czy znaki tworz¹ce podany tekst nale¿¹ do angielskiego alfabetu lub grupy znaków specjalnych
 extern "C" EXPORT bool checkCharactersInText(char* text)
 {
 	std::string textword(text);
@@ -234,15 +213,17 @@ extern "C" EXPORT bool checkCharactersInText(char* text)
 	return valid;
 }
 
-
-extern "C" EXPORT std::string encryptText(char** square, char* text, int width, int height)
+//funkcja szyfruj¹ca podany tekst na podstawie stworzonej szachownicy Polibiusza
+extern "C" EXPORT bool encryptText(char** square, char* text, char* output, int arrayLength)
 {
-	std::string textword(text);
-	std::string encrypted, found;
+	std::string found = "";
+	std::string textword = "";
+	textword = std::string(text);
+
 	char letter;
-	for (int i = 0; i < textword.length(); i++)
+	for (int k = 0; k < textword.length(); k++)
 	{
-		letter = textword.at(i);
+		letter = textword.at(k);
 		for (int i = 0; i < height; i++)
 		{
 			for (int j = 0; j < width; j++)
@@ -258,7 +239,11 @@ extern "C" EXPORT std::string encryptText(char** square, char* text, int width, 
 				}
 			}
 		}
-		encrypted = found;
 	}
-	return encrypted;
+	char* foundPtr = (char*)found.c_str();
+	for (int i = 0; i < found.length(); i++)
+	{
+		*(output + i) = *(foundPtr + i);
+	}
+	return true;
 }
