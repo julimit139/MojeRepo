@@ -113,12 +113,13 @@ namespace JAProject_PolybiusSquare
 
                 //stworzenie tablicy wątków
                 Thread[] threadTable = new Thread[count];
-                String[] stringTable = new String[count + 1];
-                String[] textTable = new String[count];
-                //for(int i = 0; i < count; i++)
-                //{
-                //    stringTable[i] = "";
-                //}
+                String[] stringTable = new String[count];
+                //String[] textTable = new String[count];
+
+                Distributor distributor;
+
+                List<String> stringList = new List<String>();
+                
 
                 //tworzenie szachownicy Polibiusza
                 IntPtr initArray = Marshal.AllocHGlobal(8 * 5); //Alokacja pamięci na 5 wskaźników
@@ -146,8 +147,7 @@ namespace JAProject_PolybiusSquare
                     for (int i = 0; i < count; i++)
                     {
                         currentText = text[i].ToString();
-                        threadTable[i] = new Thread(() => { stringTable[i] = encrypt(currentText, initArray); });
-                        threadTable[i].Start();
+                        stringList.Add(currentText);
                     }
                 }
 
@@ -167,8 +167,7 @@ namespace JAProject_PolybiusSquare
                                 currentText += text[j].ToString();
                             }
                             counter += charCount;
-                            threadTable[i] = new Thread(() => { stringTable[i] = encrypt(currentText, initArray); });
-                            threadTable[i].Start();
+                            stringList.Add(currentText);
                         }
                     }
                     else if (remainder != 0)
@@ -190,12 +189,19 @@ namespace JAProject_PolybiusSquare
                                 remainder--;
                                 counter++;
                             }
-                            threadTable[i] = new Thread(() => { stringTable[i] = encrypt(currentText, initArray); });
-                            threadTable[i].Start();
+                            stringList.Add(currentText);
                         }
 
                     }
-                    
+
+                    distributor = new Distributor(stringList, count);
+
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        threadTable[i] = new Thread(() => { stringTable[i] = encrypt(distributor.getString(), initArray); });
+                        threadTable[i].Start();
+                    }
                 }
 
 
@@ -240,4 +246,37 @@ namespace JAProject_PolybiusSquare
             }
         }
     }
+
+    class Distributor
+    {
+        List<String> stringList;
+        Object semaphore = new Object();
+        int threadCount;
+        int counter = 0;
+
+        public Distributor(List<String> stringList, int threadCount)
+        {
+            this.stringList = stringList;
+            this.threadCount = threadCount;
+        }
+
+        public String getString()
+        {
+            String s;
+            lock (semaphore)
+            {
+                if(counter < threadCount)
+                {
+                    s = stringList[counter];
+                    counter++;
+                }
+                else
+                {
+                    s = null;
+                }
+            }
+            return s;
+        }
+    }
+
 }
