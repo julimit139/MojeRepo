@@ -2,3 +2,4 @@ LIBRARY PolybiusSquareASM
 
 EXPORTS
 encryptTextAsm
+SIMDProcedure

@@ -18,10 +18,3 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     }
     return TRUE;
 }
-
-//extern "C" int testProcASM(int testInt);
-
-//extern "C" EXPORT int testProc(int testInt)
-//{
-//	return testProcASM(testInt);
-//}

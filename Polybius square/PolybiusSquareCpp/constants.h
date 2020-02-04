@@ -1,5 +1,6 @@
 #pragma once
 
+//sta³e wykorzystywane w programie
 #define WIDTH 11
 #define HEIGHT 5
 #define ALPHABET 26

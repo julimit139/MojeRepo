@@ -46,6 +46,9 @@ namespace JAProject_PolybiusSquare
         [DllImport(asm_dll_name)]
         public static extern int encryptTextAsm(IntPtr square, byte[] textArray, IntPtr text, int arrayLength);
 
+        [DllImport(asm_dll_name)]
+        public static extern int SIMDProcedure(float[] tab1, float[] tab2, float[] tabres, int tabsize);
+
         [STAThread]
         static void Main()
         {

@@ -12,7 +12,7 @@ extern "C" EXPORT bool checkLengthOfKeyword(char* key)		//parametrem funkcji jes
 	bool valid = false;										//inicjalizacja zmiennej valid warunkuj¹cej poprawnoœæ s³owa kluczowego
 	if ((keyword.length() > 2) && (keyword.length() < 8))	//sprawdzenie d³ugoœci s³owa kluczowego
 	{
-		valid = true;										//zmiana wartoœci zmiennej valid na, gdy d³ugoœæ zmiennej keyword zawiera siê w zakresie od 3 do 7 liter
+		valid = true;										//zmiana wartoœci zmiennej valid, gdy d³ugoœæ zmiennej keyword zawiera siê w zakresie od 3 do 7 liter
 	}
 	return valid;											//zwrócenie wartoœci zmiennej valid
 }
@@ -98,7 +98,7 @@ extern "C" EXPORT std::string removeDuplicates(char* key)							//parametrem fun
 extern "C" EXPORT bool checkValidityOfKeyword(char* key)							//parametrem funkcji jest podane s³owo kluczowe typu char*
 {
 	bool valid = false;																//inicjalizacja zmiennej valid warunkuj¹cej poprawnoœæ s³owa kluczowego
-	if (checkCharactersInKeyword(key))												//sprawdzenie, czy litery tworz¹ce s³owo kluczoweg nale¿¹ do angielskiego alfabetu
+	if (checkCharactersInKeyword(key))												//sprawdzenie, czy litery tworz¹ce s³owo kluczowe nale¿¹ do angielskiego alfabetu
 	{
 		if (checkDuplicatesInKeyword(key))											//sprawdzenie, czy s³owo kluczowe zawiera powtarzaj¹ce siê litery
 		{

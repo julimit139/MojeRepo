@@ -42,6 +42,9 @@
             this.conversionTimeLabel = new System.Windows.Forms.Label();
             this.encryptedTextAnswerRichTextBox = new System.Windows.Forms.RichTextBox();
             this.conversionTimeAnswerLabel = new System.Windows.Forms.Label();
+            this.keywordErrorLabel = new System.Windows.Forms.Label();
+            this.textErrorLabel = new System.Windows.Forms.Label();
+            this.threadErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.threadNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +54,7 @@
             this.encryptButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.encryptButton.Location = new System.Drawing.Point(303, 13);
             this.encryptButton.Name = "encryptButton";
-            this.encryptButton.Size = new System.Drawing.Size(64, 319);
+            this.encryptButton.Size = new System.Drawing.Size(64, 391);
             this.encryptButton.TabIndex = 0;
             this.encryptButton.Text = "Encrypt";
             this.encryptButton.UseVisualStyleBackColor = false;
@@ -60,7 +63,7 @@
             // textLabel
             // 
             this.textLabel.AutoSize = true;
-            this.textLabel.Location = new System.Drawing.Point(12, 67);
+            this.textLabel.Location = new System.Drawing.Point(12, 85);
             this.textLabel.Name = "textLabel";
             this.textLabel.Size = new System.Drawing.Size(81, 13);
             this.textLabel.TabIndex = 2;
@@ -70,7 +73,7 @@
             // 
             this.cppRadioButton.AutoSize = true;
             this.cppRadioButton.Checked = true;
-            this.cppRadioButton.Location = new System.Drawing.Point(15, 275);
+            this.cppRadioButton.Location = new System.Drawing.Point(15, 321);
             this.cppRadioButton.Name = "cppRadioButton";
             this.cppRadioButton.Size = new System.Drawing.Size(44, 17);
             this.cppRadioButton.TabIndex = 4;
@@ -81,7 +84,7 @@
             // asmRadioButton
             // 
             this.asmRadioButton.AutoSize = true;
-            this.asmRadioButton.Location = new System.Drawing.Point(15, 298);
+            this.asmRadioButton.Location = new System.Drawing.Point(15, 344);
             this.asmRadioButton.Name = "asmRadioButton";
             this.asmRadioButton.Size = new System.Drawing.Size(48, 17);
             this.asmRadioButton.TabIndex = 5;
@@ -106,7 +109,7 @@
             // 
             // textRichTextBox
             // 
-            this.textRichTextBox.Location = new System.Drawing.Point(125, 64);
+            this.textRichTextBox.Location = new System.Drawing.Point(125, 85);
             this.textRichTextBox.Name = "textRichTextBox";
             this.textRichTextBox.Size = new System.Drawing.Size(140, 150);
             this.textRichTextBox.TabIndex = 10;
@@ -114,7 +117,7 @@
             // 
             // threadNumericUpDown
             // 
-            this.threadNumericUpDown.Location = new System.Drawing.Point(125, 275);
+            this.threadNumericUpDown.Location = new System.Drawing.Point(125, 321);
             this.threadNumericUpDown.Maximum = new decimal(new int[] {
             64,
             0,
@@ -126,7 +129,7 @@
             0,
             0});
             this.threadNumericUpDown.Name = "threadNumericUpDown";
-            this.threadNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.threadNumericUpDown.Size = new System.Drawing.Size(140, 20);
             this.threadNumericUpDown.TabIndex = 11;
             this.threadNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -137,7 +140,7 @@
             // dlltypeLabel
             // 
             this.dlltypeLabel.AutoSize = true;
-            this.dlltypeLabel.Location = new System.Drawing.Point(12, 250);
+            this.dlltypeLabel.Location = new System.Drawing.Point(12, 305);
             this.dlltypeLabel.Name = "dlltypeLabel";
             this.dlltypeLabel.Size = new System.Drawing.Size(53, 13);
             this.dlltypeLabel.TabIndex = 12;
@@ -146,7 +149,7 @@
             // threadsLabel
             // 
             this.threadsLabel.AutoSize = true;
-            this.threadsLabel.Location = new System.Drawing.Point(122, 250);
+            this.threadsLabel.Location = new System.Drawing.Point(122, 305);
             this.threadsLabel.Name = "threadsLabel";
             this.threadsLabel.Size = new System.Drawing.Size(97, 13);
             this.threadsLabel.TabIndex = 13;
@@ -155,16 +158,17 @@
             // encryptedTextLabel
             // 
             this.encryptedTextLabel.AutoSize = true;
-            this.encryptedTextLabel.Location = new System.Drawing.Point(388, 64);
+            this.encryptedTextLabel.Location = new System.Drawing.Point(388, 16);
             this.encryptedTextLabel.Name = "encryptedTextLabel";
             this.encryptedTextLabel.Size = new System.Drawing.Size(78, 13);
             this.encryptedTextLabel.TabIndex = 14;
             this.encryptedTextLabel.Text = "Encrypted text:";
+            this.encryptedTextLabel.Click += new System.EventHandler(this.encryptedTextLabel_Click);
             // 
             // conversionTimeLabel
             // 
             this.conversionTimeLabel.AutoSize = true;
-            this.conversionTimeLabel.Location = new System.Drawing.Point(388, 250);
+            this.conversionTimeLabel.Location = new System.Drawing.Point(388, 222);
             this.conversionTimeLabel.Name = "conversionTimeLabel";
             this.conversionTimeLabel.Size = new System.Drawing.Size(107, 13);
             this.conversionTimeLabel.TabIndex = 16;
@@ -172,7 +176,7 @@
             // 
             // encryptedTextAnswerRichTextBox
             // 
-            this.encryptedTextAnswerRichTextBox.Location = new System.Drawing.Point(500, 64);
+            this.encryptedTextAnswerRichTextBox.Location = new System.Drawing.Point(503, 16);
             this.encryptedTextAnswerRichTextBox.Name = "encryptedTextAnswerRichTextBox";
             this.encryptedTextAnswerRichTextBox.ReadOnly = true;
             this.encryptedTextAnswerRichTextBox.Size = new System.Drawing.Size(140, 150);
@@ -182,16 +186,49 @@
             // conversionTimeAnswerLabel
             // 
             this.conversionTimeAnswerLabel.AutoSize = true;
-            this.conversionTimeAnswerLabel.Location = new System.Drawing.Point(500, 250);
+            this.conversionTimeAnswerLabel.Location = new System.Drawing.Point(501, 222);
             this.conversionTimeAnswerLabel.Name = "conversionTimeAnswerLabel";
             this.conversionTimeAnswerLabel.Size = new System.Drawing.Size(0, 13);
             this.conversionTimeAnswerLabel.TabIndex = 23;
+            // 
+            // keywordErrorLabel
+            // 
+            this.keywordErrorLabel.AutoSize = true;
+            this.keywordErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.keywordErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.keywordErrorLabel.Location = new System.Drawing.Point(12, 38);
+            this.keywordErrorLabel.Name = "keywordErrorLabel";
+            this.keywordErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.keywordErrorLabel.TabIndex = 25;
+            // 
+            // textErrorLabel
+            // 
+            this.textErrorLabel.AutoSize = true;
+            this.textErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.textErrorLabel.Location = new System.Drawing.Point(12, 240);
+            this.textErrorLabel.Name = "textErrorLabel";
+            this.textErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.textErrorLabel.TabIndex = 27;
+            // 
+            // threadErrorLabel
+            // 
+            this.threadErrorLabel.AutoSize = true;
+            this.threadErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.threadErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.threadErrorLabel.Location = new System.Drawing.Point(125, 348);
+            this.threadErrorLabel.Name = "threadErrorLabel";
+            this.threadErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.threadErrorLabel.TabIndex = 28;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 344);
+            this.ClientSize = new System.Drawing.Size(665, 416);
+            this.Controls.Add(this.threadErrorLabel);
+            this.Controls.Add(this.textErrorLabel);
+            this.Controls.Add(this.keywordErrorLabel);
             this.Controls.Add(this.conversionTimeAnswerLabel);
             this.Controls.Add(this.encryptedTextAnswerRichTextBox);
             this.Controls.Add(this.conversionTimeLabel);
@@ -230,6 +267,9 @@
         private System.Windows.Forms.Label conversionTimeLabel;
         private System.Windows.Forms.RichTextBox encryptedTextAnswerRichTextBox;
         private System.Windows.Forms.Label conversionTimeAnswerLabel;
+        private System.Windows.Forms.Label keywordErrorLabel;
+        private System.Windows.Forms.Label textErrorLabel;
+        private System.Windows.Forms.Label threadErrorLabel;
     }
 }
 
